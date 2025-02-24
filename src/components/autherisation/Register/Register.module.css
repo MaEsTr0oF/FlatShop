@@ -1,0 +1,215 @@
+.registerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.registerForm {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 2rem;
+}
+
+.stepIndicator {
+  text-align: right;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.stepIndicator span {
+  color: #000;
+  font-weight: bold;
+}
+
+.registerForm h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.select {
+  appearance: none;
+  background-image: url('path-to-arrow-icon.svg');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.passwordGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.agreements {
+  margin-bottom: 1.5rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox input {
+  margin-top: 0.25rem;
+}
+
+.checkbox span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: #e31235;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #c60f2e;
+}
+
+.loginLink {
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.loginLink a {
+  color: #e31235;
+  text-decoration: none;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+  background-color: #E8E8E8;
+}
+
+.line.complete {
+  background-color: #333;
+}
+
+.line.progress {
+  background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
+}
+
+.line.grey {
+  background-color: #E8E8E8;
+}
+
+.stepContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  background: white;
+  position: relative;
+  z-index: 1;
+}
+
+.stepContent img {
+  width: 24px;
+  height: 24px;
+}
+
+.stepContent span {
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.stepContent span.active {
+  color: #000;
+  font-weight: 500;
+}
+
+/* Стили для активных шагов */
+.step:first-child .stepContent {
+  background-color: #333;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.step:first-child .stepContent span {
+  color: #333;
+}
+
+/* Стили для второго шага (красный) */
+.step .stepContent:nth-of-type(2) {
+  background-color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.step .stepContent:nth-of-type(2) span {
+  color: white;
+}
+
+/* Стили для неактивных шагов */
+.step .stepContent:nth-of-type(3),
+.step .stepContent:nth-of-type(4) {
+  background-color: #E20338;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.step .stepContent:nth-of-type(3) span,
+.step .stepContent:nth-of-type(4) span {
+  color: white;
+}
