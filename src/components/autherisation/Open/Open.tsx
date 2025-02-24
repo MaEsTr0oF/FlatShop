@@ -1,18 +1,19 @@
-
 import { Link } from 'react-router-dom'
 import styles from './Open.module.css'
 import { useState } from 'react'
 import Captch from '../Captch/Captch'
+
 export default function Open() {
 	const [phone, setPhone] = useState('')
 	const [password, setPassword] = useState('')
 	
-
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 	}
 
-	
+	const handleVerify = (verified: boolean) => {
+		console.log('Verified:', verified)
+	}
 
 	return (
 		<div className={styles.loginContainer}>
@@ -39,7 +40,7 @@ export default function Open() {
 					/>
 					<a href="#" className={styles.forgotPassword}>Забыли пароль?</a>
 				</div>
-				<Captch />
+				<Captch onVerify={handleVerify} />
 				<button type="submit" className={styles.submitButton}>
 					Продолжить
 				</button>

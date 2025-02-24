@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Open from './components/autherisation/Open/Open'
 import Register from './components/autherisation/Register/Register'
+import SmsCode from './components/autherisation/SmsCode/SmsCode'
+import Contacts from './components/autherisation/Contacts/Contacts'
+import Finish from './components/autherisation/Finish/Finish'
 
 function App() {
   return (
@@ -9,6 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Open />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/sms-code" element={<SmsCode />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/finish" element={<Finish />} />
       </Routes>
     </Router>
   )

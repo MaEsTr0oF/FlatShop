@@ -14,7 +14,7 @@
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 800px;
   margin-bottom: 2rem;
 }
 
@@ -33,6 +33,9 @@
   text-align: center;
   margin-bottom: 2rem;
   color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Druk Cyr', sans-serif;
 }
 
 .formGroup {
@@ -141,7 +144,7 @@
 }
 
 .line.complete {
-  background-color: #333;
+	background: linear-gradient(to right, #333 50%, #e31235 50%);
 }
 
 .line.progress {
@@ -157,7 +160,6 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0 0.5rem;
-  background: white;
   position: relative;
   z-index: 1;
 }
@@ -172,44 +174,71 @@
   color: #333;
   white-space: nowrap;
 }
-
+.stepContent h3{
+	background-color: rgba(255, 255, 255, 0.1);
+	width: 24px;
+	height:24px;
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0.5;
+}
 .stepContent span.active {
   color: #000;
   font-weight: 500;
 }
 
-/* Стили для активных шагов */
 .step:first-child .stepContent {
-  background-color: #333;
-  color: white;
+  background-color: transparent;
+  color: black;
   padding: 8px 16px;
   border-radius: 4px;
 }
-
-.step:first-child .stepContent span {
-  color: #333;
-}
-
-/* Стили для второго шага (красный) */
+.step:first-child .stepContent span{
+	color: black;
+	opacity: 0.5;
+ }
 .step .stepContent:nth-of-type(2) {
-  background-color: #333;
   padding: 8px 16px;
   border-radius: 4px;
+  opacity: 1;
+  background-color: #333;
 }
 
 .step .stepContent:nth-of-type(2) span {
   color: white;
+  
+  opacity: 1;
 }
 
-/* Стили для неактивных шагов */
 .step .stepContent:nth-of-type(3),
 .step .stepContent:nth-of-type(4) {
   background-color: #E20338;
   padding: 8px 16px;
   border-radius: 4px;
+  opacity: 1;
+  color: white;
+}
+.step .stepContent:nth-of-type(4) h3{
+	color: white;
+	opacity: 1;
+}
+.step .stepContent:nth-of-type(4) span{
+	color: white;
+	opacity: 1;
 }
 
-.step .stepContent:nth-of-type(3) span,
-.step .stepContent:nth-of-type(4) span {
-  color: white;
+.errors {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #fff2f2;
+  border-radius: 8px;
+  border: 1px solid #ffcdd2;
+}
+
+.error {
+  color: #e31235;
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
 }

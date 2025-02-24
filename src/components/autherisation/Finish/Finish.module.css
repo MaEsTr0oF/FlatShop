@@ -1,0 +1,229 @@
+.finishContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.finishContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.finishContent h2 {
+  font-family: 'Druk Cyr', sans-serif;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.videoContainer img {
+  width: 100%;
+  height: auto;
+}
+
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.playButton img {
+  width: 64px;
+  height: 64px;
+}
+
+.cabinetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #e31235;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cabinetButton:hover {
+  background-color: #c60f2e;
+}
+
+/* Прогресс бар (можно скопировать стили из других компонентов) */
+.progressBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.progressBar {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 800px;
+	margin-top: 2rem;
+	position: relative;
+ }
+ 
+ .progressBar {
+	 display: flex;
+	 justify-content: center;
+	 width: 100%;
+	 max-width: 800px;
+	 margin-top: 2rem;
+	 position: relative;
+  }
+  
+  .step {
+	 display: flex;
+	 align-items: center;
+	 width: 100%;
+  }
+  
+  .line {
+	 flex: 1;
+	 height: 2px;
+	 background-color: #E8E8E8;
+  }
+  
+  .line.complete {
+	  background: linear-gradient(to right, #333 50%, #e31235 50%);
+  }
+  
+  .line.progress {
+	 background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
+  }
+  
+  .line.grey {
+	 background-color: #E8E8E8;
+  }
+  .line.finish {
+	 background-color: #333;
+  }
+  .stepContent {
+	 display: flex;
+	 align-items: center;
+	 gap: 0.5rem;
+	 padding: 0 0.5rem;
+	 position: relative;
+	 z-index: 1;
+  }
+  
+  .stepContent img {
+	 width: 24px;
+	 height: 24px;
+  }
+  
+  .stepContent span {
+	 font-size: 14px;
+	 color: #333;
+	 white-space: nowrap;
+  }
+  .stepContent h3{
+	  background-color: rgba(255, 255, 255, 0.1);
+	  width: 24px;
+	  height:24px;
+	  border-radius: 4px;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  opacity: 0.5;
+  }
+  .stepContent span.active {
+	 color: #000;
+	 font-weight: 500;
+  }
+  
+  .step:first-child .stepContent {
+	 background-color: transparent;
+	 color: black;
+	 padding: 8px 16px;
+	 border-radius: 4px;
+  }
+  .step:first-child .stepContent span{
+	  color: black;
+	  opacity: 0.5;
+	}
+  .step .stepContent:nth-of-type(2) {
+	 padding: 8px 16px;
+	 border-radius: 4px;
+	 opacity: 1;
+	 background-color: #333;
+  }
+  
+  .step .stepContent:nth-of-type(2) span {
+	 color: white;
+	 opacity: 1;
+  }
+  
+  .step .stepContent:nth-of-type(3),
+  .step .stepContent:nth-of-type(4),
+  .step .stepContent:nth-of-type(6) {
+	 background-color: #333;
+	 padding: 8px 16px;
+	 border-radius: 4px;
+	 opacity: 1;
+	 color: white;
+  }
+  .step .stepContent:nth-of-type(4) h3{
+	  color: white;
+	  opacity: 1;
+  }
+  .step .stepContent:nth-of-type(4) span{
+	  color: white;
+	  opacity: 1;
+  } 
+  .step .stepContent:nth-of-type(6) h3{
+	color: white;
+	opacity: 1;
+}
+.step .stepContent:nth-of-type(6) span{
+	color: white;
+	opacity: 1;
+} 
+  .step .stepContent:nth-of-type(8){
+	 background-color: #e31235;
+  }
+  .step .stepContent:nth-of-type(8) h3{
+	 color: white;
+	 opacity: 1;
+	 background-color: #e31235;
+ }
+ .step .stepContent:nth-of-type(8) span{
+	 color: white;
+	 opacity: 1;
+	 background-color: #e31235;
+ } 

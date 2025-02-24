@@ -1,0 +1,462 @@
+.contactsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.contactsForm {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.backButton {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+}
+
+.stepIndicator {
+  text-align: right;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.stepIndicator span {
+  color: #000;
+  font-weight: bold;
+}
+
+.contactsForm h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Druk Cyr', sans-serif;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio input {
+  display: none;
+}
+
+.radio span {
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.radio span::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.radio input:checked + span::before {
+  border-color: #e31235;
+  background-color: #e31235;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3C/svg%3E");
+  background-size: 20px;
+}
+
+.selectWrapper,
+.inputWrapper {
+  flex: 1;
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  color: #999;
+}
+
+.photoUpload {
+  position: relative;
+  margin: 2rem 0;
+  transition: all 0.3s ease;
+}
+
+.photoLabel {
+  display: block;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.photoLabel:hover {
+  border-color: #e31235;
+}
+
+.photoIcon span {
+  display: block;
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.photoHint {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 1rem auto 0;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.fileInput {
+  display: none;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: #e31235;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #c60f2e;
+}
+
+input[type="date"] {
+  color: #999;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+input[type="date"]::before {
+  content: attr(placeholder);
+  position: absolute;
+  color: #999;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+/* Копируем стили прогресс-бара из SmsCode.module.css */
+.progressBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+  position: relative;
+}
+
+/* Остальные стили прогресс-бара такие же как в SmsCode.module.css */
+
+.dateInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.calendarIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* Для Firefox */
+.dateInput::-moz-calendar-picker-indicator {
+  opacity: 0;
+}
+
+/* Для Edge */
+.dateInput::-ms-clear {
+  display: none;
+}
+
+.dateInput::placeholder {
+  color: #999;
+}
+
+/* Когда дата не выбрана */
+.dateInput:invalid {
+  color: #999;
+}
+
+/* Когда дата выбрана */
+.dateInput:valid {
+  color: #333;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+  background-color: #E8E8E8;
+}
+
+.line.complete {
+  background: linear-gradient(to right, #333 50%, #e31235 50%);
+}
+
+.line.progress {
+  background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
+}
+
+.line.grey {
+  background-color: #E8E8E8;
+}
+
+.line.finish {
+  background-color: #333;
+}
+
+.stepContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.stepContent img {
+  width: 24px;
+  height: 24px;
+}
+
+.stepContent span {
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.stepContent h3 {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.stepContent span.active {
+  color: #000;
+  font-weight: 500;
+}
+
+.step:first-child .stepContent {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.step:first-child .stepContent span {
+  color: black;
+  opacity: 0.5;
+}
+
+.step .stepContent:nth-of-type(2) {
+  padding: 8px 16px;
+  border-radius: 4px;
+  opacity: 1;
+  background-color: #333;
+}
+
+.step .stepContent:nth-of-type(2) span {
+  color: white;
+  opacity: 1;
+}
+
+.step .stepContent:nth-of-type(3),
+.step .stepContent:nth-of-type(4) {
+  background-color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  opacity: 1;
+  color: white;
+}
+
+.step .stepContent:nth-of-type(4) h3 {
+  color: white;
+  opacity: 1;
+}
+
+.step .stepContent:nth-of-type(4) span {
+  color: white;
+  opacity: 1;
+}
+
+.step .stepContent:nth-of-type(6) {
+  background-color: #e31235;
+}
+
+.step .stepContent:nth-of-type(6) h3 {
+  color: white;
+  opacity: 1;
+  background-color: #e31235;
+}
+
+.step .stepContent:nth-of-type(6) span {
+  color: white;
+  opacity: 1;
+  background-color: #e31235;
+}
+
+/* Добавим стили для предпросмотра */
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.preview {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.previewContainer span {
+  color: #e31235;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.photoUpload {
+  position: relative;
+  margin: 2rem 0;
+  transition: all 0.3s ease;
+}
+
+.photoLabel {
+  display: block;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.photoLabel:hover {
+  border-color: #e31235;
+} 
