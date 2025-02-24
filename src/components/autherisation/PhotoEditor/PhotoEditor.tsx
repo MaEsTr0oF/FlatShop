@@ -92,6 +92,12 @@ export default function PhotoEditor({ photo, onClose, onSave }: PhotoEditorProps
     try {
       if (croppedAreaPixels && imagePreview) {
         const croppedImage = await getCroppedImg(imagePreview, croppedAreaPixels)
+        // Сохраняем фото в localStorage
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          localStorage.setItem('profilePhoto', reader.result as string)
+        }
+        reader.readAsDataURL(croppedImage)
         onSave(croppedImage)
       }
     } catch (e) {

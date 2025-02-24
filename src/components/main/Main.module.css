@@ -1,0 +1,39 @@
+.mainContainer {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.grid {
+  display: grid;
+  grid-template-areas: 
+    "sidebar header"
+    "sidebar content";
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+/* Добавим классы для каждой области grid */
+.headerArea {
+  grid-area: header;
+  background: white;
+}
+
+.contentArea {
+  grid-area: content;
+  padding: 20px;
+}
+
+.sidebarArea {
+	padding-top: 65px;
+  grid-area: sidebar;
+  background: white;
+  border-right: 1px solid #eee;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 2rem;
+  background: white;
+  border-top: 1px solid #eee;
+} 

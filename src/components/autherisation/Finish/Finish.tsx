@@ -5,8 +5,7 @@ export default function Finish() {
   const navigate = useNavigate()
 
   const handleCabinetClick = () => {
-    // Переходим в личный кабинет
-    navigate('/cabinet')
+    navigate('/main')
   }
 
   return (

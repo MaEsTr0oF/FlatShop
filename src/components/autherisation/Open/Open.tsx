@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Open.module.css'
 import { useState } from 'react'
 import Captch from '../Captch/Captch'
@@ -6,9 +6,13 @@ import Captch from '../Captch/Captch'
 export default function Open() {
 	const [phone, setPhone] = useState('')
 	const [password, setPassword] = useState('')
+	const navigate = useNavigate()
 	
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
+		if (phone && password) {
+			navigate('/main')
+		}
 	}
 
 	const handleVerify = (verified: boolean) => {
@@ -42,7 +46,7 @@ export default function Open() {
 				</div>
 				<Captch onVerify={handleVerify} />
 				<button type="submit" className={styles.submitButton}>
-					Продолжить
+					<Link to="/main">Продолжить</Link>
 				</button>
 
 				<div className={styles.registerLink}>

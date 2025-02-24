@@ -5,6 +5,7 @@ import Register from './components/autherisation/Register/Register'
 import SmsCode from './components/autherisation/SmsCode/SmsCode'
 import Contacts from './components/autherisation/Contacts/Contacts'
 import Finish from './components/autherisation/Finish/Finish'
+import Main from './components/main/Main'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/sms-code" element={<SmsCode />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/finish" element={<Finish />} />
+        <Route path="/main/*" element={<Main />} />
       </Routes>
     </Router>
   )

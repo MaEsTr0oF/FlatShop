@@ -43,9 +43,6 @@ export default function Register() {
     }
 
     setErrors(newErrors)
-	 if(email =="boltface@mail.ru"){
-		newErrors.push('Здарова заебал')
-	 }
     return newErrors.length === 0
   }
 

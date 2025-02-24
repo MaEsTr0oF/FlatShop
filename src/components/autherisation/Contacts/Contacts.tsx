@@ -40,6 +40,8 @@ export default function Contacts() {
     e.preventDefault()
     
     if (validateForm()) {
+      // Сохраняем имя пользователя
+      localStorage.setItem('userName', `${firstName} ${lastName}`)
       navigate('/finish')
     }
   }

@@ -1,0 +1,124 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.partnerCard {
+  background: white;
+  border-radius: 10px;
+  padding: 24px;
+  
+  width: 430px;
+}
+
+.partnerCard h3 {
+  font-family: 'Druk Cyr', sans-serif;
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.partner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.partnerInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.details h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+.details span {
+  font-size: 14px;
+  color: #666;
+}
+
+.contacts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.chatButton, .telegramButton, .vkButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.chatButton {
+  background: #F5F5F5;
+  color: #333;
+}
+
+.telegramButton, .vkButton {
+  background: #F5F5F5;
+  padding: 8px;
+}
+
+.chatButton:hover, .telegramButton:hover, .vkButton:hover {
+  background: #E0E0E0;
+}
+
+.phone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.phone span {
+  font-size: 12px;
+  color: #666;
+}
+
+.phone a {
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+} 
+.analytics_button{
+	background-color: rgba(226, 3, 56, 0.2);
+	color: rgba(226, 3, 56, 1);
+	border-radius: 10px;
+	padding: 12px 136px;
+	font-size: 16px;
+	font-weight: 500;
+	transition: all 0.4s;
+}
+.analytics_button:hover{
+	background-color: rgba(226, 3, 56, 0.3);
+}

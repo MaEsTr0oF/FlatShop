@@ -1,0 +1,110 @@
+.card {
+  width: 365px;
+  max-width: 380px;
+  padding: 24px;
+  border-radius: 16px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.partners {
+  background: linear-gradient(135deg, #E31235 0%, #FF1744 100%);
+}
+
+.sales {
+  background: #1A1A1A;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+}
+
+.balanceSection {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+
+
+.accountSection {
+  margin-bottom: 24px;
+}
+
+.accountNumber {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-top: 8px;
+}
+
+.accountNumber span {
+  font-family: monospace;
+}
+
+.copyButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copyButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.copyButton img {
+  width: 16px;
+  height: 16px;
+}
+
+.ownerSection {
+  margin-bottom: 16px;
+}
+
+.owner {
+  margin: 0;
+  font-size: 14px;
+}
+
+.cardType {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  font-size: 25px;
+  font-weight: 700;
+  z-index: 1;
+  font-family: 'Druk Cyr', sans-serif;
+} 
+.cardType span::after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -60%);
+  width: 193px;
+  height: 193px;
+  opacity: 0.4;
+  background: #3F373766;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+.balance h2{
+	color: white;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
