@@ -48,12 +48,8 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
     if (validateForm()) {
-      console.log('Форма валидна', { email, phone, password, confirmPassword, language, inviteCode })
-      navigate('/sms-code', { 
-        state: { phone } 
-      })
+      navigate('/sms-code')
     }
   }
 
@@ -136,8 +132,6 @@ export default function Register() {
             placeholder="Кулагин Валерий Петрович"
           />
         </div>
-
-        {/* Добавляем отображение ошибок */}
         {errors.length > 0 && (
           <div className={styles.errors}>
             {errors.map((error, index) => (

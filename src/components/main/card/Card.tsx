@@ -10,33 +10,16 @@ interface CardProps {
 export default function Card({ type, balance, accountNumber, owner }: CardProps) {
   return (
     <div className={`${styles.card} ${styles[type]}`}>
-      <div className={styles.cardContent}>
-        <div className={styles.balanceSection}>
-          <span className={styles.label}>Баланс</span>
-          <h2 className={styles.balance}>{balance} ₽</h2>
-        </div>
-        
-        <div className={styles.accountSection}>
-          <span className={styles.label}>Номер счета</span>
-          <div className={styles.accountNumber}>
-            {accountNumber.split(' ').map((group, index) => (
-              <span key={index}>{group}</span>
-            ))}
-            <button className={styles.copyButton}>
-              <img src="/img/general/copy.svg" alt="copy" />
-            </button>
-          </div>
-        </div>
-        
-        <div className={styles.ownerSection}>
-          <span className={styles.label}>Владелец</span>
-          <p className={styles.owner}>{owner}</p>
-        </div>
+      <div className={styles.balance}>
+        <span className={styles.label}>Баланс</span>
+        <span className={styles.amount}>{balance} ₽</span>
       </div>
-      
-      <div className={styles.cardType}>
-        <span>{type === 'partners' ? 'ПАРТНЕРЫ' : 'ПРОДАЖИ'}</span>
+      <div className={styles.accountInfo}>
+        <span className={styles.accountNumber}>{accountNumber}</span>
+        <span className={styles.copy}></span>
       </div>
+      <div className={styles.owner}>{owner}</div>
+      <div className={styles.type}>{type === 'partners' ? 'ПАРТНЕРЫ' : 'ПРОДАЖИ'}</div>
     </div>
   )
 } 

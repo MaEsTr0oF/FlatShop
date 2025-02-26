@@ -11,11 +11,14 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Маршруты аутентификации */}
         <Route path="/" element={<Open />} />
         <Route path="/register" element={<Register />} />
         <Route path="/sms-code" element={<SmsCode />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/finish" element={<Finish />} />
+        
+        {/* Маршруты основного приложения */}
         <Route path="/main/*" element={<Main />} />
       </Routes>
     </Router>

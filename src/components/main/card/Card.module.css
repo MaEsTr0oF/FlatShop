@@ -1,20 +1,69 @@
 .card {
-  width: 365px;
-  max-width: 380px;
-  padding: 24px;
-  border-radius: 16px;
+  width: 300px;
+  padding: 20px;
+  border-radius: 20px;
   color: white;
   position: relative;
   overflow: hidden;
-  min-height: 200px;
 }
 
 .partners {
-  background: linear-gradient(135deg, #E31235 0%, #FF1744 100%);
+  background-color: #E20338;
 }
 
 .sales {
-  background: #1A1A1A;
+  background-color: #333;
+}
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.amount {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.accountNumber {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.copy {
+  width: 20px;
+  height: 20px;
+  background-image: url('/img/copy-icon.png');
+  background-size: contain;
+  cursor: pointer;
+}
+
+.owner {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+.type {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .cardContent {
@@ -26,26 +75,8 @@
   margin-bottom: 24px;
 }
 
-.label {
-  display: block;
-  font-size: 12px;
-  opacity: 0.7;
-  margin-bottom: 4px;
-}
-
-
-
 .accountSection {
   margin-bottom: 24px;
-}
-
-.accountNumber {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 18px;
-  letter-spacing: 1px;
-  margin-top: 8px;
 }
 
 .accountNumber span {
@@ -74,11 +105,6 @@
   margin-bottom: 16px;
 }
 
-.owner {
-  margin: 0;
-  font-size: 14px;
-}
-
 .cardType {
   position: absolute;
   right: 25px;
@@ -87,8 +113,9 @@
   font-weight: 700;
   z-index: 1;
   font-family: 'Druk Cyr', sans-serif;
-} 
-.cardType span::after{
+}
+
+.cardType span::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -101,8 +128,9 @@
   border-radius: 50%;
   opacity: 0.4;
 }
-.balance h2{
-	color: white;
+
+.balance h2 {
+  color: white;
   font-size: 32px;
   font-weight: 700;
   margin: 0;

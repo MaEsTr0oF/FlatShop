@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './header.module.css'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Header() {
   const [profilePhoto, setProfilePhoto] = useState<string>('/img/header/profile.png')
@@ -45,6 +46,10 @@ export default function Header() {
 			</button>
 		</div>
 	</div>
+	<nav>
+		<Link to="/main">Главная</Link>
+		<Link to="/main/partners">Партнеры</Link>
+	</nav>
 </header>
   )
 }

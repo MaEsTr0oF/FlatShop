@@ -1,0 +1,18 @@
+.partnersContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cardsSection {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.analytics {
+	display: flex;
+	gap:20px;
+  width: 100%;
+}
