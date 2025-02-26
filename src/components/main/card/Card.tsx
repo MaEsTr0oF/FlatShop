@@ -15,11 +15,13 @@ export default function Card({ type, balance, accountNumber, owner }: CardProps)
         <span className={styles.amount}>{balance} ₽</span>
       </div>
       <div className={styles.accountInfo}>
+			<h2>Номер счета</h2>
         <span className={styles.accountNumber}>{accountNumber}</span>
         <span className={styles.copy}></span>
       </div>
+		<h2>Владелец</h2>
       <div className={styles.owner}>{owner}</div>
-      <div className={styles.type}>{type === 'partners' ? 'ПАРТНЕРЫ' : 'ПРОДАЖИ'}</div>
+      <div className={styles.type}><span>{type === 'partners' ? 'ПАРТНЕРЫ' : 'ПРОДАЖИ'}</span></div>
     </div>
   )
 } 

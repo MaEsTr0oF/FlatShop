@@ -6,13 +6,91 @@
 }
 
 .cardsSection {
+	position: relative;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 40%;
 }
 
 .analytics {
+	position: relative;
 	display: flex;
 	gap:20px;
-  width: 100%;
+  	width: 100%;
+}
+.cards1, .cards2 {
+  position: absolute;
+  right: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cards1 {
+  top: 0px;
+  z-index: 2;
+}
+
+.cards2 {
+  top: 0px;
+  z-index: 1;
+}
+
+.cards1:hover, .cards2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.cardsHeader{
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	width: 100%;
+	gap: 10px;
+	padding-left: 0px;
+	position: relative;
+}
+.cardsHeader h2{
+	font-family: 'Druk Cyr';
+	font-size: 30px;
+	letter-spacing: 0px;
+	font-weight: 600;
+	color: #333;
+}
+
+.adviceIcon {
+	cursor: pointer;
+}
+
+.tooltip {
+	position: absolute;
+	top: 35px;
+	right: 45px;
+	background-color: #333;
+	color: white;
+	padding: 12px 16px;
+	border-radius: 8px;
+	font-size: 14px;
+	z-index: 1000;
+	width: max-content;
+	max-width: 250px;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+}
+
+.tooltip::before {
+	content: '';
+	position: absolute;
+	top: -6px;
+	right: 10px;
+	width: 12px;
+	height: 12px;
+	background-color: #333;
+	transform: rotate(45deg);
+}
+
+.tooltipVisible {
+	opacity: 1;
+	visibility: visible;
 }

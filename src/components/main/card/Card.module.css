@@ -1,25 +1,29 @@
 .card {
-  width: 300px;
+  width: 375px;
   padding: 20px;
   border-radius: 20px;
   color: white;
   position: relative;
   overflow: hidden;
 }
-
+.card h2{
+	font-size: 14px;
+	opacity: 0.4;
+	margin-bottom: 5px;
+}
 .partners {
   background-color: #E20338;
 }
 
 .sales {
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .balance {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .label {
@@ -34,11 +38,15 @@
 
 .accountInfo {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items:start;
   margin-bottom: 10px;
 }
-
+.accountInfo h2{
+	font-size: 14px;
+	opacity: 0.4;
+	margin-bottom: 5px;
+}
 .accountNumber {
   font-size: 16px;
   letter-spacing: 1px;
@@ -53,8 +61,8 @@
 }
 
 .owner {
-  font-size: 14px;
-  opacity: 0.7;
+  font-size: 16px;
+  
   margin-bottom: 10px;
 }
 
@@ -115,7 +123,7 @@
   font-family: 'Druk Cyr', sans-serif;
 }
 
-.cardType span::after {
+.type span::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -124,9 +132,10 @@
   width: 193px;
   height: 193px;
   opacity: 0.4;
-  background: #3F373766;
+  background: rgba(63, 55, 55, 0.6);
   border-radius: 50%;
   opacity: 0.4;
+  z-index: 999;
 }
 
 .balance h2 {

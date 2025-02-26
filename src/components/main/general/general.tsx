@@ -1,44 +1,47 @@
 import styles from './general.module.css'
 import Card from '../card/Card'
-import { useState, ChangeEvent, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Analytics from '../analytics/Analytics'
 import Comments from '../comments/Comments'
 import News from '../news/News'
 
 export default function General() {
 	const [amount, setAmount] = useState<string>('0')
-	const [cursorPosition, setCursorPosition] = useState<number>(0)
 	const inputRef = useRef<HTMLInputElement>(null)
-
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const input = e.target
-		const selectionStart = input.selectionStart || 0
-		
-		// Убираем все нечисловые символы
-		let value = input.value.replace(/[^0-9]/g, '')
-		
-		// Убираем ведущие нули
-		value = value.replace(/^0+/, '') || '0'
-		
-		setAmount(value)
-		
-		// Сохраняем позицию курсора
-		const newPosition = selectionStart - (input.value.length - value.length)
-		setCursorPosition(newPosition)
-	}
 
 	// Форматируем число для отображения с пробелами между тысячами
 	const formatAmount = (value: string): string => {
-		return value.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+		// Убираем все нечисловые символы и ведущие нули
+		const cleanValue = value.replace(/[^\d]/g, '').replace(/^0+/, '') || '0'
+		// Добавляем пробелы между тысячами
+		return cleanValue.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
 	}
 
-	// Восстанавливаем позицию курсора после форматирования
+	// Обработчик изменения значения
+	const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value.replace(/[^\d]/g, '') // Оставляем только цифры
+		
+		if (value === '' || value === '0') {
+			setAmount('0')
+		} else {
+			// Убираем ведущие нули и устанавливаем значение
+			const numericValue = parseInt(value.replace(/^0+/, ''))
+			setAmount(numericValue.toString())
+		}
+	}
+
+	// Устанавливаем курсор в конец при изменении значения
 	useEffect(() => {
 		if (inputRef.current) {
-			inputRef.current.selectionStart = cursorPosition
-			inputRef.current.selectionEnd = cursorPosition
+			const len = inputRef.current.value.length
+			inputRef.current.setSelectionRange(len, len)
 		}
-	}, [amount, cursorPosition])
+	}, [amount])
+
+	// Обработчик фокуса для выделения всего текста
+	const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+		e.target.select()
+	}
 
 	const analyticsData = [
 		{ id: 1, text: 'Текст 1', percentage: 38, color: '#E31235' },
@@ -58,8 +61,6 @@ export default function General() {
 				<img src="/img/general/workers.png" alt="workers" />
 			</div>
 
-			
-
 			<div className={styles.accounts}>
 				
 				<div className={styles.withdrawSection}>
@@ -72,9 +73,10 @@ export default function General() {
 						<input 
 							ref={inputRef}
 							type="text" 
-							placeholder='0' 
-							onChange={handleInputChange}
+							placeholder='0'
 							value={formatAmount(amount)}
+							onChange={handleAmountChange}
+							onFocus={handleFocus}
 						/>
 						<button className={styles.confirmButton}>Подтвердить</button>
 					 </div>
