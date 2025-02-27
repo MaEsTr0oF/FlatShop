@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FirstStep from './FirstStep/FirstStep'
 import SecondStep, { FormData as SecondStepData } from './SecondStep/SecondStep'
 import ThirdStep, { ThirdStepData } from './ThirdStep/ThirdStep'
@@ -26,43 +26,59 @@ interface AddFormProps {
 type StepData = SecondStepData | ThirdStepData | FourthStepData | PriceData;
 
 export default function AddForm({ onClose, onSubmit }: AddFormProps) {
-	const [currentStep, setCurrentStep] = useState(1)
-	const [formData, setFormData] = useState<FormData>({
-		title: '',
-		propertyType: 'Квартира',
-		listingType: 'Продажа',
-		address: '',
-		rentType: 'Долгосрочная аренда',
-		secondStepData: null,
-		thirdStepData: null,
-		fourthStepData: null,
-		fifthStepData: null
-	})
+	const [currentStep, setCurrentStep] = useState(() => {
+		const savedStep = localStorage.getItem('currentStep');
+		return savedStep ? parseInt(savedStep) : 1;
+	});
+
+	const [formData, setFormData] = useState<FormData>(() => {
+		const savedData = localStorage.getItem('formData');
+		return savedData ? JSON.parse(savedData) : {
+			title: '',
+			propertyType: 'Квартира',
+			listingType: 'Продажа',
+			address: '',
+			rentType: 'Долгосрочная аренда',
+			secondStepData: null,
+			thirdStepData: null,
+			fourthStepData: null,
+			fifthStepData: null
+		};
+	});
+
+	useEffect(() => {
+		localStorage.setItem('currentStep', currentStep.toString());
+		localStorage.setItem('formData', JSON.stringify(formData));
+	}, [currentStep, formData]);
 
 	const handleNext = () => {
-		setCurrentStep(prev => prev + 1)
+		setCurrentStep(prev => prev + 1);
 	}
 
 	const handleBack = () => {
-		setCurrentStep(prev => prev - 1)
+		setCurrentStep(prev => prev - 1);
 	}
 
 	const handleSave = () => {
-		localStorage.setItem('formData', JSON.stringify(formData))
-		onClose()
+		localStorage.setItem('formData', JSON.stringify(formData));
+		localStorage.setItem('currentStep', currentStep.toString());
+		onClose();
 	}
 
 	const handleSubmit = () => {
-		console.log('Итоговые данные формы:', formData)
-		onSubmit(formData)
-		onClose()
+		console.log('Итоговые данные формы:', formData);
+		onSubmit(formData);
+		// Очищаем localStorage после успешной отправки формы
+		localStorage.removeItem('formData');
+		localStorage.removeItem('currentStep');
+		onClose();
 	}
 
 	const updateFormData = (newData: Partial<FormData>) => {
 		setFormData(prev => ({
 			...prev,
 			...newData
-		}))
+		}));
 	}
 
 	const updateStepData = (step: number, data: StepData) => {
@@ -73,12 +89,12 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 			5: 'fifthStepData'
 		}
 		
-		const key = stepDataMap[step]
+		const key = stepDataMap[step];
 		if (key) {
 			setFormData(prev => ({
 				...prev,
 				[key]: data
-			}))
+			}));
 		}
 	}
 
