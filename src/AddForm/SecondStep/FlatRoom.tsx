@@ -83,7 +83,7 @@ export default function FlatRoom({
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${styles.flatRoom}`}>
 
 
 			<form className={styles.form}>

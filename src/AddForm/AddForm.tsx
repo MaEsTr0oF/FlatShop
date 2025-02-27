@@ -1,27 +1,11 @@
 import { useState, useEffect } from 'react'
 import FirstStep from './FirstStep/FirstStep'
-import SecondStep, { FormData as SecondStepData } from './SecondStep/SecondStep'
-import ThirdStep, { ThirdStepData } from './ThirdStep/ThirdStep'
-import FourthStep, { FourthStepData } from './FourthStep/FourthStep'
+import SecondStep from './SecondStep/SecondStep'
+import ThirdStep from './ThirdStep/ThirdStep'
+import FourthStep from './FourthStep/FourthStep'
 import styles from './AddForm.module.css'
-import FifthStep, { PriceData } from './FifthStep/FifthStep'
-
-interface FormData {
-	title: string;
-	propertyType: string;
-	listingType: string;
-	address: string;
-	rentType: string;
-	secondStepData: SecondStepData | null;
-	thirdStepData: ThirdStepData | null;
-	fourthStepData: FourthStepData | null;
-	fifthStepData: PriceData | null;
-}
-
-interface AddFormProps {
-	onClose: () => void;
-	onSubmit: (data: FormData) => void;
-}
+import FifthStep from './FifthStep/FifthStep'
+import { FormData, AddFormProps, SecondStepData, ThirdStepData, FourthStepData, PriceData } from '../types/form'
 
 type StepData = SecondStepData | ThirdStepData | FourthStepData | PriceData;
 

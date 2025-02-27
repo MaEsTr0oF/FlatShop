@@ -1,54 +1,56 @@
 .loginContainer {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background-color: #f5f5f5;
- }
- 
- .loginForm {
+	padding: 2rem;
+}
+
+.loginForm {
 	background: white;
 	padding: 2rem;
 	border-radius: 20px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 	width: 100%;
 	max-width: 400px;
- }
- 
- .loginForm h2 {
+}
+
+.loginForm h2 {
 	text-align: center;
 	margin-bottom: 2rem;
 	color: #333;
- }
- 
- .formGroup {
+}
+
+.formGroup {
 	margin-bottom: 1.5rem;
- }
- 
- .formGroup label {
+}
+
+.formGroup label {
 	display: block;
 	margin-bottom: 0.5rem;
 	color: #666;
- }
- 
- .formGroup input {
+}
+
+.formGroup input {
 	width: 100%;
 	padding: 0.75rem;
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	font-size: 1rem;
- }
- 
- .forgotPassword {
+}
+
+.forgotPassword {
 	display: block;
 	text-align: right;
 	color: #666;
 	text-decoration: none;
 	font-size: 0.9rem;
 	margin-top: 0.5rem;
- }
- 
- .submitButton {
+}
+
+.submitButton {
 	width: 100%;
 	padding: 1rem;
 	background-color: #e31235;
@@ -58,27 +60,101 @@
 	font-size: 1rem;
 	cursor: pointer;
 	transition: background-color 0.2s;
- }
- 
- .submitButton:hover {
+}
+
+.submitButton:hover {
 	background-color: #c60f2e;
- }
- 
- .registerLink {
+}
+
+.registerLink {
 	text-align: center;
 	margin-top: 1rem;
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding: 1rem;
- }
- 
- .registerLink a {
+}
+
+.registerLink a {
 	color: #666;
 	text-decoration: none;
- }
- 
- .registerLink a:hover {
+}
+
+.registerLink a:hover {
 	text-decoration: underline;
- }
- 
+}
+
+.progressBar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	width: 100%;
+	max-width: 400px;
+	margin-top: 2rem;
+	padding: 0 1rem;
+	background: white;
+	border-radius: 20px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	padding: 1.5rem 1rem;
+}
+
+.progressStep {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	position: relative;
+	z-index: 2;
+}
+
+.stepNumber {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	font-weight: 500;
+	background: white;
+	border: 2px solid #E0E0E0;
+	color: #666;
+	transition: all 0.3s ease;
+}
+
+.stepNumber.active {
+	background: #E31235;
+	border-color: #E31235;
+	color: white;
+	transform: scale(1.1);
+}
+
+.stepTitle {
+	font-size: 10px;
+	color: #666;
+	white-space: nowrap;
+}
+
+.progressLine {
+	position: absolute;
+	top: 50%;
+	left: 40px;
+	right: 40px;
+	height: 2px;
+	background: #E0E0E0;
+	z-index: 1;
+	transform: translateY(-10px);
+}
+
+.progressLine::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: var(--progress-width, 0%);
+	background: #E31235;
+	transition: width 0.3s ease;
+}
+
  

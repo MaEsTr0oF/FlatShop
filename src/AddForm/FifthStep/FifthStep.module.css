@@ -1,8 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #f5f5f5;
+  padding: 40px;
+  background-color: white;
+  width: 900px;
 }
 
 .container {
@@ -19,21 +20,19 @@
 }
 
 .step {
-  color: #666;
+  font-size: 24px;
+  color: #E31235;
   margin-bottom: 10px;
-  font-size: 14px;
 }
 
 .step span {
-  color: #999;
+  color: #666;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 32px;
   color: #333;
-  margin: 0;
-  font-family: 'Druk Cyr';
-  letter-spacing: 0.5px;
+  margin-bottom: 20px;
 }
 
 .form {
@@ -45,26 +44,24 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .formGroup label {
-  font-weight: 500;
+  font-size: 16px;
   color: #333;
-  font-size: 14px;
+  font-weight: 500;
 }
 
 .input {
-  padding: 12px;
+  height: 48px;
   border: 1px solid #E0E0E0;
   border-radius: 8px;
-  font-size: 14px;
+  padding: 0 16px;
+  font-size: 16px;
+  color: #333;
   width: 100%;
   transition: border-color 0.2s;
-}
-
-.input:hover {
-  border-color: #999;
 }
 
 .input:focus {
@@ -72,24 +69,25 @@
   outline: none;
 }
 
-.select {
-  padding: 12px;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  font-size: 14px;
-  background: white;
-  cursor: pointer;
-  width: 100%;
-  appearance: none;
-  background-image: url('/img/arrow-down.svg');
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  transition: border-color 0.2s;
+.input::placeholder {
+  color: #999;
 }
 
-.select:hover {
-  border-color: #999;
+.select {
+  height: 48px;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
+  background-color: white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  transition: border-color 0.2s;
 }
 
 .select:focus {
@@ -101,7 +99,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 4px;
 }
 
 .checkbox {
@@ -109,8 +106,6 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-size: 14px;
-  color: #333;
   user-select: none;
 }
 
@@ -119,30 +114,26 @@
 }
 
 .checkmark {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border: 2px solid #E0E0E0;
   border-radius: 4px;
   position: relative;
   transition: all 0.2s;
 }
 
-.checkbox:hover .checkmark {
-  border-color: #999;
-}
-
 .checkbox input:checked + .checkmark {
-  background: #E31235;
+  background-color: #E31235;
   border-color: #E31235;
 }
 
 .checkbox input:checked + .checkmark::after {
   content: '';
   position: absolute;
-  left: 5px;
+  left: 6px;
   top: 2px;
-  width: 4px;
-  height: 8px;
+  width: 5px;
+  height: 10px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -150,110 +141,142 @@
 
 .buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 16px;
+  margin-top: 30px;
 }
 
-.nextButton,
 .backButton,
+.nextButton,
 .saveButton {
-  padding: 12px 24px;
+  height: 48px;
   border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  transition: background-color 0.2s;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backButton {
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  color: #666;
+}
+
+.backButton:hover {
+  background-color: #f5f5f5;
 }
 
 .nextButton {
-  background: #E31235;
+  background-color: #E31235;
+  border: none;
   color: white;
   flex: 1;
 }
 
 .nextButton:hover {
-  background: #c60f2e;
-}
-
-.backButton {
-  background: #F5F5F5;
-  color: #333;
-}
-
-.backButton:hover {
-  background: #E0E0E0;
+  background-color: #c60f2e;
 }
 
 .saveButton {
-  background: #333;
-  color: white;
+  background-color: white;
+  border: 1px solid #E31235;
+  color: #E31235;
 }
 
 .saveButton:hover {
-  background: #1a1a1a;
+  background-color: #fff5f6;
 }
 
 .progressBar {
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.progressBar::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #E0E0E0;
-  transform: translateY(-50%);
-  z-index: 0;
-}
-
-.progressLine {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 2px;
-  background: #E31235;
-  transform: translateY(-50%);
-  z-index: 1;
-  width: var(--progress-width, 0%);
-  transition: width 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 40px;
+	
+	position: relative;
 }
 
 .progressStep {
-  position: relative;
-  z-index: 1;
-  background: white;
-  padding: 0 10px;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	position: relative;
+	z-index: 2;
 }
 
 .stepNumber {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #E0E0E0;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  margin: 0 auto 5px;
-  transition: background-color 0.2s;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 500;
+	background: white;
+	border: 2px solid #E31235;
+	color: #E31235;
 }
 
 .stepNumber.active {
-  background: #E31235;
+	background: #E31235;
+	color: white;
 }
 
 .stepNumber.completed {
-  background: #E31235;
+	background: #E31235;
+	color: white;
+}
+
+.stepTitle {
+	font-size: 12px;
+	color: #666;
+	white-space: nowrap;
+}
+
+.progressLine {
+	position: absolute;
+	top: 16px;
+	left: 50px;
+	right: 50px;
+	height: 2px;
+	background: repeating-linear-gradient(
+		90deg,
+		#E0E0E0 0px,
+		#E0E0E0 6px,
+		transparent 6px,
+		transparent 12px
+	);
+	z-index: 1;
+}
+
+.progressLine::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: var(--progress-width, 0%);
+	background: repeating-linear-gradient(
+		90deg,
+		#E31235 0px,
+		#E31235 6px,
+		transparent 6px,
+		transparent 12px
+	);
+	transition: width 0.3s ease;
+}
+
+.bedRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	background: #F5F5F5;
+	border-radius: 8px;
+	margin-bottom: 8px;
 }
 
 .stepTitle {
@@ -293,3 +316,7 @@
   gap: 16px;
   margin-bottom: 32px;
 } 
+.buttonGroup{
+	display: flex;
+	gap: 10px;
+}

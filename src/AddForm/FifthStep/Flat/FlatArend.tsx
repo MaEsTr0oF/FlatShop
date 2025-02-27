@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
+import styles from '../../AddForm.module.css'
 import { PriceData } from '../FifthStep'
 
 interface FlatArendProps {
@@ -7,34 +7,29 @@ interface FlatArendProps {
 	onNext: () => void;
 	onSave: () => void;
 	rentType: string;
-	onDataUpdate?: (data: PriceData) => void;
-	initialData?: PriceData | null;
+	onDataUpdate: (data: PriceData) => void;
+	initialData?: PriceData;
 }
 
 export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpdate, initialData }: FlatArendProps) {
-	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: 0,
+	const [formData, setFormData] = useState<PriceData>({
+		price: '0',
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,
-		deposit: 0,
-		prepayment: '',
+		rentType: initialData?.rentType || '',
+		minRentPeriod: initialData?.minRentPeriod || '',
 		utilities: {
 			included: false,
 			electricity: false,
 			gas: false,
 			water: false,
-			internet: false,
+			internet: false
 		},
-		minRentalPeriod: '',
-		rules: {
-			children: false,
-			pets: false,
-			smoking: false,
-			party: false,
-			docs: false,
-			month: false,
-		},
+		maintenance: false,
+		vat: initialData?.vat || '',
+		onlineShow: false,
+		deposit: '0',
 		showingTime: {
 			everyday: true,
 			startTime: '09:00',
@@ -50,45 +45,31 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 				sunday: true
 			}
 		}
-	})
+	});
 
 	useEffect(() => {
-		if (onDataUpdate) {
-			onDataUpdate(formData);
+		if (initialData) {
+			setFormData(initialData);
 		}
-	}, [formData, onDataUpdate]);
+	}, [initialData]);
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value, type, checked } = e.target
-		
-		if (name.includes('.')) {
-			const [category, field] = name.split('.')
-			if (category === 'rules' && formData.rules) {
-				setFormData(prev => ({
-					...prev,
-					rules: {
-						...prev.rules!,
-						[field]: checked
-					}
-				}))
-			} else if (category === 'utilities' && formData.utilities) {
-				setFormData(prev => ({
-					...prev,
-					utilities: {
-						...prev.utilities!,
-						[field]: checked
-					}
-				}))
-			}
-		} else {
-			setFormData(prev => ({
-				...prev,
-				[name]: type === 'checkbox' ? checked : 
-					name === 'price' || name === 'commission' || name === 'deposit' ? 
-					parseFloat(value) || 0 : value
-			}))
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value, type } = e.target;
+		const checked = (e.target as HTMLInputElement).checked;
+
+		setFormData((prev: PriceData) => ({
+			...prev,
+			[name]: type === 'checkbox' ? checked : value
+		}));
+	};
+
+	const handleSubmit = () => {
+		onDataUpdate(formData);
+		if (onSave) {
+			onSave();
 		}
-	}
+		onNext();
+	};
 
 	return (
 		<form className={styles.form}>
@@ -183,7 +164,7 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 			<button type="button" onClick={onBack} className={styles.backButton}>
 					Назад
 				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
+				<button type="button" onClick={handleSubmit} className={styles.nextButton}>
 					Выставить объявление
 				</button>
 				<button type="button" onClick={onSave} className={styles.saveButton}>

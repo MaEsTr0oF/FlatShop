@@ -1,40 +1,16 @@
-import styles from './FifthStep.module.css'
-import FlatSale from './Flat/FlatSale'
-import HouseSale from './House/HouseSale'
-import FlatArend from './Flat/FlatArend.tsx'
-import RoomArend from './Room/RoomArend.tsx'
-import RoomSale from './Room/RoomSale'
-import HouseArend from './House/HouseArend'
-import CommercialSale from './Commercial/CommercialSale.tsx'
-import CommercialArend from './Commercial/CommercialArend.tsx'
-
-interface FifthStepProps {
-  onNext: () => void;
-  onBack: () => void;
-  onSave: () => void;
-  listingType: string;
-  rentType: string;
-  propertyType: string;
-  onDataUpdate?: (data: PriceData) => void;
-  initialData?: PriceData | null;
-}
+import styles from '../AddForm.module.css'
+import { useState } from 'react'
 
 export interface PriceData {
-  price: number;
-  priceType: 'fixed' | 'negotiated';
-  mortgage: boolean;
-  commission: number;
-  deposit?: number;
-  prepayment?: string;
-  utilities?: {
-    included: boolean;
-    electricity: boolean;
-    gas: boolean;
-    water: boolean;
-    internet: boolean;
-  };
-  minRentalPeriod?: string;
-  maxGuests?: string;
+  rentType: string;
+  minRentPeriod: string;
+  price: string;
+  utilities: boolean;
+  maintenance: boolean;
+  vat: string;
+  onlineShow: boolean;
+  deposit: string;
+  maxGuests?: number;
   rules?: {
     children: boolean;
     pets: boolean;
@@ -43,6 +19,7 @@ export interface PriceData {
     docs: boolean;
     month: boolean;
   };
+  mortgage: boolean;
   showingTime: {
     everyday: boolean;
     startTime: string;
@@ -60,53 +37,174 @@ export interface PriceData {
   };
 }
 
-export default function FifthStep({ onNext, onBack, onSave, listingType, rentType, propertyType, onDataUpdate, initialData }: FifthStepProps) {
-  console.log('FifthStep props:', { propertyType, listingType, rentType });
+interface FifthStepProps {
+  onNext: () => void;
+  onBack: () => void;
+  onSave?: () => void;
+  onDataUpdate?: (data: PriceData) => void;
+  initialData?: PriceData | null;
+}
+
+export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initialData }: FifthStepProps) {
+  const [formData, setFormData] = useState<PriceData>({
+    rentType: initialData?.rentType || '',
+    minRentPeriod: initialData?.minRentPeriod || '',
+    price: initialData?.price || '',
+    utilities: initialData?.utilities || false,
+    maintenance: initialData?.maintenance || false,
+    vat: initialData?.vat || 'Да',
+    onlineShow: initialData?.onlineShow || false,
+    deposit: initialData?.deposit || '',
+    mortgage: initialData?.mortgage || false,
+    showingTime: initialData?.showingTime || {
+      everyday: false,
+      startTime: '',
+      endTime: '',
+      online: false,
+      customDays: {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+      },
+    }
+  });
+
+  const handleSubmit = () => {
+    if (onDataUpdate) {
+      onDataUpdate(formData);
+    }
+    if (onSave) {
+      onSave();
+    }
+    onNext();
+  };
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
-        {propertyType === "Квартира" && listingType === "Продажа" && 
-          <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Квартира" && listingType === "Аренда" && 
-          <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Комната" && listingType === "Продажа" && 
-          <RoomSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Комната" && listingType === "Аренда" && 
-          <RoomArend onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Дом" && listingType === "Продажа" &&
-          <HouseSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Дом" && listingType === "Аренда" &&
-          <HouseArend onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Коммерческая недвижимость" && listingType === "Продажа" &&
-          <CommercialSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
-        {propertyType === "Коммерческая недвижимость" && listingType === "Аренда" &&
-          <CommercialArend onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
+    <div className={styles.stepContainer}>
+      <div className={styles.header}>
+        <h3 className={styles.step}>05/<span>05</span></h3>
+        <h2 className={styles.title}>УСЛОВИЯ АРЕНДЫ</h2>
       </div>
 
-      <div className={styles.progressBarContainer}>
-        <div className={styles.progressBar}>
-          <div className={styles.progressLine} style={{ '--progress-width': '80%' } as React.CSSProperties} />
-          <div className={styles.progressStep}>
-            <div className={styles.stepNumber}>01</div>
-            <div className={styles.stepTitle}>Новое объявление</div>
-          </div>
-          <div className={styles.progressStep}>
-            <div className={styles.stepNumber}>02</div>
-            <div className={styles.stepTitle}>О квартире</div>
-          </div>
-          <div className={styles.progressStep}>
-            <div className={styles.stepNumber}>03</div>
-            <div className={styles.stepTitle}>О доме</div>
-          </div>
-          <div className={styles.progressStep}>
-            <div className={styles.stepTitle}>Фото и описание</div>
-          </div>
-          <div className={styles.progressStep}>
-            <div className={`${styles.stepNumber} ${styles.active}`}>05</div>
-            <div className={styles.stepTitle}>Условия сделки</div>
-          </div>
+      <form className={styles.form}>
+        <div className={styles.formGroup}>
+          <label>Тип аренды</label>
+          <select
+            name="rentType"
+            value={formData.rentType}
+            onChange={(e) => setFormData({...formData, rentType: e.target.value})}
+            className={styles.select}
+          >
+            <option value="">Субъект</option>
+          </select>
         </div>
-      </div>
+
+        <div className={styles.formGroup}>
+          <label>Минимальный срок аренды</label>
+          <input
+            type="text"
+            name="minRentPeriod"
+            value={formData.minRentPeriod}
+            onChange={(e) => setFormData({...formData, minRentPeriod: e.target.value})}
+            className={styles.input}
+            placeholder="Мес."
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label>Арендная плата</label>
+          <select
+            name="price"
+            value={formData.price}
+            onChange={(e) => setFormData({...formData, price: e.target.value})}
+            className={styles.select}
+          >
+            <option value="">₽ (429) + 17 ₽/м²</option>
+          </select>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={formData.utilities}
+              onChange={(e) => setFormData({...formData, utilities: e.target.checked})}
+            />
+            <span className={styles.checkmark}></span>
+            Коммунальные услуги включены
+          </label>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={formData.maintenance}
+              onChange={(e) => setFormData({...formData, maintenance: e.target.checked})}
+            />
+            <span className={styles.checkmark}></span>
+            Эксплуатационные расходы услуги включены
+          </label>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label>НДС включен</label>
+          <select
+            name="vat"
+            value={formData.vat}
+            onChange={(e) => setFormData({...formData, vat: e.target.value})}
+            className={styles.select}
+          >
+            <option value="Да">Да</option>
+            <option value="Нет">Нет</option>
+          </select>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={formData.onlineShow}
+              onChange={(e) => setFormData({...formData, onlineShow: e.target.checked})}
+            />
+            <span className={styles.checkmark}></span>
+            Онлайн-показ
+          </label>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label>Залог</label>
+          <input
+            type="text"
+            name="deposit"
+            value={formData.deposit}
+            onChange={(e) => setFormData({...formData, deposit: e.target.value})}
+            className={styles.input}
+            placeholder="Размер залога"
+          />
+        </div>
+
+        <div className={styles.buttons}>
+          <button
+            type="button"
+            onClick={onBack}
+            className={styles.saveButton}
+          >
+            Сохранить и выйти
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className={styles.nextButton}
+          >
+            Выставить объявление
+          </button>
+        </div>
+      </form>
     </div>
-  )
+  );
 } 

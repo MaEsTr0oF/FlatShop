@@ -1,262 +1,181 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
+import styles from '../../AddForm.module.css'
 import { PriceData } from '../FifthStep'
 
 interface CommercialArendProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
-	onDataUpdate?: (data: PriceData) => void;
-	initialData?: PriceData | null;
+	onDataUpdate: (data: PriceData) => void;
+	initialData?: PriceData;
 }
 
 export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialArendProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: 0,
-		priceType: 'fixed',
+		rentType: '',
+		minRentPeriod: '',
+		price: '0',
+		utilities: false,
+		maintenance: false,
+		vat: 'Да',
+		onlineShow: false,
+		deposit: '0',
 		mortgage: false,
-		commission: 0,
-		deposit: 0,
-		prepayment: '',
-		utilities: {
-			included: false,
-			electricity: false,
-			gas: false,
-			water: false,
-			internet: false,
-		},
-		minRentalPeriod: '',
 		showingTime: {
-			everyday: true,
-			startTime: '09:00',
-			endTime: '21:00',
+			everyday: false,
+			startTime: '',
+			endTime: '',
 			online: false,
 			customDays: {
-				monday: true,
-				tuesday: true,
-				wednesday: true,
-				thursday: true,
-				friday: true,
-				saturday: true,
-				sunday: true
-			}
+				monday: false,
+				tuesday: false,
+				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false,
+			},
+		},
+		maxGuests: 0,
+		rules: {
+			children: false,
+			pets: false,
+			smoking: false,
+			party: false,
+			docs: false,
+			month: false,
 		}
-	})
+	});
 
 	useEffect(() => {
-		if (onDataUpdate) {
-			onDataUpdate(formData);
+		if (initialData) {
+			setFormData(initialData);
 		}
-	}, [formData, onDataUpdate]);
+	}, [initialData]);
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value, type } = e.target
-		
-		if (name.includes('.')) {
-			const [category, field] = name.split('.')
-			if (category === 'showingTime') {
-				setFormData(prev => ({
-					...prev,
-					showingTime: {
-						...prev.showingTime,
-						[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
-					}
-				}))
-			} else if (category === 'utilities' && formData.utilities) {
-				setFormData(prev => ({
-					...prev,
-					utilities: {
-						...prev.utilities!,
-						[field]: (e.target as HTMLInputElement).checked
-					}
-				}))
-			}
-		} else {
-			setFormData(prev => ({
-				...prev,
-				[name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : 
-					name === 'price' || name === 'commission' || name === 'deposit' ? 
-					parseFloat(value) || 0 : value
-			}))
+	const handleSubmit = () => {
+		onDataUpdate(formData);
+		if (onSave) {
+			onSave();
 		}
-	}
+		onNext();
+	};
 
 	return (
 		<form className={styles.form}>
-			<h2 className={styles.title}>УСЛОВИЯ СДЕЛКИ</h2>
+		<div className={styles.formGroup}>
+		  <label>Тип аренды</label>
+		  <select
+			 name="rentType"
+			 value={formData.rentType}
+			 onChange={(e) => setFormData({...formData, rentType: e.target.value})}
+			 className={styles.select}
+		  >
+			 <option value="">Субъект</option>
+		  </select>
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Цена</label>
-				<div className={styles.priceInputGroup}>
-					<input
-						type="text"
-						name="price"
-						value={formData.price}
-						onChange={handleChange}
-						placeholder="Введите цену"
-						className={styles.input}
-					/>
-				</div>
-			</div>
+		<div className={styles.formGroup}>
+		  <label>Минимальный срок аренды</label>
+		  <input
+			 type="text"
+			 name="minRentPeriod"
+			 value={formData.minRentPeriod}
+			 onChange={(e) => setFormData({...formData, minRentPeriod: e.target.value})}
+			 className={styles.input}
+			 placeholder="Мес."
+		  />
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Комиссия</label>
-				<input
-					type="text"
-					name="commission"
-					value={formData.commission}
-					onChange={handleChange}
-					placeholder="Введите комиссию"
-					className={styles.input}
-				/>
-			</div>
+		<div className={styles.formGroup}>
+		  <label>Арендная плата</label>
+		  <select
+			 name="price"
+			 value={formData.price}
+			 onChange={(e) => setFormData({...formData, price: e.target.value})}
+			 className={styles.select}
+		  >
+			 <option value="">₽ (429) + 17 ₽/м²</option>
+		  </select>
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Депозит</label>
-				<input
-					type="text"
-					name="deposit"
-					value={formData.deposit}
-					onChange={handleChange}
-					placeholder="Введите депозит"
-					className={styles.input}
-				/>
-			</div>
+		<div className={styles.formGroup}>
+		  <label className={styles.checkbox}>
+			 <input
+				type="checkbox"
+				checked={formData.utilities}
+				onChange={(e) => setFormData({...formData, utilities: e.target.checked})}
+			 />
+			 <span className={styles.checkmark}></span>
+			 Коммунальные услуги включены
+		  </label>
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Предоплата</label>
-				<input
-					type="text"
-					name="prepayment"
-					value={formData.prepayment}
-					onChange={handleChange}
-					placeholder="Введите предоплату"
-					className={styles.input}
-				/>
-			</div>
+		<div className={styles.formGroup}>
+		  <label className={styles.checkbox}>
+			 <input
+				type="checkbox"
+				checked={formData.maintenance}
+				onChange={(e) => setFormData({...formData, maintenance: e.target.checked})}
+			 />
+			 <span className={styles.checkmark}></span>
+			 Эксплуатационные расходы услуги включены
+		  </label>
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Коммунальные платежи</label>
-				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.included"
-							checked={formData.utilities?.included}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Включены в стоимость
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.electricity"
-							checked={formData.utilities?.electricity}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Электричество
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.gas"
-							checked={formData.utilities?.gas}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Газ
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.water"
-							checked={formData.utilities?.water}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Вода
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.internet"
-							checked={formData.utilities?.internet}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Интернет
-					</label>
-				</div>
-			</div>
+		<div className={styles.formGroup}>
+		  <label>НДС включен</label>
+		  <select
+			 name="vat"
+			 value={formData.vat}
+			 onChange={(e) => setFormData({...formData, vat: e.target.value})}
+			 className={styles.select}
+		  >
+			 <option value="Да">Да</option>
+			 <option value="Нет">Нет</option>
+		  </select>
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Минимальный срок аренды</label>
-				<input
-					type="text"
-					name="minRentalPeriod"
-					value={formData.minRentalPeriod}
-					onChange={handleChange}
-					placeholder="Введите минимальный срок"
-					className={styles.input}
-				/>
-			</div>
+		<div className={styles.formGroup}>
+		  <label className={styles.checkbox}>
+			 <input
+				type="checkbox"
+				checked={formData.onlineShow}
+				onChange={(e) => setFormData({...formData, onlineShow: e.target.checked})}
+			 />
+			 <span className={styles.checkmark}></span>
+			 Онлайн-показ
+		  </label>
+		</div>
 
-			<div className={styles.formGroup}>
-				<label>Время показа</label>
-				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="showingTime.everyday"
-							checked={formData.showingTime.everyday}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Каждый день
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="showingTime.online"
-							checked={formData.showingTime.online}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Онлайн-показ
-					</label>
-				</div>
-				<div className={styles.timeInputs}>
-					<input
-						type="time"
-						name="showingTime.startTime"
-						value={formData.showingTime.startTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-					<span>до</span>
-					<input
-						type="time"
-						name="showingTime.endTime"
-						value={formData.showingTime.endTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-				</div>
-			</div>
+		<div className={styles.formGroup}>
+		  <label>Залог</label>
+		  <input
+			 type="text"
+			 name="deposit"
+			 value={formData.deposit}
+			 onChange={(e) => setFormData({...formData, deposit: e.target.value})}
+			 className={styles.input}
+			 placeholder="Размер залога"
+		  />
+		</div>
 
-			<div className={styles.buttonGroup}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
-					Выставить объявление
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
-		</form>
+		<div className={styles.buttons}>
+		  <button
+			 type="button"
+			 onClick={onBack}
+			 className={styles.saveButton}
+		  >
+			 Сохранить и выйти
+		  </button>
+		  <button
+			 type="button"
+			 onClick={handleSubmit}
+			 className={styles.nextButton}
+		  >
+			 Выставить объявление
+		  </button>
+		</div>
+	 </form>
 	)
 }

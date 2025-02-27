@@ -207,17 +207,86 @@ input::placeholder {
   color: #999;
 }
 
-/* Копируем стили прогресс-бара из SmsCode.module.css */
 .progressBar {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 2rem;
-  position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 2rem;
+    padding: 0 1rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 1rem;
+    margin: 2rem auto;
 }
 
-/* Остальные стили прогресс-бара такие же как в SmsCode.module.css */
+.progressStep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 2;
+}
+
+.stepNumber {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    background: white;
+    border: 2px solid #E0E0E0;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.stepNumber.active {
+    background: #E31235;
+    border-color: #E31235;
+    color: white;
+    transform: scale(1.1);
+}
+
+.stepNumber.completed {
+    background: #E31235;
+    border-color: #E31235;
+    color: white;
+}
+
+.stepTitle {
+    font-size: 10px;
+    color: #666;
+    white-space: nowrap;
+}
+
+.progressLine {
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: #E0E0E0;
+    z-index: 1;
+    transform: translateY(-10px);
+}
+
+.progressLine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress-width, 0%);
+    background: #E31235;
+    transition: width 0.3s ease;
+}
 
 .dateInputWrapper {
   position: relative;
@@ -368,95 +437,4 @@ input::placeholder {
   border-radius: 4px;
 }
 
-.step:first-child .stepContent span {
-  color: black;
-  opacity: 0.5;
-}
-
-.step .stepContent:nth-of-type(2) {
-  padding: 8px 16px;
-  border-radius: 4px;
-  opacity: 1;
-  background-color: #333;
-}
-
-.step .stepContent:nth-of-type(2) span {
-  color: white;
-  opacity: 1;
-}
-
-.step .stepContent:nth-of-type(3),
-.step .stepContent:nth-of-type(4) {
-  background-color: #333;
-  padding: 8px 16px;
-  border-radius: 4px;
-  opacity: 1;
-  color: white;
-}
-
-.step .stepContent:nth-of-type(4) h3 {
-  color: white;
-  opacity: 1;
-}
-
-.step .stepContent:nth-of-type(4) span {
-  color: white;
-  opacity: 1;
-}
-
-.step .stepContent:nth-of-type(6) {
-  background-color: #e31235;
-}
-
-.step .stepContent:nth-of-type(6) h3 {
-  color: white;
-  opacity: 1;
-  background-color: #e31235;
-}
-
-.step .stepContent:nth-of-type(6) span {
-  color: white;
-  opacity: 1;
-  background-color: #e31235;
-}
-
-/* Добавим стили для предпросмотра */
-.previewContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.preview {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.previewContainer span {
-  color: #e31235;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.photoUpload {
-  position: relative;
-  margin: 2rem 0;
-  transition: all 0.3s ease;
-}
-
-.photoLabel {
-  display: block;
-  border: 2px dashed #ddd;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.photoLabel:hover {
-  border-color: #e31235;
-} 
+.step:first-

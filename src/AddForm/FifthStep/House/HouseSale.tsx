@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
+import styles from '../../AddForm.module.css'
 import { PriceData } from '../FifthStep'
 
 interface HouseSaleProps {
@@ -11,8 +11,8 @@ interface HouseSaleProps {
 }
 
 export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseSaleProps) {
-	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: 0,
+	const [formData, setFormData] = useState<PriceData>({
+		price: '0',
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,
@@ -68,15 +68,7 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 			<h2 className={styles.title}>УСЛОВИЯ СДЕЛКИ</h2>
 
 			<div className={styles.formGroup}>
-				<div className={styles.priceType}>
-					<label className={styles.checkbox}>
-						Способ продажи
-					</label>
-					<select name="priceType" value={formData.priceType} onChange={handleChange} className={styles.select}>
-						<option value="fixed">Фиксированная</option>
-						<option value="negotiated">Свободная</option>
-					</select>
-				</div>
+				
 				<div className={styles.formGroup}>
 					<label className={styles.checkbox}>
 						<input
@@ -87,6 +79,16 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 						/>
 						<span className={styles.checkmark}></span>
 						Ипотека
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="mortgage"
+							checked={formData.mortgage}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Продажа доли
 					</label>
 				</div>
 				<label>Цена</label>
@@ -100,33 +102,7 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 						className={styles.input}
 					/>
 				</div>
-			</div>
-
-			<div className={styles.formGroup}>
-				<label>Комиссия</label>
-				<input
-					type="text"
-					name="commission"
-					value={formData.commission}
-					onChange={handleChange}
-					placeholder="Введите комиссию"
-					className={styles.input}
-				/>
-			</div>
-
-			<div className={styles.formGroup}>
-				<label>Время показа</label>
-				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="showingTime.everyday"
-							checked={formData.showingTime.everyday}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Каждый день
-					</label>
+				<div className={styles.formGroup}>
 					<label className={styles.checkbox}>
 						<input
 							type="checkbox"
@@ -138,25 +114,7 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 						Онлайн-показ
 					</label>
 				</div>
-				<div className={styles.timeInputs}>
-					<input
-						type="time"
-						name="showingTime.startTime"
-						value={formData.showingTime.startTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-					<span>до</span>
-					<input
-						type="time"
-						name="showingTime.endTime"
-						value={formData.showingTime.endTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-				</div>
 			</div>
-
 			<div className={styles.buttonGroup}>
 				<button type="button" onClick={onBack} className={styles.backButton}>
 					Назад

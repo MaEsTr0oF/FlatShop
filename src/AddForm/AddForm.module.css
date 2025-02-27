@@ -223,77 +223,84 @@
 }
 
 .progressBar {
-	margin-top: 48px;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	margin-top: 40px;
+	
 	position: relative;
-	padding: 0 32px;
-}
-
-.progressBar::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	height: 2px;
-	background: #E0E0E0;
-	transform: translateY(-50%);
-	z-index: 0;
-}
-
-.progressLine {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	height: 2px;
-	background: #E31235;
-	transform: translateY(-50%);
-	z-index: 1;
-	width: var(--progress-width, 0%);
-	transition: width 0.3s ease;
 }
 
 .progressStep {
-	position: relative;
-	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 8px;
-	background: white;
-	padding: 0 12px;
+	position: relative;
+	z-index: 2;
 }
 
 .stepNumber {
-	width: 24px;
-	height: 24px;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
-	background: #E0E0E0;
-	color: white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 500;
-	transition: all 0.2s;
+	background: white;
+	border: 2px solid #E31235;
+	color: #E31235;
 }
 
 .stepNumber.active {
 	background: #E31235;
+	color: white;
 }
 
 .stepNumber.completed {
-	background: #4CAF50;
+	background: #E31235;
+	color: white;
 }
-
 .stepTitle {
 	font-size: 12px;
 	color: #666;
 	white-space: nowrap;
 }
 
+.progressLine {
+	position: absolute;
+	top: 16px;
+	left: 50px;
+	right: 50px;
+	height: 2px;
+	background: repeating-linear-gradient(
+		90deg,
+		#E0E0E0 0px,
+		#E0E0E0 6px,
+		transparent 6px,
+		transparent 12px
+	);
+	z-index: 1;
+}
+
+.progressLine::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: var(--progress-width, 0%);
+	background: repeating-linear-gradient(
+		90deg,
+		#E0E0E0 0px,
+		#E0E0E0 6px,
+		transparent 6px,
+		transparent 12px
+	);
+	transition: width 0.3s ease;
+}
 .textarea {
 	min-height: 120px;
 	padding: 16px;

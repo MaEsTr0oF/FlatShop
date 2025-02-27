@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
-import { PriceData } from '../FifthStep'
+import styles from '../../AddForm.module.css'
+import { PriceData } from '../../../types/form'
 
 interface CommercialSaleProps {
 	onNext: () => void;
@@ -12,7 +12,7 @@ interface CommercialSaleProps {
 
 export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: 0,
+		price: '0',
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,
@@ -73,8 +73,8 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 						Способ продажи
 					</label>
 					<select name="priceType" value={formData.priceType} onChange={handleChange} className={styles.select}>
-						<option value="fixed">Фиксированная</option>
-						<option value="negotiated">Свободная</option>
+						<option value="fixed">Продажа</option>
+						<option value="negotiated">Переуступка права аренды</option>
 					</select>
 				</div>
 				<div className={styles.formGroup}>
@@ -88,13 +88,33 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 						<span className={styles.checkmark}></span>
 						Ипотека
 					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="mortgage"
+							checked={formData.mortgage}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Аукцион
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="mortgage"
+							checked={formData.mortgage}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Помещение сдано
+					</label>
 				</div>
 				<label>Цена</label>
 				<div className={styles.priceInputGroup}>
 					<input
 						type="text"
 						name="price"
-						value={formData.price}
+						value={formData.price.toString()}
 						onChange={handleChange}
 						placeholder="Введите цену"
 						className={styles.input}
@@ -103,30 +123,18 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 			</div>
 
 			<div className={styles.formGroup}>
-				<label>Комиссия</label>
-				<input
-					type="text"
-					name="commission"
-					value={formData.commission}
-					onChange={handleChange}
-					placeholder="Введите комиссию"
-					className={styles.input}
-				/>
+			<label className={styles.checkbox}>
+					НДС включён
+					</label>
+					<select name="priceType" value={formData.priceType} onChange={handleChange} className={styles.select}>
+						<option value="yes">да</option>
+						<option value="no">нет</option>
+					</select>
 			</div>
 
 			<div className={styles.formGroup}>
 				<label>Время показа</label>
 				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="showingTime.everyday"
-							checked={formData.showingTime.everyday}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Каждый день
-					</label>
 					<label className={styles.checkbox}>
 						<input
 							type="checkbox"
@@ -138,23 +146,7 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 						Онлайн-показ
 					</label>
 				</div>
-				<div className={styles.timeInputs}>
-					<input
-						type="time"
-						name="showingTime.startTime"
-						value={formData.showingTime.startTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-					<span>до</span>
-					<input
-						type="time"
-						name="showingTime.endTime"
-						value={formData.showingTime.endTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-				</div>
+				
 			</div>
 
 			<div className={styles.buttonGroup}>

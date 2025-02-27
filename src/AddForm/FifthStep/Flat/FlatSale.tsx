@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
-import { PriceData } from '../FifthStep'
+import styles from '../../AddForm.module.css'
 
 interface FlatSaleProps {
 	onNext: () => void;
@@ -10,9 +9,31 @@ interface FlatSaleProps {
 	initialData?: PriceData | null;
 }
 
+interface PriceData {
+	price: string;
+	priceType: string;
+	mortgage: boolean;
+	commission: number;
+	showingTime: {
+		everyday: boolean;
+		startTime: string;
+		endTime: string;
+		online: boolean;
+		customDays: {
+			monday: boolean;
+			tuesday: boolean;
+			wednesday: boolean;
+			thursday: boolean;
+			friday: boolean;
+			saturday: boolean;
+			sunday: boolean;
+		};
+	};
+}
+
 export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initialData }: FlatSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: 0,
+		price: '0',
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,
@@ -62,19 +83,6 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 			}))
 		}
 	}
-
-	// const handleCustomDaysChange = (day: keyof PriceData['showingTime']['customDays']) => {
-	// 	setFormData(prev => ({
-	// 		...prev,
-	// 		showingTime: {
-	// 			...prev.showingTime,
-	// 			customDays: {
-	// 				...prev.showingTime.customDays,
-	// 				[day]: !prev.showingTime.customDays[day]
-	// 			}
-	// 		}
-	// 	}))
-	// }
 
 	return (
 		<form className={styles.form}>

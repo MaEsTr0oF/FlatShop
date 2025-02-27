@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
-import { PriceData } from '../FifthStep'
+import styles from '../../AddForm.module.css'
+import { PriceData } from '../../../types/form'
 
 interface RoomSaleProps {
 	onNext: () => void;
@@ -40,26 +40,24 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 	}, [formData, onDataUpdate]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value, type } = e.target
+		const { name, value, type } = e.target;
 		
-		if (name.includes('.')) {
-			const [category, field] = name.split('.')
-			if (category === 'showingTime') {
-				setFormData(prev => ({
-					...prev,
-					showingTime: {
-						...prev.showingTime,
-						[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
-					}
-				}))
-			}
+		if (name.startsWith('showingTime.')) {
+			const [, field] = name.split('.');
+			setFormData(prev => ({
+				...prev,
+				showingTime: {
+					...prev.showingTime,
+					[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+				}
+			}));
 		} else {
 			setFormData(prev => ({
 				...prev,
 				[name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : 
 					name === 'price' || name === 'commission' ? 
 					parseFloat(value) || 0 : value
-			}))
+			}));
 		}
 	}
 
@@ -103,31 +101,7 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 			</div>
 
 			<div className={styles.formGroup}>
-				<label>Комиссия</label>
-				<input
-					type="text"
-					name="commission"
-					value={formData.commission}
-					onChange={handleChange}
-					placeholder="Введите комиссию"
-					className={styles.input}
-				/>
-			</div>
-
-			<div className={styles.formGroup}>
-				<label>Время показа</label>
-				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="showingTime.everyday"
-							checked={formData.showingTime.everyday}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Каждый день
-					</label>
-					<label className={styles.checkbox}>
+				<label className={styles.checkbox}>
 						<input
 							type="checkbox"
 							name="showingTime.online"
@@ -138,6 +112,7 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 						Онлайн-показ
 					</label>
 				</div>
+				
 				<div className={styles.timeInputs}>
 					<input
 						type="time"
@@ -146,15 +121,7 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 						onChange={handleChange}
 						className={styles.input}
 					/>
-					<span>до</span>
-					<input
-						type="time"
-						name="showingTime.endTime"
-						value={formData.showingTime.endTime}
-						onChange={handleChange}
-						className={styles.input}
-					/>
-				</div>
+
 			</div>
 
 			<div className={styles.buttonGroup}>
