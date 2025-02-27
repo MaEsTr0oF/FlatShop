@@ -3,9 +3,8 @@ import FirstStep from './FirstStep/FirstStep'
 import SecondStep from './SecondStep/SecondStep'
 import ThirdStep from './ThirdStep/ThirdStep'
 import FourthStep from './FourthStep/FourthStep'
-import FifthStep from './FifthStep/FifthStep'
 import styles from './AddForm.module.css'
-
+import FifthStep from './FifthStep/FifthStep'
 interface FormData {
 	title: string;
 	propertyType: string;
@@ -18,7 +17,7 @@ export default function AddForm() {
 	const [currentStep, setCurrentStep] = useState(1)
 	const [formData, setFormData] = useState<FormData>({
 		title: '',
-		propertyType: 'Квартира',
+		propertyType: 'Комната',
 		listingType: 'Продажа',
 		address: '',
 		rentType: 'Долгосрочная аренда'
@@ -75,7 +74,9 @@ export default function AddForm() {
 					onNext={handleNext}
 					onBack={handleBack}
 					onSave={handleSave}
+					propertyType={formData.propertyType}
 					listingType={formData.listingType}
+					rentType={formData.rentType}
 				/>
 			)}
 			{currentStep === 5 && (
@@ -83,6 +84,7 @@ export default function AddForm() {
 					onNext={handleNext}
 					onBack={handleBack}
 					onSave={handleSave}
+					propertyType={formData.propertyType}
 					listingType={formData.listingType}
 					rentType={formData.rentType}
 				/>

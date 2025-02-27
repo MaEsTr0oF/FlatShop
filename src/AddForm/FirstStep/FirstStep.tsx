@@ -49,7 +49,7 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 						onChange={handleChange}
 						className={styles.select}
 					>
-						<option value="Квартирa">Квартира</option>
+						<option value="Квартира">Квартира</option>
 						<option value="Комната">Комната</option>
 						<option value="Дом">Дом</option>
 						<option value="Коммерческая недвижимость">Коммерческая недвижимость</option>
@@ -142,4 +142,4 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 			</div>
 		</div>
 	)
-}
+} 
