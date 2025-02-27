@@ -1,0 +1,26 @@
+.addButtonContainer {
+	position: relative;
+}
+
+.addButton {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 24px;
+	background-color: #E31235;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.2s;
+}
+
+.addButton:hover {
+	background-color: #c60f2e;
+}
+
+.addButton span {
+	font-size: 18px;
+	font-weight: 500;
+}

@@ -49,6 +49,7 @@ export default function Header() {
 	<nav>
 		<Link to="/main">Главная</Link>
 		<Link to="/main/partners">Партнеры</Link>
+		<Link to="/main/sales">Продажи</Link>
 	</nav>
 </header>
   )
