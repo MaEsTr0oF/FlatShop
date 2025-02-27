@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import styles from '../AddForm.module.css'
+import styles from '../../AddForm.module.css'
 
-interface CommercialSaleProps {
+interface CommercialBuildingProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
@@ -20,7 +20,7 @@ interface FormData {
 	};
 }
 
-export default function CommercialSale({ onNext, onBack, onSave }: CommercialSaleProps) {
+export default function CommercialBuilding({ onNext, onBack, onSave }: CommercialBuildingProps) {
 	const [formData, setFormData] = useState<FormData>({
 		readiness: 'В эксплуатации',
 		buildingType: 'Торговый центр',
@@ -57,7 +57,7 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 	return (
 		<div className={styles.stepContainer}>
 			<div className={styles.header}>
-				<h3 className={styles.step}>04/<span>05</span></h3>
+				<h3 className={styles.step}>03/<span>05</span></h3>
 				<h2 className={styles.title}>О ЗДАНИИ</h2>
 			</div>
 
@@ -99,8 +99,6 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
 						</select>
 					</div>
 					<div className={styles.formGroup} style={{ flex: 1 }}>
@@ -112,7 +110,8 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 							className={styles.select}
 						>
 							<option value="нет">нет</option>
-							<option value="да">да</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
 						</select>
 					</div>
 				</div>
@@ -133,22 +132,22 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 						<label className={styles.checkbox}>
 							<input
 								type="checkbox"
-								name="parking.multilevel"
-								checked={formData.parking.multilevel}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Надземная многоуровневая
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
 								name="parking.ground"
 								checked={formData.parking.ground}
 								onChange={handleChange}
 							/>
 							<span className={styles.checkmark}></span>
 							Открытая во дворе
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="parking.multilevel"
+								checked={formData.parking.multilevel}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Надземная многоуровневая
 						</label>
 						<label className={styles.checkbox}>
 							<input
@@ -189,7 +188,7 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 			</form>
 
 			<div className={styles.progressBar}>
-				<div className={styles.progressLine} style={{ '--progress-width': '60%' } as React.CSSProperties} />
+				<div className={styles.progressLine} style={{ '--progress-width': '40%' } as React.CSSProperties} />
 				<div className={styles.progressStep}>
 					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
 					<div className={styles.stepTitle}>Новое объявление</div>
@@ -199,11 +198,11 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 					<div className={styles.stepTitle}>О помещении</div>
 				</div>
 				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>03</div>
+					<div className={`${styles.stepNumber} ${styles.active}`}>03</div>
 					<div className={styles.stepTitle}>О здании</div>
 				</div>
 				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.active}`}>04</div>
+					<div className={styles.stepNumber}>04</div>
 					<div className={styles.stepTitle}>Фото и описание</div>
 				</div>
 				<div className={styles.progressStep}>
@@ -213,4 +212,4 @@ export default function CommercialSale({ onNext, onBack, onSave }: CommercialSal
 			</div>
 		</div>
 	)
-}
+} 

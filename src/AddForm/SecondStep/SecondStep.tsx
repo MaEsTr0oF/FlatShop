@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './SecondStep.module.css'
 import FlatRoom from './FlatRoom'
 import HouseRoom from './HouseRoom'
@@ -10,6 +10,8 @@ interface SecondStepProps {
 	onSave: () => void;
 	propertyType: string;
 	listingType: string;
+	onDataUpdate?: (data: FormData) => void;
+	initialData?: FormData | null;
 }
 
 export interface FormData {
@@ -97,8 +99,8 @@ export interface BedInfo {
 	count: number;
 }
 
-export default function SecondStep({ onNext, onBack, onSave, propertyType, listingType}: SecondStepProps) {
-	const [formData, setFormData] = useState<FormData>({
+export default function SecondStep({ onNext, onBack, onSave, propertyType, listingType, onDataUpdate, initialData }: SecondStepProps) {
+	const [formData, setFormData] = useState<FormData>(initialData || {
 		type: propertyType === 'Дом' ? 'дом' : propertyType === 'Офис' || propertyType === 'Коворкинг' ? propertyType : 'квартира',
 		roomCount: 1,
 		beds: [],
@@ -166,6 +168,12 @@ export default function SecondStep({ onNext, onBack, onSave, propertyType, listi
 		infrastructure: propertyType === 'Дом' ? { shop: false, kindergarten: false, pharmacy: false, school: false } : undefined,
 	})
 
+	useEffect(() => {
+		if (onDataUpdate) {
+			onDataUpdate(formData);
+		}
+	}, [formData, onDataUpdate]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -188,7 +196,6 @@ export default function SecondStep({ onNext, onBack, onSave, propertyType, listi
 				<HouseRoom
 					formData={formData}
 					setFormData={setFormData}
-					propertyType={propertyType}
 					listingType={listingType}
 					onNext={onNext}
 					onBack={onBack}
@@ -199,8 +206,6 @@ export default function SecondStep({ onNext, onBack, onSave, propertyType, listi
 				<CommercialRoom
 					formData={formData}
 					setFormData={setFormData}
-					propertyType={propertyType}
-					listingType={listingType}
 					onNext={onNext}
 					onBack={onBack}
 					onSave={onSave}

@@ -5,7 +5,6 @@ import { FormData } from './SecondStep'
 interface HouseRoomProps {
 	formData: FormData;
 	setFormData: Dispatch<SetStateAction<FormData>>;
-	propertyType: string;
 	listingType: string;
 	onNext: () => void;
 	onBack: () => void;
@@ -15,7 +14,6 @@ interface HouseRoomProps {
 export default function HouseRoom({
 	formData,
 	setFormData,
-	propertyType,
 	listingType,
 	onNext,
 	onBack,

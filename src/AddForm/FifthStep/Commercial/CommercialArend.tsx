@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from '../FifthStep.module.css'
 import { PriceData } from '../FifthStep'
 
-interface HouseArendProps {
+interface CommercialArendProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
@@ -10,7 +10,7 @@ interface HouseArendProps {
 	initialData?: PriceData | null;
 }
 
-export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseArendProps) {
+export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialArendProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
 		priceType: 'fixed',
@@ -26,15 +26,6 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 			internet: false,
 		},
 		minRentalPeriod: '',
-		maxGuests: '',
-		rules: {
-			children: false,
-			pets: false,
-			smoking: false,
-			party: false,
-			docs: false,
-			month: false,
-		},
 		showingTime: {
 			everyday: true,
 			startTime: '09:00',
@@ -76,14 +67,6 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 					...prev,
 					utilities: {
 						...prev.utilities!,
-						[field]: (e.target as HTMLInputElement).checked
-					}
-				}))
-			} else if (category === 'rules' && formData.rules) {
-				setFormData(prev => ({
-					...prev,
-					rules: {
-						...prev.rules!,
 						[field]: (e.target as HTMLInputElement).checked
 					}
 				}))
@@ -221,84 +204,6 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 			</div>
 
 			<div className={styles.formGroup}>
-				<label>Максимальное количество гостей</label>
-				<input
-					type="text"
-					name="maxGuests"
-					value={formData.maxGuests}
-					onChange={handleChange}
-					placeholder="Введите максимальное количество гостей"
-					className={styles.input}
-				/>
-			</div>
-
-			<div className={styles.formGroup}>
-				<label>Правила</label>
-				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="rules.children"
-							checked={formData.rules?.children}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Можно с детьми
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="rules.pets"
-							checked={formData.rules?.pets}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Можно с животными
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="rules.smoking"
-							checked={formData.rules?.smoking}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Можно курить
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="rules.party"
-							checked={formData.rules?.party}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Можно устраивать вечеринки
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="rules.docs"
-							checked={formData.rules?.docs}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Нужны документы
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="rules.month"
-							checked={formData.rules?.month}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Помесячная оплата
-					</label>
-				</div>
-			</div>
-
-			<div className={styles.formGroup}>
 				<label>Время показа</label>
 				<div className={styles.checkboxGroup}>
 					<label className={styles.checkbox}>
@@ -354,4 +259,4 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 			</div>
 		</form>
 	)
-} 
+}

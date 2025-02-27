@@ -5,8 +5,6 @@ import { FormData } from './SecondStep'
 interface CommercialRoomProps {
 	formData: FormData;
 	setFormData: Dispatch<SetStateAction<FormData>>;
-	propertyType: string;
-	listingType: string;
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
@@ -15,7 +13,6 @@ interface CommercialRoomProps {
 export default function CommercialRoom({
 	formData,
 	setFormData,
-	listingType,
 	onNext,
 	onBack,
 	onSave
@@ -25,13 +22,19 @@ export default function CommercialRoom({
 		const [category, field] = name.split('.')
 
 		if (field) {
-			setFormData(prev => ({
-				...prev,
-				[category]: {
-					...prev[category as keyof FormData],
-					[field]: e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+			setFormData(prev => {
+				const categoryValue = prev[category as keyof FormData];
+				if (typeof categoryValue === 'object' && categoryValue !== null) {
+					return {
+						...prev,
+						[category]: {
+							...categoryValue,
+							[field]: e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+						}
+					};
 				}
-			}))
+				return prev;
+			})
 		} else {
 			setFormData(prev => ({
 				...prev,

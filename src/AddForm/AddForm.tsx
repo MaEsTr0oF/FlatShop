@@ -1,26 +1,42 @@
 import { useState } from 'react'
 import FirstStep from './FirstStep/FirstStep'
-import SecondStep from './SecondStep/SecondStep'
-import ThirdStep from './ThirdStep/ThirdStep'
-import FourthStep from './FourthStep/FourthStep'
+import SecondStep, { FormData as SecondStepData } from './SecondStep/SecondStep'
+import ThirdStep, { ThirdStepData } from './ThirdStep/ThirdStep'
+import FourthStep, { FourthStepData } from './FourthStep/FourthStep'
 import styles from './AddForm.module.css'
-import FifthStep from './FifthStep/FifthStep'
+import FifthStep, { PriceData } from './FifthStep/FifthStep'
+
 interface FormData {
 	title: string;
 	propertyType: string;
 	listingType: string;
 	address: string;
 	rentType: string;
+	secondStepData: SecondStepData | null;
+	thirdStepData: ThirdStepData | null;
+	fourthStepData: FourthStepData | null;
+	fifthStepData: PriceData | null;
 }
 
-export default function AddForm() {
+interface AddFormProps {
+	onClose: () => void;
+	onSubmit: (data: FormData) => void;
+}
+
+type StepData = SecondStepData | ThirdStepData | FourthStepData | PriceData;
+
+export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 	const [currentStep, setCurrentStep] = useState(1)
 	const [formData, setFormData] = useState<FormData>({
 		title: '',
-		propertyType: 'Комната',
+		propertyType: 'Квартира',
 		listingType: 'Продажа',
 		address: '',
-		rentType: 'Долгосрочная аренда'
+		rentType: 'Долгосрочная аренда',
+		secondStepData: null,
+		thirdStepData: null,
+		fourthStepData: null,
+		fifthStepData: null
 	})
 
 	const handleNext = () => {
@@ -32,8 +48,14 @@ export default function AddForm() {
 	}
 
 	const handleSave = () => {
-		// Здесь будет логика сохранения и выхода
-		console.log('Сохранение и выход')
+		localStorage.setItem('formData', JSON.stringify(formData))
+		onClose()
+	}
+
+	const handleSubmit = () => {
+		console.log('Итоговые данные формы:', formData)
+		onSubmit(formData)
+		onClose()
 	}
 
 	const updateFormData = (newData: Partial<FormData>) => {
@@ -41,6 +63,23 @@ export default function AddForm() {
 			...prev,
 			...newData
 		}))
+	}
+
+	const updateStepData = (step: number, data: StepData) => {
+		const stepDataMap: Record<number, keyof FormData> = {
+			2: 'secondStepData',
+			3: 'thirdStepData',
+			4: 'fourthStepData',
+			5: 'fifthStepData'
+		}
+		
+		const key = stepDataMap[step]
+		if (key) {
+			setFormData(prev => ({
+				...prev,
+				[key]: data
+			}))
+		}
 	}
 
 	return (
@@ -60,6 +99,8 @@ export default function AddForm() {
 					onSave={handleSave}
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
+					onDataUpdate={(data: SecondStepData) => updateStepData(2, data)}
+					initialData={formData.secondStepData}
 				/>
 			)}
 			{currentStep === 3 && (
@@ -67,6 +108,8 @@ export default function AddForm() {
 					onNext={handleNext}
 					onBack={handleBack}
 					onSave={handleSave}
+					onDataUpdate={(data: ThirdStepData) => updateStepData(3, data)}
+					initialData={formData.thirdStepData}
 				/>
 			)}
 			{currentStep === 4 && (
@@ -77,16 +120,20 @@ export default function AddForm() {
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
 					rentType={formData.rentType}
+					onDataUpdate={(data: FourthStepData) => updateStepData(4, data)}
+					initialData={formData.fourthStepData}
 				/>
 			)}
 			{currentStep === 5 && (
 				<FifthStep
-					onNext={handleNext}
+					onNext={handleSubmit}
 					onBack={handleBack}
 					onSave={handleSave}
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
 					rentType={formData.rentType}
+					onDataUpdate={(data: PriceData) => updateStepData(5, data)}
+					initialData={formData.fifthStepData}
 				/>
 			)}
 		</div>

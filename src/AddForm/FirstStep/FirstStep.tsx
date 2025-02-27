@@ -1,4 +1,4 @@
-import styles from './FirstStep.module.css'
+import styles from '../AddForm.module.css'
 
 interface FormData {
 	title: string;
@@ -22,7 +22,7 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.stepContainer}>
 			<div className={styles.header}>
 				<h3 className={styles.step}>01/<span>05</span></h3>
 				<h2 className={styles.title}>НОВОЕ ОБЪЯВЛЕНИЕ</h2>
@@ -125,11 +125,11 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 				</div>
 				<div className={styles.progressStep}>
 					<div className={styles.stepNumber}>02</div>
-					<div className={styles.stepTitle}>О квартире</div>
+					<div className={styles.stepTitle}>О помещении</div>
 				</div>
 				<div className={styles.progressStep}>
 					<div className={styles.stepNumber}>03</div>
-					<div className={styles.stepTitle}>О доме</div>
+					<div className={styles.stepTitle}>О здании</div>
 				</div>
 				<div className={styles.progressStep}>
 					<div className={styles.stepNumber}>04</div>

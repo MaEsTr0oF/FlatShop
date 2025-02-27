@@ -5,7 +5,7 @@ import CommercialSale from './CommercialSale'
 import FlatArend from './Flat/FlatArend'
 import RoomArend from './Room/RoomArend'
 import RoomSale from './Room/RoomSale'
-import HouseArend from './Home/HouseSale'
+
 interface FourthStepProps {
   onNext: () => void;
   onBack: () => void;
@@ -13,6 +13,8 @@ interface FourthStepProps {
   listingType: string;
   rentType: string;
   propertyType: string;
+  onDataUpdate?: (data: FourthStepData) => void;
+  initialData?: FourthStepData | null;
 }
 
 export interface PhotoData {
@@ -21,49 +23,40 @@ export interface PhotoData {
   main: boolean;
 }
 
-export interface FormData {
-  photos: PhotoData[];
+export interface FourthStepData {
+  salePhotos: File[];
+  rentPhotos: File[];
+  videoUrl: string;
   description: string;
-  title: string;
-  price: number;
-  priceType: 'fixed' | 'negotiated';
-  mortgage: boolean;
-  commission: number;
-  deposit: number;
-  prepayment: number;
-  utilities: {
-    included: boolean;
-    electricity: boolean;
-    gas: boolean;
-    water: boolean;
-    internet: boolean;
-  };
-  minRentalPeriod?: number;
-  showingTime?: {
-    everyday: boolean;
-    startTime: string;
-    endTime: string;
-  };
 }
 
-export default function FourthStep({ onNext, onBack, onSave, listingType, rentType, propertyType }: FourthStepProps) {
+export default function FourthStep({ 
+  onNext, 
+  onBack, 
+  onSave, 
+  listingType, 
+  rentType, 
+  propertyType,
+  onDataUpdate,
+  initialData
+}: FourthStepProps) {
   console.log('FourthStep props:', { propertyType, listingType, rentType });
   return (
     <div className={styles.container}>
       {propertyType === "Квартира" && listingType === "Продажа" && 
-        <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} />}
+        <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
       {propertyType === "Квартира" && listingType === "Аренда" && 
-        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} />}
+        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType}  />}
       {propertyType === "Комната" && listingType === "Продажа" && 
-        <RoomSale onNext={onNext} onBack={onBack} onSave={onSave} />}
+        <RoomSale onNext={onNext} onBack={onBack} onSave={onSave}   />}
       {propertyType === "Комната" && listingType === "Аренда" && 
-        <RoomArend onNext={onNext} onBack={onBack} onSave={onSave} />}
+        <RoomArend onNext={onNext} onBack={onBack} onSave={onSave}  />}
       {propertyType === "Дом" && listingType==="Продажа" &&
         <HouseSale onNext={onNext} onBack={onBack} onSave={onSave} />}
-		{propertyType === "Дом" && listingType==="Аренда" &&
-        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} />}
+      {propertyType === "Дом" && listingType==="Аренда" &&
+        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType}  />}
       {propertyType === "Коммерческая недвижимость" && 
-        <CommercialSale onNext={onNext} onBack={onBack} onSave={onSave} />}
+        <CommercialSale onNext={onNext} onBack={onBack} onSave={onSave}  />}
 
       <div className={styles.progressBar}>
         {/* Прогресс-бар как в SecondStep */}

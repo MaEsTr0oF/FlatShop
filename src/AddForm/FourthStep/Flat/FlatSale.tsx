@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import styles from '../FourthStep.module.css'
+import { FourthStepData } from '../FourthStep'
 
 interface FlatSaleProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
+	onDataUpdate?: (data: FourthStepData) => void;
+	initialData?: FourthStepData | null;
 	rentType?: string;
 }
 

@@ -1,7 +1,9 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import styles from './Sales.module.css'
 import { Link } from 'react-router-dom';
 import AddButton from '../../AddButton/AddButton';
+import { Advertisement } from '../../../types/form';
+
 interface Property {
 	id: string;
 	type: string;
@@ -32,185 +34,32 @@ export default function Sales() {
 		price: '',
 		status: ''
 	})
+	const [properties, setProperties] = useState<Property[]>([])
 	const itemsPerPage = 10
 
-	const properties: Property[] = [
-		{
-			id: '1',
-			type: 'Квартира',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 40,
-			floor: '3/12',
-			price: 10000,
-			status: 'Назначен осмотр',
-			image: '/img/sales/image1.svg'
-		},
-		{
-			id: '2',
-			type: 'Комната',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 10,
-			floor: '3/12',
-			price: 2000,
-			status: 'Активно',
-			image: '/img/sales/image2.svg'
-		},
-		{
-			id: '3',
-			type: 'Дом',
-			city: 'Комсомольск-на-Амуре',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '',
-			price: 100000,
-			status: 'Продано',
-			image: '/img/sales/image3.svg'
-		},
-		{
-			id: '4',
-			type: 'Коммерческая недвижимость',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '3/12',
-			price: 2000,
-			status: 'Этап сделки',
-			image: '/img/sales/image4.svg'
-		},
-		{
-			id: '5',
-			type: 'Квартира',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 40,
-			floor: '3/12',
-			price: 10000,
-			status: 'Назначен осмотр',
-			image: '/img/sales/image1.svg'
-		},
-		{
-			id: '6',
-			type: 'Комната',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 10,
-			floor: '3/12',
-			price: 2000,
-			status: 'Активно',
-			image: '/img/sales/image2.svg'
-		},
-		{
-			id: '7',
-			type: 'Дом',
-			city: 'Комсомольск-на-Амуре',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '',
-			price: 100000,
-			status: 'Продано',
-			image: '/img/sales/image3.svg'
-		},
-		{
-			id: '8',
-			type: 'Коммерческая недвижимость',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '3/12',
-			price: 2000,
-			status: 'Этап сделки',
-			image: '/img/sales/image4.svg'
-		},
-		{
-			id: '9',
-			type: 'Квартира',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 40,
-			floor: '3/12',
-			price: 10000,
-			status: 'Назначен осмотр',
-			image: '/img/sales/image1.svg'
-		},
-		{
-			id: '10',
-			type: 'Комната',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 10,
-			floor: '3/12',
-			price: 2000,
-			status: 'Активно',
-			image: '/img/sales/image2.svg'
-		},
-		{
-			id: '11',
-			type: 'Дом',
-			city: 'Комсомольск-на-Амуре',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '',
-			price: 100000,
-			status: 'Продано',
-			image: '/img/sales/image3.svg'
-		},
-		{
-			id: '12',
-			type: 'Коммерческая недвижимость',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '3/12',
-			price: 2000,
-			status: 'Этап сделки',
-			image: '/img/sales/image4.svg'
-		},{
-			id: '13',
-			type: 'Квартира',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 40,
-			floor: '3/12',
-			price: 10000,
-			status: 'Назначен осмотр',
-			image: '/img/sales/image1.svg'
-		},
-		{
-			id: '14',
-			type: 'Комната',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 10,
-			floor: '3/12',
-			price: 2000,
-			status: 'Активно',
-			image: '/img/sales/image2.svg'
-		},
-		{
-			id: '15',
-			type: 'Дом',
-			city: 'Комсомольск-на-Амуре',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '',
-			price: 100000,
-			status: 'Продано',
-			image: '/img/sales/image3.svg'
-		},
-		{
-			id: '16',
-			type: 'Коммерческая недвижимость',
-			city: 'Санкт-Петербург',
-			address: 'ул. Обычная, 5',
-			area: 100,
-			floor: '3/12',
-			price: 2000,
-			status: 'Этап сделки',
-			image: '/img/sales/image4.svg'
-		},
-	]
+	// Загрузка объявлений из localStorage
+	useEffect(() => {
+		const loadAds = () => {
+			const savedAds = JSON.parse(localStorage.getItem('salesAds') || '[]') as Advertisement[]
+			const convertedProperties: Property[] = savedAds.map(ad => ({
+				id: String(ad.id),
+				type: ad.propertyType,
+				city: ad.address.split(',')[0] || 'Не указан',
+				address: ad.address,
+				area: ad.secondStepData?.totalArea || 0,
+				floor: ad.secondStepData?.floor?.toString() || '',
+				price: ad.fifthStepData?.price || 0,
+				status: 'Активно',
+				image: ad.thirdStepData?.photos?.[0] ? URL.createObjectURL(ad.thirdStepData.photos[0]) : '/img/sales/image1.svg'
+			}))
+			setProperties(convertedProperties)
+		}
+
+		loadAds()
+		// Добавляем слушатель события storage для обновления данных при изменении localStorage
+		window.addEventListener('storage', loadAds)
+		return () => window.removeEventListener('storage', loadAds)
+	}, [])
 
 	// Получаем уникальные значения для фильтров
 	const filterOptions = useMemo(() => ({
@@ -225,7 +74,7 @@ export default function Sales() {
 			...prev,
 			[filterName]: value
 		}))
-		setCurrentPage(1) // Сброс на первую страницу при изменении фильтров
+		setCurrentPage(1)
 	}
 
 	const filteredProperties = useMemo(() => {
@@ -288,26 +137,29 @@ export default function Sales() {
 			</div>
 
 			<div className={styles.tabs}>
-				<Link to="/main/sales"><button 
-					className={`${styles.tab} ${activeTab === 'Продажа' ? styles.active : ''}`}
-					onClick={() => setActiveTab('Продажа')}
-				>
-					Продажа
-				</button>
+				<Link to="/main/sales">
+					<button 
+						className={`${styles.tab} ${activeTab === 'Продажа' ? styles.active : ''}`}
+						onClick={() => setActiveTab('Продажа')}
+					>
+						Продажа
+					</button>
 				</Link>
-				<Link to="/main/daily-rent"><button 
-					className={`${styles.tab} ${activeTab === 'Посуточная аренда' ? styles.active : ''}`}
-					onClick={() => setActiveTab('Посуточная аренда')}
-				>
-					Посуточная аренда
-				</button>
+				<Link to="/main/daily-rent">
+					<button 
+						className={`${styles.tab} ${activeTab === 'Посуточная аренда' ? styles.active : ''}`}
+						onClick={() => setActiveTab('Посуточная аренда')}
+					>
+						Посуточная аренда
+					</button>
 				</Link>
-				<Link to="/main/long-term"><button 
-					className={`${styles.tab} ${activeTab === 'Долгосрочная аренда' ? styles.active : ''}`}
-					onClick={() => setActiveTab('Долгосрочная аренда')}
-				>
-					Долгосрочная аренда
-				</button>
+				<Link to="/main/long-term">
+					<button 
+						className={`${styles.tab} ${activeTab === 'Долгосрочная аренда' ? styles.active : ''}`}
+						onClick={() => setActiveTab('Долгосрочная аренда')}
+					>
+						Долгосрочная аренда
+					</button>
 				</Link>
 			</div>
 
@@ -351,7 +203,7 @@ export default function Sales() {
 						<option value="">Стоимость, руб</option>
 						{filterOptions.price.map(range => (
 							<option key={range} value={range}>
-								{ range.split('-').map(num => Number(num).toLocaleString()).join('-')}
+								{range.split('-').map(num => Number(num).toLocaleString()).join('-')}
 							</option>
 						))}
 					</select>
@@ -366,7 +218,7 @@ export default function Sales() {
 						))}
 					</select>
 				</div>
-				<button 
+				<button
 					className={styles.resetButton}
 					onClick={handleResetFilters}
 					disabled={isFiltersEmpty}

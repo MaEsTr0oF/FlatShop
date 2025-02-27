@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from '../FifthStep.module.css'
 import { PriceData } from '../FifthStep'
 
-interface HouseSaleProps {
+interface CommercialSaleProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
@@ -10,7 +10,7 @@ interface HouseSaleProps {
 	initialData?: PriceData | null;
 }
 
-export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseSaleProps) {
+export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
 		priceType: 'fixed',
@@ -170,4 +170,4 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 			</div>
 		</form>
 	)
-} 
+}

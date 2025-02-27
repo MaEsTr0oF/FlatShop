@@ -1,24 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './ThirdStep.module.css'
 
 interface ThirdStepProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
+	onDataUpdate?: (data: ThirdStepData) => void;
+	initialData?: ThirdStepData | null;
 }
 
-interface FormData {
+export interface ThirdStepData {
 	photos: File[];
 	videoUrl: string;
 	description: string;
 }
 
-export default function ThirdStep({ onNext, onBack, onSave }: ThirdStepProps) {
-	const [formData, setFormData] = useState<FormData>({
+export default function ThirdStep({ onNext, onBack, onSave, onDataUpdate, initialData }: ThirdStepProps) {
+	const [formData, setFormData] = useState<ThirdStepData>(initialData || {
 		photos: [],
 		videoUrl: '',
 		description: ''
 	})
+
+	useEffect(() => {
+		if (onDataUpdate) {
+			onDataUpdate(formData);
+		}
+	}, [formData, onDataUpdate]);
 
 	const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {

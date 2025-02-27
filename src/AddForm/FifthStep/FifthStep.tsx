@@ -5,6 +5,8 @@ import FlatArend from './Flat/FlatArend.tsx'
 import RoomArend from './Room/RoomArend.tsx'
 import RoomSale from './Room/RoomSale'
 import HouseArend from './House/HouseArend'
+import CommercialSale from './Commercial/CommercialSale.tsx'
+import CommercialArend from './Commercial/CommercialArend.tsx'
 
 interface FifthStepProps {
   onNext: () => void;
@@ -13,14 +15,16 @@ interface FifthStepProps {
   listingType: string;
   rentType: string;
   propertyType: string;
+  onDataUpdate?: (data: PriceData) => void;
+  initialData?: PriceData | null;
 }
 
 export interface PriceData {
-  price: string;
+  price: number;
   priceType: 'fixed' | 'negotiated';
   mortgage: boolean;
-  commission: string;
-  deposit?: string;
+  commission: number;
+  deposit?: number;
   prepayment?: string;
   utilities?: {
     included: boolean;
@@ -30,10 +34,20 @@ export interface PriceData {
     internet: boolean;
   };
   minRentalPeriod?: string;
+  maxGuests?: string;
+  rules?: {
+    children: boolean;
+    pets: boolean;
+    smoking: boolean;
+    party: boolean;
+    docs: boolean;
+    month: boolean;
+  };
   showingTime: {
     everyday: boolean;
     startTime: string;
     endTime: string;
+    online: boolean;
     customDays: {
       monday: boolean;
       tuesday: boolean;
@@ -46,25 +60,27 @@ export interface PriceData {
   };
 }
 
-export default function FifthStep({ onNext, onBack, onSave, listingType, rentType, propertyType }: FifthStepProps) {
+export default function FifthStep({ onNext, onBack, onSave, listingType, rentType, propertyType, onDataUpdate, initialData }: FifthStepProps) {
   console.log('FifthStep props:', { propertyType, listingType, rentType });
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         {propertyType === "Квартира" && listingType === "Продажа" && 
-          <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} />}
+          <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
         {propertyType === "Квартира" && listingType === "Аренда" && 
-          <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} />}
+          <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} onDataUpdate={onDataUpdate} initialData={initialData} />}
         {propertyType === "Комната" && listingType === "Продажа" && 
-          <RoomSale onNext={onNext} onBack={onBack} onSave={onSave} />}
+          <RoomSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
         {propertyType === "Комната" && listingType === "Аренда" && 
-          <RoomArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} />}
+          <RoomArend onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
         {propertyType === "Дом" && listingType === "Продажа" &&
-          <HouseSale onNext={onNext} onBack={onBack} onSave={onSave} />}
+          <HouseSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
         {propertyType === "Дом" && listingType === "Аренда" &&
-          <HouseArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType} />}
-        {propertyType === "Коммерческая недвижимость" && 
-          <div>Компонент для коммерческой недвижимости в разработке</div>}
+          <HouseArend onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
+        {propertyType === "Коммерческая недвижимость" && listingType === "Продажа" &&
+          <CommercialSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
+        {propertyType === "Коммерческая недвижимость" && listingType === "Аренда" &&
+          <CommercialArend onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
       </div>
 
       <div className={styles.progressBarContainer}>
@@ -83,7 +99,6 @@ export default function FifthStep({ onNext, onBack, onSave, listingType, rentTyp
             <div className={styles.stepTitle}>О доме</div>
           </div>
           <div className={styles.progressStep}>
-            <div className={styles.stepNumber}>04</div>
             <div className={styles.stepTitle}>Фото и описание</div>
           </div>
           <div className={styles.progressStep}>
