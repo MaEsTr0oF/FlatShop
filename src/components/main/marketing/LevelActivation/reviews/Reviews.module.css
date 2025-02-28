@@ -1,0 +1,246 @@
+.container {
+	width: 100%;
+	padding: 50px 0 0;
+	background: #fff;
+	overflow: hidden;
+ }
+ 
+ .title {
+	font-family: 'Druk Cyr';
+	font-size: 36px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin: 0 0 80px;
+	text-align: center;
+	color: #000;
+ }
+ 
+ .reviewsContainer {
+	max-width: 1440px;
+	margin: 0 auto;
+	height: 500px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+ }
+ 
+ .reviewCard {
+	position: absolute;
+	cursor: pointer;
+	transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	width: 290px;
+	height: 380px;
+	border-radius: 24px;
+	overflow: hidden;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+ }
+ 
+ .reviewCard:nth-child(1) {
+	transform: translateX(-480px) scale(0.9);
+	z-index: 1;
+ }
+ 
+ .reviewCard:nth-child(2) {
+	transform: translateX(-240px) scale(0.95);
+	z-index: 2;
+ }
+ 
+ .reviewCard:nth-child(3) {
+	transform: translateX(0) scale(1);
+	z-index: 3;
+ }
+ 
+ .reviewCard:nth-child(4) {
+	transform: translateX(240px) scale(0.95);
+	z-index: 2;
+ }
+ 
+ .reviewCard:nth-child(5) {
+	transform: translateX(480px) scale(0.9);
+	z-index: 1;
+ }
+ 
+ .reviewCard.active {
+	transform: translateX(0) scale(1.1);
+	z-index: 10;
+ }
+ 
+ .reviewCard:not(.active) {
+	filter: brightness(0.7);
+ }
+ 
+ .imageWrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+ }
+ 
+ .imageWrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+ }
+ 
+ .reviewContent {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+	color: white;
+	padding: 40px 24px 24px;
+ }
+ 
+ .reviewInfo {
+	margin-bottom: 12px;
+ }
+ 
+ .reviewInfo h3 {
+	font-size: 24px;
+	font-weight: 600;
+	margin: 0 0 4px;
+ }
+ 
+ .reviewInfo p {
+	font-size: 16px;
+	margin: 0;
+	opacity: 0.8;
+ }
+ 
+ .reviewText {
+	font-size: 18px;
+	line-height: 1.5;
+	margin: 0;
+	font-weight: 500;
+ }
+ 
+ /* Стили для секции с призывом к действию */
+ .ctaSection {
+	width: 100%;
+	background: #E31235;
+	padding: 30px 20px;
+	text-align: center;
+	border-radius: 32px;
+	margin-bottom: 0px;
+ }
+ 
+ .ctaTitle {
+	font-family: 'Druk Cyr';
+	font-size: 40px;
+	font-weight: 700;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 0 0 32px;
+	text-align: center;
+ }
+ 
+ .ctaButton {
+	display: inline-block;
+	background: #333;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 500;
+	padding: 20px 40px;
+	border-radius: 12px;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+ }
+ 
+ .ctaButton:hover {
+	background: #444;
+ }
+ 
+ @media (max-width: 1440px) {
+	.reviewCard:nth-child(1) { transform: translateX(-360px) scale(0.9); }
+	.reviewCard:nth-child(2) { transform: translateX(-180px) scale(0.95); }
+	.reviewCard:nth-child(4) { transform: translateX(180px) scale(0.95); }
+	.reviewCard:nth-child(5) { transform: translateX(360px) scale(0.9); }
+ }
+ 
+ @media (max-width: 1024px) {
+	.container {
+	  padding: 80px 0;
+	}
+ 
+	.reviewsContainer {
+	  height: 400px;
+	}
+ 
+	.reviewCard {
+	  width: 240px;
+	  height: 320px;
+	}
+ 
+	.reviewCard:nth-child(1) { transform: translateX(-280px) scale(0.9); }
+	.reviewCard:nth-child(2) { transform: translateX(-140px) scale(0.95); }
+	.reviewCard:nth-child(4) { transform: translateX(140px) scale(0.95); }
+	.reviewCard:nth-child(5) { transform: translateX(280px) scale(0.9); }
+ 
+	.ctaTitle {
+	  font-size: 36px;
+	}
+ }
+ 
+ @media (max-width: 768px) {
+	.container {
+	  padding: 60px 0;
+	}
+ 
+	.title {
+	  font-size: 28px;
+	  margin-bottom: 40px;
+	}
+ 
+	.reviewsContainer {
+	  height: 360px;
+	}
+ 
+	.reviewCard {
+	  width: 200px;
+	  height: 280px;
+	}
+ 
+	.reviewCard:nth-child(1) { transform: translateX(-220px) scale(0.9); }
+	.reviewCard:nth-child(2) { transform: translateX(-110px) scale(0.95); }
+	.reviewCard:nth-child(4) { transform: translateX(110px) scale(0.95); }
+	.reviewCard:nth-child(5) { transform: translateX(220px) scale(0.9); }
+ 
+	.reviewContent {
+	  padding: 30px 20px 20px;
+	}
+ 
+	.reviewInfo h3 {
+	  font-size: 20px;
+	}
+ 
+	.reviewText {
+	  font-size: 16px;
+	}
+ 
+	.ctaTitle {
+	  font-size: 28px;
+	}
+ 
+	.ctaButton {
+	  font-size: 16px;
+	  padding: 16px 32px;
+	}
+ }
+ 
+ @media (max-width: 480px) {
+	.reviewCard {
+	  width: 180px;
+	  height: 250px;
+	}
+ 
+	.reviewCard:nth-child(1) { transform: translateX(-160px) scale(0.9); }
+	.reviewCard:nth-child(2) { transform: translateX(-80px) scale(0.95); }
+	.reviewCard:nth-child(4) { transform: translateX(80px) scale(0.95); }
+	.reviewCard:nth-child(5) { transform: translateX(160px) scale(0.9); }
+ 
+	.ctaTitle {
+	  font-size: 24px;
+	  margin-bottom: 24px;
+	}
+ } 
