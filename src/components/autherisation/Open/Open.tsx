@@ -53,30 +53,6 @@ export default function Open() {
 					<Link to="/register">Зарегистрироваться</Link>
 				</div>
 			</form>
-
-			<div className={styles.progressBar}>
-				<div className={styles.progressLine} style={{ '--progress-width': '0%' } as React.CSSProperties} />
-				<div className={styles.progressStep}>
-					<div className={styles.stepNumber}>01</div>
-					<div className={styles.stepTitle}>Начало</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={styles.stepNumber}>02</div>
-					<div className={styles.stepTitle}>Регистрация</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={styles.stepNumber}>03</div>
-					<div className={styles.stepTitle}>SMS-код</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={styles.stepNumber}>04</div>
-					<div className={styles.stepTitle}>Контакты</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={styles.stepNumber}>05</div>
-					<div className={styles.stepTitle}>Завершение</div>
-				</div>
-			</div>
 		</div>
 	)
 }

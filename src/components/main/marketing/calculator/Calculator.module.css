@@ -1,0 +1,192 @@
+.container {
+  width: 100%;
+  padding: 60px 0;
+  background: #fff;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 40px;
+}
+
+.title {
+  font-family: 'Druk Cyr';
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-align: center;
+  color: #000;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #333;
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+.form {
+  flex: 1;
+}
+
+.formGroup {
+  margin-bottom: 32px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.propertyTypes {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.typeButton {
+  flex: 1;
+  min-width: 120px;
+  padding: 20px;
+  background: #F8F8F8;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.typeButton img {
+  width: 32px;
+  height: 32px;
+}
+
+.typeButton span {
+  font-size: 14px;
+  color: #333;
+}
+
+.typeButton.active {
+  background: #E31235;
+}
+
+.typeButton.active span {
+  color: #fff;
+}
+
+.input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #E31235;
+}
+
+.dealsCounter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #F8F8F8;
+  padding: 8px;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.counterButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.counterButton:hover {
+  background: #E31235;
+  color: #fff;
+}
+
+.counterValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #E31235;
+  min-width: 40px;
+  text-align: center;
+}
+
+.result {
+  flex: 0 0 400px;
+  background: #fff;
+  border: 2px solid #E31235;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultContent {
+  text-align: center;
+}
+
+.resultContent h3 {
+  font-family: 'Druk Cyr';
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #000;
+}
+
+.income {
+  font-family: 'Druk Cyr';
+  font-size: 48px;
+  font-weight: 700;
+  color: #E31235;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .result {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .propertyTypes {
+    gap: 8px;
+  }
+
+  .typeButton {
+    min-width: calc(50% - 4px);
+  }
+} 

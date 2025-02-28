@@ -7,6 +7,7 @@ import Partners from "./partners/Partners";
 import Sales from "./sales/Sales";
 import DailyRent from "./daily-rent/DailyRent";
 import LongTerm from "./LongTerm/LongTerm";
+import Marketing from "./marketing/Marketing";
 export default function Main() {
   return (
     <div className={styles.mainContainer}>
@@ -17,10 +18,11 @@ export default function Main() {
         <div className={styles.contentArea}>
           <Routes>
             <Route index element={<General />} />
-            <Route path="partners" element={<Partners />} />
-            <Route path="sales" element={<Sales />} />
+            <Route path="balance" element={<Partners />} />
+            <Route path="ads" element={<Sales />} />
             <Route path="daily-rent" element={<DailyRent />} />
             <Route path="long-term" element={<LongTerm />} />
+				<Route path="marketing" element={<Marketing />} />
           </Routes>
         </div>
         <div className={styles.sidebarArea}>

@@ -1,15 +1,15 @@
 import styles from './footer.module.css'
-
+import { Link } from 'react-router-dom'
 export default function Footer() {
   return (
     <div className={styles.footer}>
       <nav className={styles.navigation}>
         <ul className={styles.mainMenu}>
           <li>
-            <a href="#" className={styles.homeLink}>
+			 <Link to="/main"><a href="#" className={styles.homeLink}>
               <span className={styles.icon}><img src="/img/footer/home.png" alt="home" /></span>
               На главную
-            </a>
+            </a></Link>
           </li>
           <li>
             <a href="#">
@@ -18,16 +18,16 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href="#">
+			 <Link to="/main/balance"> <a href="#">
               <span className={styles.icon}><img src="/img/footer/balance.png" alt="home" /></span>
               Баланс
-            </a>
+            </a></Link>
           </li>
           <li>
-            <a href="#">
+           <Link to="/main/marketing"><a href="#">
               <span className={styles.icon}><img src="/img/footer/marketing.png" alt="home" /></span>
               Маркетинг
-            </a>
+            </a></Link>
           </li>
           <li>
             <a href="#">
@@ -36,10 +36,10 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href="#">
+			 		<Link to="/main/ads"><a href="#">
               <span className={styles.icon}><img src="/img/footer/advertisements.png" alt="home" /></span>
-              Объявления
-            </a>
+				  Объявления
+            </a></Link>
           </li>
         </ul>
 
