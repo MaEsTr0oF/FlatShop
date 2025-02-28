@@ -76,11 +76,13 @@
 }
 
 .typeButton.active {
-  background: #E31235;
+  background: #ffffff;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+
 }
 
 .typeButton.active span {
-  color: #fff;
+  color: #333;
 }
 
 .input {
@@ -90,10 +92,15 @@
   border-radius: 12px;
   font-size: 16px;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .input:focus {
   border-color: #E31235;
+}
+
+.input::placeholder {
+  color: #999;
 }
 
 .dealsCounter {
@@ -135,6 +142,7 @@
 
 .result {
   flex: 0 0 400px;
+  width: 400px;
   background: #fff;
   border: 2px solid #E31235;
   border-radius: 20px;
@@ -146,6 +154,7 @@
 
 .resultContent {
   text-align: center;
+  width: 100%;
 }
 
 .resultContent h3 {
@@ -161,6 +170,69 @@
   font-size: 48px;
   font-weight: 700;
   color: #E31235;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  background: #F8F8F8;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #E0E0E0;
+}
+
+/* Стили для Chrome/Safari */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 40px;
+  background: #E31F24;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Стили для Firefox */
+.slider::-moz-range-thumb {
+  width: 120px;
+  height: 40px;
+  background: #E31F24;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  position: relative;
+}
+
+.slider::-webkit-slider-thumb:hover,
+.slider::-moz-range-thumb:hover {
+  background: #c71a1f;
+}
+
+.sliderValue {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  pointer-events: none;
+  text-align: center;
+  width: 120px;
+  left: var(--value-position, 0%);
+  margin-left: -60px; /* Половина ширины значения */
 }
 
 @media (max-width: 1024px) {
@@ -169,7 +241,8 @@
   }
 
   .result {
-    flex: 0 0 auto;
+    width: 100%;
+    flex: none;
   }
 }
 

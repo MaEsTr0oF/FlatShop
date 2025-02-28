@@ -1,0 +1,80 @@
+.ctaSection {
+  width: 100%;
+  background: #E31235;
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 32px;
+  margin-bottom: 0px;
+}
+
+.ctaTitle {
+  font-family: 'Druk Cyr';
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+.ctaSubtitle {
+  font-family: 'Druk Cyr';
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 20px 0 0;
+  text-align: center;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #444;
+}
+
+@media (max-width: 1024px) {
+  .ctaTitle {
+    font-size: 36px;
+  }
+
+  .ctaSubtitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ctaTitle {
+    font-size: 28px;
+  }
+
+  .ctaButton {
+    font-size: 16px;
+    padding: 16px 32px;
+  }
+
+  .ctaSubtitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ctaTitle {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .ctaSubtitle {
+    font-size: 16px;
+  }
+} 

@@ -5,11 +5,12 @@ interface CardProps {
 	firstLine: string;
 	secondLine: string;
 	active?: boolean;
+	onClick?: () => void;
 }
 
-export default function Card({ image, firstLine, secondLine, active = false }: CardProps) {
+export default function Card({ image, firstLine, secondLine, active = false, onClick }: CardProps) {
 	return (
-		<div className={`${styles.card} ${active ? styles.active : ''}`}>
+		<div className={`${styles.card} ${active ? styles.active : ''}`} onClick={onClick}>
 			<div className={styles.content}>
 				<h2 className={styles.title}>
 					{firstLine}<br />{secondLine}
