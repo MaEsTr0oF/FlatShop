@@ -1,0 +1,189 @@
+
+
+.title {
+	font-family: var(--font-primary);
+	font-size: 48px;
+	font-weight: 700;
+	color: #000000;
+	margin-bottom: 40px;
+ }
+ 
+ .statsContainer {
+	display: flex;
+	gap: 24px;
+ }
+ 
+ .statsBlock {
+	flex: 1;
+ }
+ 
+ /* Стили для блока личных партнеров */
+ .personalPartners {
+	background: #E20338;
+	border-radius: 24px;
+	padding: 32px;
+	height: 100%;
+ }
+ 
+ /* Стили для блока сетевых партнеров */
+ .networkPartners {
+	background: #000000;
+	border-radius: 24px;
+	padding: 32px;
+	height: 100%;
+ }
+ 
+ .mainStat {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	height: 100%;
+ }
+ 
+ .statHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+ }
+ 
+ .statHeader h3 {
+	font-family: var(--font-secondary);
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: #FFFFFF;
+ }
+ 
+ .number {
+	font-family: var(--font-primary);
+	font-size: 48px;
+	font-weight: 700;
+	color: #E20338;
+	line-height: 1;
+	background: #FFFFFF;
+	border-radius: 16px;
+	padding: 10px;
+ }
+ .number2 {
+	color: #000000;
+ }
+ 
+ .statGroup {
+	display: flex;
+	gap: 16px;
+ }
+ 
+ .stat {
+	flex: 1;
+	background: #FFFFFF;
+	border-radius: 16px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+ }
+ 
+ .label {
+	font-family: var(--font-secondary);
+	font-size: 14px;
+	color: #666666;
+	line-height: 1.4;
+ }
+ 
+ .value {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+ }
+ 
+ .value span:first-child {
+	font-family: var(--font-primary);
+	font-size: 24px;
+	font-weight: 700;
+	/* color: #000000; */
+ }
+ 
+ .growth {
+	font-family: var(--font-secondary);
+	font-size: 14px;
+	color: #22C55E;
+ }
+ .number3 {
+	border-radius: 16px;
+	padding: 10px;
+	background: #F1F2FC;
+	color: #E20338;
+ }
+ .number4 {
+	border-radius: 16px;
+	padding: 10px;
+	background: #F1F2FC;
+	color: #000000;
+ }
+ @media (max-width: 1200px) {
+	.container {
+	  padding: 32px;
+	}
+ 
+	.title {
+	  font-size: 40px;
+	  margin-bottom: 32px;
+	}
+ 
+	.number {
+	  font-size: 40px;
+	}
+ 
+	.stat {
+	  padding: 16px;
+	}
+ 
+	.value span:first-child {
+	  font-size: 20px;
+	}
+ }
+ 
+ @media (max-width: 768px) {
+	.container {
+	  padding: 24px;
+	}
+ 
+	.title {
+	  font-size: 32px;
+	  margin-bottom: 24px;
+	}
+ 
+	.statsContainer {
+	  flex-direction: column;
+	}
+ 
+	.statGroup {
+	  flex-direction: column;
+	}
+ 
+	.number {
+	  font-size: 32px;
+	}
+ }
+ 
+ @media (max-width: 480px) {
+	.container {
+	  padding: 16px;
+	}
+ 
+	.statHeader {
+	  flex-direction: column;
+	  align-items: center;
+	  text-align: center;
+	  gap: 16px;
+	}
+ 
+	.statHeader h3 {
+	  font-size: 14px;
+	}
+ 
+	.stat {
+	  padding: 16px;
+	}
+ }
+ 

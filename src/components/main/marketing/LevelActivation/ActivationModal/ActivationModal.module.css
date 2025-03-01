@@ -16,11 +16,12 @@
   background: #FFFFFF;
   border-radius: 32px;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   height: 50vh;
   position: relative;
   overflow: hidden;
   min-height: 600px;
+  padding: 40px 120px 0px 0;
 }
 
 .closeButton {
@@ -43,7 +44,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px;
+  padding: 0 0 80px;
 }
 
 .levelsContainer {
@@ -55,62 +56,100 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 40px;
 }
 
 .levelCard {
-  position: relative;
-  width: 280px;
+  position: absolute;
+  width: 200px;
+  height: 300px;
   background: #FFFFFF;
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  margin: 0 -80px;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 -100px
+}
+
+/* Позиционирование карточек */
+.levelCard:nth-child(4) { /* Уровень 4 */
+  left: calc(50% + 480px);
+  z-index: 2;
+}
+
+.levelCard:nth-child(2) { /* Уровень 2 */
+  left: calc(50% + 160px);
+  z-index: 4;
+}
+
+.levelCard:nth-child(3) { /* Уровень 3 */
+  left: calc(50% + 320px);
+  z-index: 3;
+}
+
+.levelCard:nth-child(1) { /* Уровень 1 */
+
+  z-index: 7;
+}
+
+.levelCard:nth-child(7) { /* Уровень 7 */
+  left: calc(50% - 110px);
+  z-index: 6;
+}
+
+.levelCard:nth-child(6) { /* Уровень 6 */
+  left: calc(50% - 220px);
+  z-index: 5;
+}
+
+.levelCard:nth-child(5) { /* Уровень 5 */
+  left: calc(50% - 330px);
+  z-index: 4;
+}
+
+/* Стили для выбранной карточки */
+.levelCard.selected {
+  width: 220px;
+  height: 340px;
+  z-index: 10;
+  border: 2px solid #E20338;
+  box-shadow: 0px 8px 30px rgba(226, 3, 56, 0.2);
 }
 
 .levelCard:hover {
-  transform: translateY(-10px);
+  transform: translateY(-50%) scale(1.05);
 }
 
+/* .levelCard.selected:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+} */
 
-
-/* Порядок наложения карточек */
-.levelCard:nth-child(7) { z-index: 1; }
-.levelCard:nth-child(6) { z-index: 2; }
-.levelCard:nth-child(5) { z-index: 3; }
-.levelCard:nth-child(4) { z-index: 7; }
-.levelCard:nth-child(3) { z-index: 6; }
-.levelCard:nth-child(2) { z-index: 5; }
-.levelCard:nth-child(1) { z-index: 4; }
-.levelCard.selected {
-	border: 2px solid #E20338;
-	position: relative;
-	z-index: 10;
- }
 .levelNumber {
   font-family: var(--font-primary);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
 .activation {
   color: #E20338;
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 4px;
 }
 
 .price {
   color: #666666;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .levelImage {
   width: 100%;
-  height: 160px;
+  height: 140px;
   object-fit: contain;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .payButton {
@@ -161,19 +200,24 @@
 .activateAllButton:hover {
   background: #c70230;
 }
-.levelCard:nth-child(1) { left: 0px; }
-.levelCard:nth-child(2) { left: 0px; }
-  .levelCard:nth-child(3) { left: 0px; }
-  .levelCard:nth-child(4) { left: 0px; }
-  .levelCard:nth-child(5) { left: 60px; }
-  .levelCard:nth-child(6) { left: 100px; }
-  .levelCard:nth-child(7) { left: 140px; }
+
 @media (max-width: 1600px) {
   .levelCard {
-    width: 240px;
+    width: 180px;
+    height: 300px;
   }
 
-  
+  .levelCard:nth-child(4) { left: calc(50% + 180px); }
+  .levelCard:nth-child(2) { left: calc(50% + 360px); }
+  .levelCard:nth-child(3) { left: calc(50% + 540px); }
+  .levelCard:nth-child(7) { left: calc(50% - 180px); }
+  .levelCard:nth-child(6) { left: calc(50% - 360px); }
+  .levelCard:nth-child(5) { left: calc(50% - 540px); }
+
+  .levelCard.selected {
+    width: 200px;
+    height: 320px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -194,7 +238,18 @@
     transform: none;
     margin: 0;
     flex-shrink: 0;
-    width: 280px;
+    width: 200px;
+    height: 320px;
+  }
+
+  .levelCard.selected {
+    transform: scale(1.05);
+    width: 200px;
+    height: 320px;
+  }
+
+  .levelCard:hover {
+    transform: scale(1.05);
   }
 
   .footer {

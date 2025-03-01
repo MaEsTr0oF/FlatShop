@@ -30,10 +30,10 @@ export default function Footer() {
             </a></Link>
           </li>
           <li>
-            <a href="#">
+			 <Link to="/main/Partner"><a href="#">
               <span className={styles.icon}><img src="/img/footer/partners.png" alt="home" /></span>
               Партнёры
-            </a>
+            </a></Link>
           </li>
           <li>
 			 		<Link to="/main/ads"><a href="#">

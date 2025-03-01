@@ -23,8 +23,8 @@ export default function ActivationModal({ isOpen, onClose }: ActivationModalProp
   if (!isOpen) return null;
 
   const levels = [
-    { level: 1, percent: '20%', price: '250 000', activation: '20% с активацией' },
-    { level: 2, percent: '10%', price: '120 000', activation: '10% с активацией' },
+    { level: 1, percent: '8%', price: '250 000', activation: '8% с активацией' },
+    { level: 2, percent: '8%', price: '120 000', activation: '8% с активацией' },
     { level: 3, percent: '8%', price: '70 000', activation: '8% с активацией' },
     { level: 4, percent: '8%', price: '50 000', activation: '8% с активацией' },
     { level: 5, percent: '8%', price: '40 000', activation: '8% с активацией' },

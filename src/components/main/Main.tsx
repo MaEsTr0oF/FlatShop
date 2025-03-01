@@ -8,6 +8,7 @@ import Sales from "./sales/Sales";
 import DailyRent from "./daily-rent/DailyRent";
 import LongTerm from "./LongTerm/LongTerm";
 import Marketing from "./marketing/Marketing";
+import Partner from "./Partner/Partner";
 export default function Main() {
   return (
     <div className={styles.mainContainer}>
@@ -23,6 +24,7 @@ export default function Main() {
             <Route path="daily-rent" element={<DailyRent />} />
             <Route path="long-term" element={<LongTerm />} />
 				<Route path="marketing" element={<Marketing />} />
+				<Route path="partner" element={<Partner />} />
           </Routes>
         </div>
         <div className={styles.sidebarArea}>

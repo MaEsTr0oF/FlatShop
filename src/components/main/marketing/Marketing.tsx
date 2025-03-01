@@ -14,7 +14,7 @@ import leaderBonusActive from '/img/marketing/leaderBonusActive.png'
 import { useState } from 'react';
 import LinearBonus from './LinearBonus/LinearBonus'
 import LevelActivation from './LevelActivation/LevelActivation'
-
+import NotWork from './NotWork/NotWork'
 export default function Marketing() {
 	const [activeCard, setActiveCard] = useState(0);
 	const scrollLeft = () => {
@@ -88,6 +88,8 @@ export default function Marketing() {
 			{activeCard === 0 && <PersonalSales />}
 			{activeCard === 1 && <LinearBonus />}
 			{activeCard === 2 && <LevelActivation />}
+			{activeCard === 3 && <NotWork />}
+			{activeCard === 4 && <NotWork />}
 			</div>
 		</>
 	)
