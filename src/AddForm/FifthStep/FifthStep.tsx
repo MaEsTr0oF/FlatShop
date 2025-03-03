@@ -4,13 +4,14 @@ import { useState } from 'react'
 export interface PriceData {
   rentType: string;
   minRentPeriod: string;
-  price: string;
-  utilities: boolean;
+  price: number;
   maintenance: boolean;
   vat: string;
   onlineShow: boolean;
-  deposit: string;
+  deposit: number;
   maxGuests?: number;
+  commission: number;
+  utilities?: boolean;
   rules?: {
     children: boolean;
     pets: boolean;
@@ -49,13 +50,13 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
   const [formData, setFormData] = useState<PriceData>({
     rentType: initialData?.rentType || '',
     minRentPeriod: initialData?.minRentPeriod || '',
-    price: initialData?.price || '',
-    utilities: initialData?.utilities || false,
+    price: initialData?.price || 0,
     maintenance: initialData?.maintenance || false,
     vat: initialData?.vat || 'Да',
     onlineShow: initialData?.onlineShow || false,
-    deposit: initialData?.deposit || '',
+    deposit: initialData?.deposit || 0,
     mortgage: initialData?.mortgage || false,
+    commission: initialData?.commission || 0,
     showingTime: initialData?.showingTime || {
       everyday: false,
       startTime: '',
@@ -120,7 +121,7 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
           <select
             name="price"
             value={formData.price}
-            onChange={(e) => setFormData({...formData, price: e.target.value})}
+            onChange={(e) => setFormData({...formData, price: parseInt(e.target.value)})}
             className={styles.select}
           >
             <option value="">₽ (429) + 17 ₽/м²</option>
@@ -182,7 +183,7 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
             type="text"
             name="deposit"
             value={formData.deposit}
-            onChange={(e) => setFormData({...formData, deposit: e.target.value})}
+            onChange={(e) => setFormData({...formData, deposit: parseInt(e.target.value)})}
             className={styles.input}
             placeholder="Размер залога"
           />

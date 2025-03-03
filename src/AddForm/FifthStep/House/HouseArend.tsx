@@ -12,23 +12,15 @@ interface HouseArendProps {
 
 export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseArendProps) {
 	const [formData, setFormData] = useState<PriceData>({
-		price: '0',
-		priceType: 'fixed',
+		price: 0,
 		mortgage: false,
 		commission: 0,
 		rentType: initialData?.rentType || '',
 		minRentPeriod: initialData?.minRentPeriod || '',
-		utilities: {
-			included: false,
-			electricity: false,
-			gas: false,
-			water: false,
-			internet: false
-		},
 		maintenance: false,
 		vat: initialData?.vat || '',
 		onlineShow: false,
-		deposit: '0',
+		deposit: 0,
 		maxGuests: initialData?.maxGuests || 0,
 		rules: {
 			children: false,

@@ -13,8 +13,6 @@ interface FourthStepProps {
   listingType: string;
   rentType: string;
   propertyType: string;
-  onDataUpdate?: (data: FourthStepData) => void;
-  initialData?: FourthStepData | null;
 }
 
 export interface PhotoData {
@@ -37,8 +35,6 @@ export default function FourthStep({
   listingType, 
   rentType, 
   propertyType,
-  onDataUpdate,
-  initialData
 }: FourthStepProps) {
   return (
     <div className={styles.container}>
@@ -47,7 +43,7 @@ export default function FourthStep({
 				<h2 className={styles.title}>{propertyType}</h2>
 			</div>
       {propertyType === "Квартира" && listingType === "Продажа" && 
-        <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} onDataUpdate={onDataUpdate} initialData={initialData} />}
+        <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Квартира" && listingType === "Аренда" && 
         <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType}  />}
       {propertyType === "Комната" && listingType === "Продажа" && 

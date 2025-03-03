@@ -4,8 +4,7 @@
 /* Подключение шрифта Druk Cyr */
 @font-face {
 	font-family: 'Druk Cyr';
-	src: url('/fonts/DrukCyr-Bold.woff2') format('woff2'),
-		 url('/fonts/DrukCyr-Bold.woff') format('woff');
+	src: url('/fonts/DrukCyr-Bold.woff2') format('woff2');
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
@@ -13,8 +12,7 @@
 
 @font-face {
 	font-family: 'Druk Cyr';
-	src: url('/fonts/DrukCyr-Medium.woff2') format('woff2'),
-		 url('/fonts/DrukCyr-Medium.woff') format('woff');
+	src: url('/fonts/DrukCyr-Medium.woff2') format('woff2');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
@@ -22,8 +20,7 @@
 
 @font-face {
 	font-family: 'Druk Cyr';
-	src: url('/fonts/DrukCyr-Heavy.woff2') format('woff2'),
-		 url('/fonts/DrukCyr-Heavy.woff') format('woff');
+	src: url('/fonts/DrukCyr-Heavy.woff2') format('woff2');
 	font-weight: 900;
 	font-style: normal;
 	font-display: swap;
@@ -31,12 +28,14 @@
 
 /* Базовые стили для использования шрифтов */
 :root {
-	--font-primary: 'Druk Cyr', sans-serif;
-	--font-secondary: 'Raleway', sans-serif;
+	--font-primary: 'Druk Cyr', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--font-secondary: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
 	font-family: var(--font-secondary);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -99,8 +99,6 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 					onSave={handleSave}
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
-					onDataUpdate={(data: SecondStepData) => updateStepData(2, data)}
-					initialData={formData.secondStepData}
 				/>
 			)}
 			{currentStep === 3 && (
@@ -120,20 +118,14 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
 					rentType={formData.rentType}
-					onDataUpdate={(data: FourthStepData) => updateStepData(4, data)}
-					initialData={formData.fourthStepData}
 				/>
 			)}
 			{currentStep === 5 && (
 				<FifthStep
 					onNext={handleSubmit}
 					onBack={handleBack}
+				
 					onSave={handleSave}
-					propertyType={formData.propertyType}
-					listingType={formData.listingType}
-					rentType={formData.rentType}
-					onDataUpdate={(data: PriceData) => updateStepData(5, data)}
-					initialData={formData.fifthStepData}
 				/>
 			)}
 		</div>

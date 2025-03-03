@@ -20,7 +20,7 @@ interface Filters {
 	type: string;
 	city: string;
 	object: string;
-	price: string;
+	price: number;
 	status: string;
 }
 
@@ -31,7 +31,7 @@ export default function Sales() {
 		type: '',
 		city: '',
 		object: '',
-		price: '',
+		price: 0,
 		status: ''
 	})
 	const [properties, setProperties] = useState<Property[]>([])
@@ -83,7 +83,7 @@ export default function Sales() {
 			if (filters.city && property.city !== filters.city) return false
 			if (filters.status && property.status !== filters.status) return false
 			if (filters.price) {
-				const [min, max] = filters.price.split('-').map(Number)
+				const [min, max] = filters.price.toString().split('-').map(Number)
 				if (max) {
 					if (property.price < min || property.price > max) return false
 				} else {
@@ -121,7 +121,7 @@ export default function Sales() {
 			type: '',
 			city: '',
 			object: '',
-			price: '',
+			price: 0,
 			status: ''
 		})
 		setCurrentPage(1)

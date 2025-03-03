@@ -13,23 +13,15 @@ interface FlatArendProps {
 
 export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpdate, initialData }: FlatArendProps) {
 	const [formData, setFormData] = useState<PriceData>({
-		price: '0',
-		priceType: 'fixed',
+		price: 0,
 		mortgage: false,
 		commission: 0,
 		rentType: initialData?.rentType || '',
 		minRentPeriod: initialData?.minRentPeriod || '',
-		utilities: {
-			included: false,
-			electricity: false,
-			gas: false,
-			water: false,
-			internet: false
-		},
 		maintenance: false,
 		vat: initialData?.vat || '',
 		onlineShow: false,
-		deposit: '0',
+		deposit: 0,
 		showingTime: {
 			everyday: true,
 			startTime: '09:00',

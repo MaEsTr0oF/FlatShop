@@ -13,6 +13,13 @@ interface RoomSaleProps {
 export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initialData }: RoomSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
+		utilities: {
+			included: false,
+			electricity: false,
+			gas: false,
+			water: false,
+			internet: false
+		},
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,
@@ -30,6 +37,14 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 				saturday: true,
 				sunday: true
 			}
+		},
+		rules: {
+			children: false,
+			pets: false,
+			smoking: false,
+			party: false,
+			docs: false,
+			month: false
 		}
 	})
 

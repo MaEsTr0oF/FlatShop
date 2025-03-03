@@ -11,8 +11,23 @@ interface CommercialSaleProps {
 }
 
 export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialSaleProps) {
-	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: '0',
+	const [formData, setFormData] = useState<PriceData>(	initialData || {
+		price: 0,
+		utilities: {
+			included: false,
+			electricity: false,
+			gas: false,
+			water: false,
+			internet: false
+		},
+		rules: {
+			children: false,
+			pets: false,
+			smoking: false,
+			party: false,
+			docs: false,
+			month: false
+		},
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,

@@ -12,6 +12,14 @@ interface RoomArendProps {
 
 export default function RoomArend({ onNext, onBack, onSave, onDataUpdate, initialData }: RoomArendProps) {
 	const [formData, setFormData] = useState<PriceData>({
+		rules: {
+			children: false,
+			pets: false,
+			smoking: false,
+			party: false,
+			docs: false,
+			month: false
+		},
 		price: 0,
 		priceType: 'fixed',
 		mortgage: false,

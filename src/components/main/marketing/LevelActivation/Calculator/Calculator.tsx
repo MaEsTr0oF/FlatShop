@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './Calculator.module.css'
-import SubFooterButton from '../../PersonalSales/subfooter/SubFooterButton';
 import ActivationModal from '../ActivationModal/ActivationModal'
 
 export default function Calculator() {
@@ -9,7 +8,7 @@ export default function Calculator() {
     line2: 0,
     line3: 0
   });
-  const [averageDealAmount, setAverageDealAmount] = useState('');
+  //const [averageDealAmount, setAverageDealAmount] = useState('');
   const sliderRefs = {
     line1: useRef<HTMLInputElement>(null),
     line2: useRef<HTMLInputElement>(null),
@@ -23,36 +22,36 @@ export default function Calculator() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Расчет дохода без активации
-  const calculateIncomeWithoutActivation = () => {
-    if (!averageDealAmount) return 0;
-    const amount = parseFloat(averageDealAmount.replace(/[^\d]/g, ''));
-    return (
-      amount * partnersCount.line1 * 0.03 +
-      amount * partnersCount.line2 * 0.02 +
-      amount * partnersCount.line3 * 0.01
-    );
-  };
+//   const calculateIncomeWithoutActivation = () => {
+//     if (!averageDealAmount) return 0;
+//     const amount = parseFloat(averageDealAmount.replace(/[^\d]/g, ''));
+//     return (
+//       amount * partnersCount.line1 * 0.03 +
+//       amount * partnersCount.line2 * 0.02 +
+//       amount * partnersCount.line3 * 0.01
+//     );
+//   };
 
   // Расчет дохода с активацией
-  const calculateIncomeWithActivation = () => {
-    if (!averageDealAmount) return 0;
-    const amount = parseFloat(averageDealAmount.replace(/[^\d]/g, ''));
-    return (
-      amount * partnersCount.line1 * 0.07 +
-      amount * partnersCount.line2 * 0.06 +
-      amount * partnersCount.line3 * 0.05
-    );
-  };
+//   const calculateIncomeWithActivation = () => {
+// 		if (!averageDealAmount) return 0;
+// 		const amount = parseFloat(averageDealAmount.replace(/[^\d]/g, ''));
+//     return (
+//       amount * partnersCount.line1 * 0.07 +
+//       amount * partnersCount.line2 * 0.06 +
+//       amount * partnersCount.line3 * 0.05
+//     );
+//   };
 
   // Форматирование числа в рубли
-  const formatCurrency = (value: number) => {
-    return Math.round(value).toLocaleString('ru-RU') + ' РУБ';
-  };
+//   const formatCurrency = (value: number) => {
+//     return Math.round(value).toLocaleString('ru-RU') + ' РУБ';
+//   };
 
-  const handleDealAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^\d]/g, '');
-    setAverageDealAmount(value);
-  };
+//   const handleDealAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const value = e.target.value.replace(/[^\d]/g, '');
+//     setAverageDealAmount(value);
+//   };
 
   const updateSliderValuePosition = (line: keyof typeof partnersCount) => {
     const range = sliderRefs[line].current;
@@ -173,7 +172,7 @@ export default function Calculator() {
             <div className={`${styles.resultCard} ${styles.active}`}>
               <h3>С АКТИВАЦИЕЙ УРОВНЯ</h3>
               <div className={styles.amount}>
-                {formatCurrency(calculateIncomeWithActivation())}
+                {/* {formatCurrency(calculateIncomeWithActivation())} */}
               </div>
             </div>
           </div>

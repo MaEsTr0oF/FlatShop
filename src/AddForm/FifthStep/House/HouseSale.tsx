@@ -10,10 +10,17 @@ interface HouseSaleProps {
 	initialData?: PriceData | null;
 }
 
-export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseSaleProps) {
+export default function HouseSale({ onNext, onBack, onSave, onDataUpdate }: HouseSaleProps) {
 	const [formData, setFormData] = useState<PriceData>({
-		price: '0',
-		priceType: 'fixed',
+		rentType: '',
+		minRentPeriod: '',
+		maintenance: false,
+		vat: '',
+		onlineShow: false,
+		deposit: 0,
+		maxGuests: 0,
+
+		price: 0,
 		mortgage: false,
 		commission: 0,
 		showingTime: {

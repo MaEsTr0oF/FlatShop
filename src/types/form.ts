@@ -8,7 +8,11 @@ export interface SecondStepData {
 	renovation?: string;
 	bathroom?: string;
 	balcony?: boolean;
-	windows?: string[];
+	windows: {
+		courtyard: boolean;
+		street: boolean;
+		sunny: boolean;
+	};
 }
 
 export interface ThirdStepData {
@@ -32,28 +36,32 @@ export interface FourthStepData {
 	ventilation?: boolean;
 	conditioning?: boolean;
 	heating?: string;
+	salePhotos?: File[];
+	rentPhotos?: File[];
+	videoUrl?: string;
+	description?: string;
 }
 
 export interface PriceData {
-	price: string;
+	price: number;
 	priceType?: string;
-	mortgage: boolean;
-	commission: number;
-	utilities?: {
+	mortgage?: boolean;
+	commission?: number;
+	utilities: {
 		included: boolean;
 		electricity: boolean;
 		gas: boolean;
 		water: boolean;
 		internet: boolean;
-	} | boolean;
+	};
 	maintenance?: boolean;
 	vat?: string;
-	deposit?: string;
+	deposit?: number;
 	rentType?: string;
 	minRentPeriod?: string;
 	onlineShow?: boolean;
 	maxGuests?: number;
-	rules?: {
+	rules: {
 		children: boolean;
 		pets: boolean;
 		smoking: boolean;
