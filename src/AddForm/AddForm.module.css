@@ -227,8 +227,10 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 40px;
-	
+	padding: 24px 0;
 	position: relative;
+	background: white;
+	border-top: 1px solid #E0E0E0;
 }
 
 .progressStep {
@@ -238,6 +240,8 @@
 	gap: 8px;
 	position: relative;
 	z-index: 2;
+	flex: 1;
+	max-width: 120px;
 }
 
 .stepNumber {
@@ -250,38 +254,38 @@
 	font-size: 14px;
 	font-weight: 500;
 	background: white;
-	border: 2px solid #E31235;
-	color: #E31235;
+	border: 2px solid #E0E0E0;
+	color: #666;
+	transition: all 0.3s ease;
 }
 
 .stepNumber.active {
 	background: #E31235;
+	border-color: #E31235;
 	color: white;
 }
 
 .stepNumber.completed {
 	background: #E31235;
+	border-color: #E31235;
 	color: white;
 }
+
 .stepTitle {
 	font-size: 12px;
 	color: #666;
 	white-space: nowrap;
+	text-align: center;
 }
 
 .progressLine {
 	position: absolute;
-	top: 16px;
-	left: 50px;
-	right: 50px;
+	top: 50%;
+	left: 60px;
+	right: 60px;
 	height: 2px;
-	background: repeating-linear-gradient(
-		90deg,
-		#E0E0E0 0px,
-		#E0E0E0 6px,
-		transparent 6px,
-		transparent 12px
-	);
+	background: #E0E0E0;
+	transform: translateY(-50%);
 	z-index: 1;
 }
 
@@ -292,15 +296,10 @@
 	left: 0;
 	height: 100%;
 	width: var(--progress-width, 0%);
-	background: repeating-linear-gradient(
-		90deg,
-		#E0E0E0 0px,
-		#E0E0E0 6px,
-		transparent 6px,
-		transparent 12px
-	);
+	background: #E31235;
 	transition: width 0.3s ease;
 }
+
 .textarea {
 	min-height: 120px;
 	padding: 16px;

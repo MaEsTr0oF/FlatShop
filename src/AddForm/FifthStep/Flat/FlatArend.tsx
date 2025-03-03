@@ -168,7 +168,7 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 			</div>
 
 			<div className={styles.buttonGroup}>
-			<button type="button" onClick={onBack} className={styles.backButton}>
+				<button type="button" onClick={onBack} className={styles.backButton}>
 					Назад
 				</button>
 				<button type="button" onClick={handleSubmit} className={styles.nextButton}>
@@ -177,6 +177,30 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 				<button type="button" onClick={onSave} className={styles.saveButton}>
 					Сохранить и выйти
 				</button>
+			</div>
+
+			<div className={styles.progressBar}>
+				<div className={styles.progressLine} style={{ '--progress-width': '100%' } as React.CSSProperties} />
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
+					<div className={styles.stepTitle}>Новое объявление</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>02</div>
+					<div className={styles.stepTitle}>О квартире</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>03</div>
+					<div className={styles.stepTitle}>Фото и описание</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>04</div>
+					<div className={styles.stepTitle}>О доме</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.active}`}>05</div>
+					<div className={styles.stepTitle}>Условия сделки</div>
+				</div>
 			</div>
 		</form>
 	)

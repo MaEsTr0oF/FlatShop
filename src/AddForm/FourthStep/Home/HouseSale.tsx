@@ -154,7 +154,7 @@ export default function HouseSale({ onNext, onBack, onSave }: HouseSaleProps) {
 				</select>
 			</div>
 
-			<div className={styles.buttonGroup}>
+			<div className={styles.buttons}>
 				<button type="button" onClick={onBack} className={styles.backButton}>
 					Назад
 				</button>

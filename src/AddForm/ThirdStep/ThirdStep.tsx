@@ -148,22 +148,22 @@ export default function ThirdStep({ onNext, onBack, onSave, onDataUpdate, initia
 			</form>
 
 			<div className={styles.progressBar}>
-				<div className={styles.progressLine} style={{ '--progress-width': '40%' } as React.CSSProperties} />
+				<div className={styles.progressLine} style={{ '--progress-width': '60%' } as React.CSSProperties} />
 				<div className={styles.progressStep}>
 					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
 					<div className={styles.stepTitle}>Новое объявление</div>
 				</div>
 				<div className={styles.progressStep}>
 					<div className={`${styles.stepNumber} ${styles.completed}`}>02</div>
-					<div className={styles.stepTitle}>О квартире</div>
+					<div className={styles.stepTitle}>О помещении</div>
 				</div>
 				<div className={styles.progressStep}>
 					<div className={`${styles.stepNumber} ${styles.active}`}>03</div>
-					<div className={styles.stepTitle}>Фото и описание</div>
+					<div className={styles.stepTitle}>О доме</div>
 				</div>
 				<div className={styles.progressStep}>
 					<div className={styles.stepNumber}>04</div>
-					<div className={styles.stepTitle}>О доме</div>
+					<div className={styles.stepTitle}>Фото и описание</div>
 				</div>
 				<div className={styles.progressStep}>
 					<div className={styles.stepNumber}>05</div>

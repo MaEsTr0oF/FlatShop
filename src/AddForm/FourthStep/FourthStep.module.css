@@ -1,7 +1,6 @@
 .container {
   padding: 40px;
-  max-width: 1000px;
-  
+  width: 800px;
   margin: 0 auto;
   background-color: white;
   border-radius: 12px;
@@ -192,43 +191,67 @@
 
 .buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 24px;
+  background: white;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
 }
 
 .backButton,
 .nextButton,
 .saveButton {
+  flex: 1;
   padding: 12px 24px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
+  height: 48px;
+  transition: background-color 0.2s;
 }
 
 .backButton {
-  background: #f5f5f5;
+  background: white;
   color: #333;
+  border: 1px solid #E0E0E0;
+}
+
+.backButton:hover {
+  background: #F5F5F5;
 }
 
 .nextButton {
-  background: #e31235;
+  background: #E31235;
   color: white;
-  flex: 1;
+}
+
+.nextButton:hover {
+  background: #c60f2e;
 }
 
 .saveButton {
   background: #333;
   color: white;
-} 
+}
+
+.saveButton:hover {
+  background: #222;
+}
+
 .progressBar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 40px;
-	
+	padding: 24px 0;
 	position: relative;
+	background: white;
+	border-top: 1px solid #E0E0E0;
 }
 
 .progressStep {
@@ -238,6 +261,8 @@
 	gap: 8px;
 	position: relative;
 	z-index: 2;
+	flex: 1;
+	max-width: 120px;
 }
 
 .stepNumber {
@@ -271,21 +296,17 @@
 	font-size: 12px;
 	color: #666;
 	white-space: nowrap;
+	text-align: center;
 }
 
 .progressLine {
 	position: absolute;
-	top: 16px;
-	left: 50px;
-	right: 50px;
+	top: 50%;
+	left: 60px;
+	right: 60px;
 	height: 2px;
-	background: repeating-linear-gradient(
-		90deg,
-		#E0E0E0 0px,
-		#E0E0E0 6px,
-		transparent 6px,
-		transparent 12px
-	);
+	background: #E0E0E0;
+	transform: translateY(-50%);
 	z-index: 1;
 }
 
@@ -296,12 +317,6 @@
 	left: 0;
 	height: 100%;
 	width: var(--progress-width, 0%);
-	background: repeating-linear-gradient(
-		90deg,
-		#E31235 0px,
-		#E31235 6px,
-		transparent 6px,
-		transparent 12px
-	);
+	background: #E31235;
 	transition: width 0.3s ease;
 }

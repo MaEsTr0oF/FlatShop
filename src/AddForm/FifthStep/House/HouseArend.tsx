@@ -133,6 +133,30 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 					Сохранить и выйти
 				</button>
 			</div>
+
+			<div className={styles.progressBar}>
+				<div className={styles.progressLine} style={{ '--progress-width': '100%' } as React.CSSProperties} />
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
+					<div className={styles.stepTitle}>Новое объявление</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>02</div>
+					<div className={styles.stepTitle}>О доме</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>03</div>
+					<div className={styles.stepTitle}>Фото и описание</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.completed}`}>04</div>
+					<div className={styles.stepTitle}>О здании</div>
+				</div>
+				<div className={styles.progressStep}>
+					<div className={`${styles.stepNumber} ${styles.active}`}>05</div>
+					<div className={styles.stepTitle}>Условия сделки</div>
+				</div>
+			</div>
 		</form>
 	)
 } 
