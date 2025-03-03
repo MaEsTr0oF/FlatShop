@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import styles from '../../AddForm.module.css'
-import { PriceData } from '../FifthStep'
+import styles from '../FifthStep.module.css'
+import { PriceData } from '../../../types/form'
 
 interface HouseSaleProps {
 	onNext: () => void;
@@ -10,19 +10,26 @@ interface HouseSaleProps {
 	initialData?: PriceData | null;
 }
 
-export default function HouseSale({ onNext, onBack, onSave, onDataUpdate }: HouseSaleProps) {
-	const [formData, setFormData] = useState<PriceData>({
-		rentType: '',
-		minRentPeriod: '',
-		maintenance: false,
-		vat: '',
-		onlineShow: false,
-		deposit: 0,
-		maxGuests: 0,
-
+export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseSaleProps) {
+	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
 		mortgage: false,
 		commission: 0,
+		utilities: {
+			included: false,
+			electricity: false,
+			gas: false,
+			water: false,
+			internet: false
+		},
+		rules: {
+			children: false,
+			pets: false,
+			smoking: false,
+			party: false,
+			docs: false,
+			month: false
+		},
 		showingTime: {
 			everyday: true,
 			startTime: '09:00',
@@ -38,7 +45,7 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate }: Hous
 				sunday: true
 			}
 		}
-	})
+	});
 
 	useEffect(() => {
 		if (onDataUpdate) {
@@ -47,28 +54,27 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate }: Hous
 	}, [formData, onDataUpdate]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value, type } = e.target
-		
+		const { name, value, type } = e.target;
 		if (name.includes('.')) {
-			const [category, field] = name.split('.')
+			const [category, field] = name.split('.');
 			if (category === 'showingTime') {
-				setFormData(prev => ({
+				setFormData((prev: PriceData) => ({
 					...prev,
 					showingTime: {
 						...prev.showingTime,
 						[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
 					}
-				}))
+				}));
 			}
 		} else {
-			setFormData(prev => ({
+			setFormData((prev: PriceData) => ({
 				...prev,
 				[name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : 
 					name === 'price' || name === 'commission' ? 
-					parseFloat(value) || 0 : value
-			}))
+						parseFloat(value) || 0 : value
+			}));
 		}
-	}
+	};
 
 	return (
 		<form className={styles.form}>

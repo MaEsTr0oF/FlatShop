@@ -11,29 +11,14 @@ interface FourthStepProps {
   onBack: () => void;
   onSave: () => void;
   listingType: string;
-  rentType: string;
   propertyType: string;
-}
-
-export interface PhotoData {
-  id: number;
-  url: string;
-  main: boolean;
-}
-
-export interface FourthStepData {
-  salePhotos: File[];
-  rentPhotos: File[];
-  videoUrl: string;
-  description: string;
 }
 
 export default function FourthStep({ 
   onNext, 
   onBack, 
   onSave, 
-  listingType, 
-  rentType, 
+  listingType,
   propertyType,
 }: FourthStepProps) {
   return (
@@ -45,17 +30,17 @@ export default function FourthStep({
       {propertyType === "Квартира" && listingType === "Продажа" && 
         <FlatSale onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Квартира" && listingType === "Аренда" && 
-        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType}  />}
+        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Комната" && listingType === "Продажа" && 
-        <RoomSale onNext={onNext} onBack={onBack} onSave={onSave}   />}
+        <RoomSale onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Комната" && listingType === "Аренда" && 
-        <RoomArend onNext={onNext} onBack={onBack} onSave={onSave}  />}
+        <RoomArend onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Дом" && listingType==="Продажа" &&
         <HouseSale onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Дом" && listingType==="Аренда" &&
-        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} rentType={rentType}  />}
+        <FlatArend onNext={onNext} onBack={onBack} onSave={onSave} />}
       {propertyType === "Коммерческая недвижимость" && 
-        <CommercialSale onNext={onNext} onBack={onBack} onSave={onSave}  />}
+        <CommercialSale onNext={onNext} onBack={onBack} onSave={onSave} />}
 
       <div className={styles.progressBar}>
         <div className={styles.progressLine} style={{ '--progress-width': '80%' } as React.CSSProperties} />

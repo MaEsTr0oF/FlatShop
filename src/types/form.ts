@@ -1,18 +1,86 @@
 export interface SecondStepData {
 	type: 'квартира' | 'апартаменты' | 'дом' | 'Офис' | 'Коворкинг';
 	roomCount: number;
+	beds?: BedInfo[];
+	bedType?: string;
+	bedCount?: number;
+	roomType?: {
+		isolated: boolean;
+		adjacent: boolean;
+	};
+	floor: number;
+	hasMultipleFloors?: boolean;
+	layout?: {
+		open: boolean;
+		cabinet: boolean;
+	};
 	totalArea: number;
-	floor?: number;
-	buildingType?: string;
-	ceilingHeight?: number;
-	renovation?: string;
-	bathroom?: string;
-	balcony?: boolean;
+	kitchenArea?: number;
+	livingArea?: number;
+	ceilingHeight: number;
+	powerCapacity?: number;
+	bathroom: string;
 	windows: {
 		courtyard: boolean;
 		street: boolean;
 		sunny: boolean;
 	};
+	features?: {
+		balcony: boolean;
+		loggia: boolean;
+		wardrobe: boolean;
+		panoramicWindows: boolean;
+		warmFloor: boolean;
+		bathhouse: boolean;
+		pool: boolean;
+		terrace: boolean;
+	};
+	renovation: string;
+	furniture?: {
+		kitchen: boolean;
+		clothes: boolean;
+		sleeping: boolean;
+	};
+	appliances?: {
+		refrigerator: boolean;
+		dishwasher: boolean;
+		washer: boolean;
+		conditioner: boolean;
+		waterHeater: boolean;
+	};
+	additionalFeatures?: {
+		wifi: boolean;
+		tv: boolean;
+		towels: boolean;
+		hygiene: boolean;
+		bedLinen: boolean;
+	};
+	landCategory?: 'ИЖС' | 'СНТ' | 'ЛПХ';
+	buildYear?: number;
+	floorCount?: number;
+	landArea?: number;
+	wallMaterial?: 'Брус' | 'Кирпич' | 'Бетон';
+	parking?: 'Гараж' | 'Парковка' | 'Нет';
+	bathroomLocation?: {
+		inHouse: boolean;
+		outside: boolean;
+	};
+	transport?: {
+		asphaltRoad: boolean;
+		publicTransport: boolean;
+		railwayStation: boolean;
+	};
+	infrastructure?: {
+		shop: boolean;
+		kindergarten: boolean;
+		pharmacy: boolean;
+		school: boolean;
+	};
+}
+
+export interface BedInfo {
+	type: string;
+	count: number;
 }
 
 export interface ThirdStepData {

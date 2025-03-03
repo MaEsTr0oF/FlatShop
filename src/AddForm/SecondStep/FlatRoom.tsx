@@ -1,10 +1,10 @@
 import { useState, Dispatch, SetStateAction } from 'react'
 import styles from './SecondStep.module.css'
-import { FormData, BedInfo } from './SecondStep'
+import { SecondStepData, BedInfo } from '../../types/form'
 
 interface FlatRoomProps {
-	formData: FormData;
-	setFormData: Dispatch<SetStateAction<FormData>>;
+	formData: SecondStepData;
+	setFormData: Dispatch<SetStateAction<SecondStepData>>;
 	propertyType: string;
 	listingType: string;
 	onNext: () => void;
@@ -59,7 +59,7 @@ export default function FlatRoom({
 		e.preventDefault()
 		setFormData(prev => ({
 			...prev,
-			beds: [...prev.beds, { ...newBed }]
+			beds: [...(prev.beds || []), { ...newBed }]
 		}))
 		setNewBed({
 			type: 'полуторная',
@@ -70,7 +70,7 @@ export default function FlatRoom({
 	const handleRemoveBed = (index: number) => {
 		setFormData(prev => ({
 			...prev,
-			beds: prev.beds.filter((_, i) => i !== index)
+			beds: prev.beds?.filter((_, i) => i !== index) || []
 		}))
 	}
 
@@ -84,8 +84,6 @@ export default function FlatRoom({
 
 	return (
 		<div className={`${styles.container} ${styles.flatRoom}`}>
-
-
 			<form className={styles.form}>
 				{listingType==="Аренда" && propertyType==="Комната"&&<>
 					<div className={styles.formGroup}>
@@ -98,26 +96,6 @@ export default function FlatRoom({
 						>
 							<option value="комната">Комната</option>
 						</select>
-						<label>Расположение</label>
-						<select 
-							name="type" 
-							value={formData.type}
-							onChange={handleChange}
-							className={styles.select}
-						>
-							<option value="комната">Квартира</option>
-						</select>
-						<label>Тип дома </label>
-						<select 
-							name="type" 
-							value={formData.type}
-							onChange={handleChange}
-							className={styles.select}
-						>
-							<option value="комната">Блочный</option>
-						</select>
-						<label>Этажей в доме </label>
-						<input type="number" name="floor" id="floor" />
 					</div>
 				</>}
 				{propertyType==="Квартира" && <>
@@ -154,7 +132,7 @@ export default function FlatRoom({
 							<input
 								type="checkbox"
 								name="roomType.isolated"
-								checked={formData.roomType.isolated}
+								checked={formData.roomType?.isolated || false}
 								onChange={handleChange}
 							/>
 							<span className={styles.checkmark}></span>
@@ -164,7 +142,7 @@ export default function FlatRoom({
 							<input
 								type="checkbox"
 								name="roomType.adjacent"
-								checked={formData.roomType.adjacent}
+								checked={formData.roomType?.adjacent || false}
 								onChange={handleChange}
 							/>
 							<span className={styles.checkmark}></span>
@@ -204,7 +182,7 @@ export default function FlatRoom({
 					<input
 						type="number"
 						name="kitchenArea"
-						value={formData.kitchenArea}
+						value={formData.kitchenArea || 0}
 						onChange={handleChange}
 						min="0"
 						step="0.1"
@@ -217,7 +195,7 @@ export default function FlatRoom({
 					<input
 						type="number"
 						name="livingArea"
-						value={formData.livingArea}
+						value={formData.livingArea || 0}
 						onChange={handleChange}
 						min="0"
 						step="0.1"
@@ -241,7 +219,7 @@ export default function FlatRoom({
 				{(formData.type==="апартаменты" ||(propertyType==="Комната" && listingType==="Аренда")) && <>
 				<div className={styles.formGroup}>
 					<label>Спальные места</label>
-					{formData.beds.map((bed, index) => (
+					{formData.beds?.map((bed, index) => (
 						<div key={index} className={styles.bedRow}>
 							<span>{bed.type} - {bed.count} мест(а)</span>
 							<button 
@@ -253,31 +231,26 @@ export default function FlatRoom({
 						</div>
 					))}
 					<div className={styles.addBedForm}>
-						<select 
-							name="type" 
+						<select
+							name="type"
 							value={newBed.type}
 							onChange={handleBedChange}
 							className={styles.select}
 						>
-							<option value="полуторная">Полуторная (120-150 см)</option>
-							<option value="двуспальная">Двуспальная (140-150 см)</option>
-							<option value="двуспальная-широкая">Двуспальная (160-170 см)</option>
-							<option value="особо-широкая">Особо широкая (180-200 см)</option>
-							<option value="диван-кровать">Диван-кровать (160-180 см)</option>
-							<option value="односпальный-диван">Односпальный диван (100-140 см)</option>
-							<option value="кресло">Раскладное кресло (70-110 см)</option>
-							<option value="двухъярусная">Двухъярусная кровать</option>
+							<option value="односпальная">Односпальная (70-110)</option>
+							<option value="полуторная">Полуторная (120-140)</option>
+							<option value="двуспальная">Двуспальная (150-180)</option>
+							<option value="двухъярусная">Двухъярусная</option>
 						</select>
-						<input 
-							type="number" 
+						<input
+							type="number"
 							name="count"
 							value={newBed.count}
 							onChange={handleBedChange}
 							min="1"
-							placeholder="Количество мест"
 							className={styles.input}
 						/>
-						<button
+						<button 
 							onClick={handleAddBed}
 							className={styles.addButton}
 						>
@@ -286,89 +259,18 @@ export default function FlatRoom({
 					</div>
 				</div>
 				</>}
-				{propertyType==="Квартира" && <>
-				<div className={styles.formGroup}>
-					<label>Особенности</label>
-					<div className={styles.checkboxGroup}>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="features.balcony"
-								checked={formData.features.balcony}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Балкон
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="features.loggia"
-								checked={formData.features.loggia}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Лоджия
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="features.wardrobe"
-								checked={formData.features.wardrobe}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Гардеробная
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="features.panoramicWindows"
-								checked={formData.features.panoramicWindows}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Панорамные окна
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="features.warmFloor"
-								checked={formData.features.warmFloor}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Теплый пол
-						</label>
-					</div>
-				</div>
-				</>}
+
 				<div className={styles.formGroup}>
 					<label>Санузел</label>
-					<div className={styles.radioGroup}>
-						<label className={styles.radio}>
-							<input
-								type="radio"
-								name="bathroom"
-								value="Совмещенный"
-								checked={formData.bathroom === 'Совмещенный'}
-								onChange={handleChange}
-							/>
-							<span className={styles.radiomark}></span>
-							Совмещенный
-						</label>
-						<label className={styles.radio}>
-							<input
-								type="radio"
-								name="bathroom"
-								value="Раздельный"
-								checked={formData.bathroom === 'Раздельный'}
-								onChange={handleChange}
-							/>
-							<span className={styles.radiomark}></span>
-							Раздельный
-						</label>
-					</div>
+					<select
+						name="bathroom"
+						value={formData.bathroom}
+						onChange={handleChange}
+						className={styles.select}
+					>
+						<option value="Совмещенный">Совмещенный</option>
+						<option value="Раздельный">Раздельный</option>
+					</select>
 				</div>
 
 				<div className={styles.formGroup}>
@@ -406,7 +308,63 @@ export default function FlatRoom({
 						</label>
 					</div>
 				</div>
-				{listingType==="Продажа" && <>
+
+				<div className={styles.formGroup}>
+					<label>Особенности</label>
+					<div className={styles.checkboxGroup}>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="features.balcony"
+								checked={formData.features?.balcony || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Балкон
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="features.loggia"
+								checked={formData.features?.loggia || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Лоджия
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="features.wardrobe"
+								checked={formData.features?.wardrobe || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Гардеробная
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="features.panoramicWindows"
+								checked={formData.features?.panoramicWindows || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Панорамные окна
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="features.warmFloor"
+								checked={formData.features?.warmFloor || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Теплый пол
+						</label>
+					</div>
+				</div>
+
 				<div className={styles.formGroup}>
 					<label>Ремонт</label>
 					<select
@@ -421,160 +379,7 @@ export default function FlatRoom({
 						<option value="Без ремонта">Без ремонта</option>
 					</select>
 				</div>
-				</>}
-				<div className={styles.formGroup}>
-					<label>Мебель</label>
-					<div className={styles.checkboxGroup}>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="furniture.kitchen"
-								checked={formData.furniture.kitchen}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Кухня
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="furniture.clothes"
-								checked={formData.furniture.clothes}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Хранение одежды
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="furniture.sleeping"
-								checked={formData.furniture.sleeping}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Спальные места
-						</label>
-					</div>
-				</div>
 
-				<div className={styles.formGroup}>
-					<label>Техника</label>
-					<div className={styles.checkboxGroup}>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="appliances.refrigerator"
-								checked={formData.appliances.refrigerator}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Холодильник
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="appliances.dishwasher"
-								checked={formData.appliances.dishwasher}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Посудомоечная машина
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="appliances.washer"
-								checked={formData.appliances.washer}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Стиральная машина
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="appliances.conditioner"
-								checked={formData.appliances.conditioner}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Кондиционер
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="appliances.waterHeater"
-								checked={formData.appliances.waterHeater}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Водонагреватель
-						</label>
-					</div>
-				</div>
-				{(formData.type==="апартаменты" ||(propertyType==="Комната" && listingType==="Аренда")) && <>
-				<div className={styles.formGroup}>
-					<label>Интернет и ТВ</label>
-					<div className={styles.checkboxGroup}>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="additionalFeatures.wifi"
-								checked={formData.additionalFeatures.wifi}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Wi-Fi
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="additionalFeatures.tv"
-								checked={formData.additionalFeatures.tv}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Телевидение
-						</label>
-					</div>
-				</div>
-				<div className={styles.formGroup}>
-					<label>Комфорт</label>
-					<div className={styles.checkboxGroup}>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="additionalFeatures.towels"
-								checked={formData.additionalFeatures.towels}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Полотенца
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="additionalFeatures.hygiene"
-								checked={formData.additionalFeatures.hygiene}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Средства гигиены
-						</label>
-						<label className={styles.checkbox}>
-							<input
-								type="checkbox"
-								name="additionalFeatures.bedLinen"
-								checked={formData.additionalFeatures.bedLinen}
-								onChange={handleChange}
-							/>
-							<span className={styles.checkmark}></span>
-							Постельное белье
-						</label>
-					</div>
-				</div>
-				</>}
 				<div className={styles.buttons}>
 					<button
 						type="button"
@@ -599,8 +404,6 @@ export default function FlatRoom({
 					</button>
 				</div>
 			</form>
-
-			
 		</div>
 	)
 }

@@ -46,7 +46,7 @@
     font-style: italic;
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Druk Cyr';
     src: url('DrukCyr-SuperItalic.eot');
     src: local('Druk Cyr Super Italic'), local('DrukCyr-SuperItalic'),
@@ -56,9 +56,9 @@
         url('DrukCyr-SuperItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
-}
+} */
 
-@font-face {
+/* @font-face {
     font-family: 'Druk Cyr';
     src: url('DrukCyr-Super.eot');
     src: local('Druk Cyr Super'), local('DrukCyr-Super'),
@@ -68,7 +68,7 @@
         url('DrukCyr-Super.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 @font-face {
     font-family: 'Druk Cyr';

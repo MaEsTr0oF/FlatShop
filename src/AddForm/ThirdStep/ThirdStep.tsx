@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './ThirdStep.module.css'
+import { ThirdStepData } from '../../types/form'
 
 interface ThirdStepProps {
 	onNext: () => void;
@@ -7,12 +8,6 @@ interface ThirdStepProps {
 	onSave: () => void;
 	onDataUpdate?: (data: ThirdStepData) => void;
 	initialData?: ThirdStepData | null;
-}
-
-export interface ThirdStepData {
-	photos: File[];
-	videoUrl: string;
-	description: string;
 }
 
 export default function ThirdStep({ onNext, onBack, onSave, onDataUpdate, initialData }: ThirdStepProps) {

@@ -20,7 +20,7 @@ export default function Main() {
           <Routes>
             <Route index element={<General />} />
             <Route path="balance" element={<Partners />} />
-            <Route path="ads" element={<Sales />} />
+            <Route path="sales" element={<Sales />} />
             <Route path="daily-rent" element={<DailyRent />} />
             <Route path="long-term" element={<LongTerm />} />
 				<Route path="marketing" element={<Marketing />} />

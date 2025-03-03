@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react'
 import styles from './SecondStep.module.css'
-import { FormData } from './SecondStep'
+import { SecondStepData } from '../../types/form'
 
 interface CommercialRoomProps {
-	formData: FormData;
-	setFormData: Dispatch<SetStateAction<FormData>>;
+	formData: SecondStepData;
+	setFormData: Dispatch<SetStateAction<SecondStepData>>;
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
@@ -23,7 +23,7 @@ export default function CommercialRoom({
 
 		if (field) {
 			setFormData(prev => {
-				const categoryValue = prev[category as keyof FormData];
+				const categoryValue = prev[category as keyof SecondStepData];
 				if (typeof categoryValue === 'object' && categoryValue !== null) {
 					return {
 						...prev,
@@ -73,7 +73,7 @@ export default function CommercialRoom({
 						<input
 							type="checkbox"
 							name="hasMultipleFloors"
-							checked={formData.hasMultipleFloors}
+							checked={formData.hasMultipleFloors || false}
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
@@ -89,7 +89,7 @@ export default function CommercialRoom({
 						<input
 							type="checkbox"
 							name="layout.open"
-							checked={formData.layout?.open}
+							checked={formData.layout?.open || false}
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
@@ -99,7 +99,7 @@ export default function CommercialRoom({
 						<input
 							type="checkbox"
 							name="layout.cabinet"
-							checked={formData.layout?.cabinet}
+							checked={formData.layout?.cabinet || false}
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
@@ -149,7 +149,7 @@ export default function CommercialRoom({
 				<input
 					type="number"
 					name="powerCapacity"
-					value={formData.powerCapacity}
+					value={formData.powerCapacity || 0}
 					onChange={handleChange}
 					placeholder="0 кВТ"
 					className={styles.input}

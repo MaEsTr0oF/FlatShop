@@ -3,6 +3,7 @@ import styles from './SecondStep.module.css'
 import FlatRoom from './FlatRoom'
 import HouseRoom from './HouseRoom'
 import CommercialRoom from './CommercialRoom'
+import { SecondStepData } from '../../types/form'
 
 interface SecondStepProps {
 	onNext: () => void;
@@ -10,88 +11,8 @@ interface SecondStepProps {
 	onSave: () => void;
 	propertyType: string;
 	listingType: string;
-	onDataUpdate?: (data: FormData) => void;
-	initialData?: FormData | null;
-}
-
-export interface FormData {
-	type: 'квартира' | 'апартаменты' | 'дом' | 'Офис' | 'Коворкинг';
-	roomCount: number;
-	beds: BedInfo[];
-	bedType?: string;
-	bedCount?: number;
-	roomType: {
-		isolated: boolean;
-		adjacent: boolean;
-	};
-	floor: number;
-	hasMultipleFloors?: boolean;
-	layout?: {
-		open: boolean;
-		cabinet: boolean;
-	};
-	totalArea: number;
-	kitchenArea: number;
-	livingArea: number;
-	ceilingHeight: number;
-	powerCapacity?: number;
-	bathroom: 'Совмещенный' | 'Раздельный' | 'В доме' | 'На улице';
-	windows: {
-		courtyard: boolean;
-		street: boolean;
-		sunny: boolean;
-	};
-	features: {
-		balcony: boolean;
-		loggia: boolean;
-		wardrobe: boolean;
-		panoramicWindows: boolean;
-		warmFloor: boolean;
-		bathhouse: boolean;
-		pool: boolean;
-		terrace: boolean;
-	};
-	renovation: 'Евро' | 'Косметический' | 'Требуется ремонт' | 'Без ремонта';
-	furniture: {
-		kitchen: boolean;
-		clothes: boolean;
-		sleeping: boolean;
-	};
-	appliances: {
-		refrigerator: boolean;
-		dishwasher: boolean;
-		washer: boolean;
-		conditioner: boolean;
-		waterHeater: boolean;
-	};
-	additionalFeatures: {
-		wifi: boolean;
-		tv: boolean;
-		towels: boolean;
-		hygiene: boolean;
-		bedLinen: boolean;
-	};
-	landCategory?: 'ИЖС' | 'СНТ' | 'ЛПХ';
-	buildYear?: number;
-	floorCount?: number;
-	landArea?: number;
-	wallMaterial?: 'Брус' | 'Кирпич' | 'Бетон';
-	parking?: 'Гараж' | 'Парковка' | 'Нет';
-	bathroomLocation?: {
-		inHouse: boolean;
-		outside: boolean;
-	};
-	transport?: {
-		asphaltRoad: boolean;
-		publicTransport: boolean;
-		railwayStation: boolean;
-	};
-	infrastructure?: {
-		shop: boolean;
-		kindergarten: boolean;
-		pharmacy: boolean;
-		school: boolean;
-	};
+	onDataUpdate?: (data: SecondStepData) => void;
+	initialData?: SecondStepData | null;
 }
 
 export interface BedInfo {
@@ -100,7 +21,7 @@ export interface BedInfo {
 }
 
 export default function SecondStep({ onNext, onBack, onSave, propertyType, listingType, onDataUpdate, initialData }: SecondStepProps) {
-	const [formData, setFormData] = useState<FormData>(initialData || {
+	const [formData, setFormData] = useState<SecondStepData>(initialData || {
 		type: propertyType === 'Дом' ? 'дом' : propertyType === 'Офис' || propertyType === 'Коворкинг' ? propertyType : 'квартира',
 		roomCount: 1,
 		beds: [],

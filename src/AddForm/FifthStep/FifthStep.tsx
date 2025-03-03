@@ -1,42 +1,6 @@
 import styles from '../AddForm.module.css'
 import { useState } from 'react'
-
-export interface PriceData {
-  rentType: string;
-  minRentPeriod: string;
-  price: number;
-  maintenance: boolean;
-  vat: string;
-  onlineShow: boolean;
-  deposit: number;
-  maxGuests?: number;
-  commission: number;
-  utilities?: boolean;
-  rules?: {
-    children: boolean;
-    pets: boolean;
-    smoking: boolean;
-    party: boolean;
-    docs: boolean;
-    month: boolean;
-  };
-  mortgage: boolean;
-  showingTime: {
-    everyday: boolean;
-    startTime: string;
-    endTime: string;
-    online: boolean;
-    customDays: {
-      monday: boolean;
-      tuesday: boolean;
-      wednesday: boolean;
-      thursday: boolean;
-      friday: boolean;
-      saturday: boolean;
-      sunday: boolean;
-    };
-  };
-}
+import { PriceData } from '../../types/form'
 
 interface FifthStepProps {
   onNext: () => void;
@@ -57,6 +21,21 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
     deposit: initialData?.deposit || 0,
     mortgage: initialData?.mortgage || false,
     commission: initialData?.commission || 0,
+    utilities: {
+      included: initialData?.utilities?.included || false,
+      electricity: initialData?.utilities?.electricity || false,
+      gas: initialData?.utilities?.gas || false,
+      water: initialData?.utilities?.water || false,
+      internet: initialData?.utilities?.internet || false,
+    },
+    rules: {
+      children: initialData?.rules?.children || false,
+      pets: initialData?.rules?.pets || false,
+      smoking: initialData?.rules?.smoking || false,
+      party: initialData?.rules?.party || false,
+      docs: initialData?.rules?.docs || false,
+      month: initialData?.rules?.month || false,
+    },
     showingTime: initialData?.showingTime || {
       everyday: false,
       startTime: '',
@@ -129,15 +108,84 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
         </div>
 
         <div className={styles.formGroup}>
-          <label className={styles.checkbox}>
-            <input
-              type="checkbox"
-              checked={formData.utilities}
-              onChange={(e) => setFormData({...formData, utilities: e.target.checked})}
-            />
-            <span className={styles.checkmark}></span>
-            Коммунальные услуги включены
-          </label>
+          <label>Коммунальные услуги</label>
+          <div className={styles.checkboxGroup}>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.utilities.included}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  utilities: {
+                    ...formData.utilities,
+                    included: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Включены в стоимость
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.utilities.electricity}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  utilities: {
+                    ...formData.utilities,
+                    electricity: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Электричество
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.utilities.gas}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  utilities: {
+                    ...formData.utilities,
+                    gas: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Газ
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.utilities.water}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  utilities: {
+                    ...formData.utilities,
+                    water: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Вода
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.utilities.internet}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  utilities: {
+                    ...formData.utilities,
+                    internet: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Интернет
+            </label>
+          </div>
         </div>
 
         <div className={styles.formGroup}>
@@ -148,7 +196,7 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
               onChange={(e) => setFormData({...formData, maintenance: e.target.checked})}
             />
             <span className={styles.checkmark}></span>
-            Эксплуатационные расходы услуги включены
+            Эксплуатационные расходы включены
           </label>
         </div>
 
@@ -187,6 +235,102 @@ export default function FifthStep({ onNext, onBack, onSave, onDataUpdate, initia
             className={styles.input}
             placeholder="Размер залога"
           />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label>Правила</label>
+          <div className={styles.checkboxGroup}>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.rules.children}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  rules: {
+                    ...formData.rules,
+                    children: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Можно с детьми
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.rules.pets}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  rules: {
+                    ...formData.rules,
+                    pets: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Можно с животными
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.rules.smoking}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  rules: {
+                    ...formData.rules,
+                    smoking: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Можно курить
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.rules.party}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  rules: {
+                    ...formData.rules,
+                    party: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Можно устраивать вечеринки
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.rules.docs}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  rules: {
+                    ...formData.rules,
+                    docs: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Нужны документы
+            </label>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={formData.rules.month}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  rules: {
+                    ...formData.rules,
+                    month: e.target.checked
+                  }
+                })}
+              />
+              <span className={styles.checkmark}></span>
+              Оплата помесячно
+            </label>
+          </div>
         </div>
 
         <div className={styles.buttons}>

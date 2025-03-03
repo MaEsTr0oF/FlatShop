@@ -1,130 +1,239 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '../FourthStep.module.css'
+import { FourthStepData } from '../../../types/form'
 
 interface FlatArendProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
-	rentType:string;
+	onDataUpdate?: (data: FourthStepData) => void;
+	initialData?: FourthStepData | null;
 }
 
-interface FormData {
-	rentPrice: string;
-	paymentBy: 'Арендатор' | 'Собственник';
-	utilities: 'Арендатор' | 'Собственник';
-	commission: string;
-	deposit: string;
-	price:string;
-}
+export default function FlatArend({ onNext, onBack, onSave, onDataUpdate, initialData }: FlatArendProps) {
+	const [formData, setFormData] = useState<FourthStepData>(initialData || {
+		readiness: '',
+		buildingType: '',
+		passengerElevator: '',
+		freightElevator: '',
+		parking: {
+			underground: false,
+			ground: false,
+			multilevel: false,
+			barrier: false,
+		},
+		security: false,
+		ventilation: false,
+		conditioning: false,
+		heating: '',
+		salePhotos: [],
+		rentPhotos: [],
+		videoUrl: '',
+		description: '',
+	});
 
-export default function FlatArend({ onNext, onBack, onSave,rentType }: FlatArendProps) {
-	const [formData, setFormData] = useState<FormData>({
-		rentPrice: '',
-		paymentBy: 'Арендатор',
-		utilities: 'Собственник',
-		commission: '',
-		deposit: '',
-		price:'4 500'
-	})
+	useEffect(() => {
+		if (onDataUpdate) {
+			onDataUpdate(formData);
+		}
+	}, [formData, onDataUpdate]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target
-		setFormData(prev => ({
-			...prev,
-			[name]: value
-		}))
-	}
+		const { name, value, type } = e.target;
+		const checked = (e.target as HTMLInputElement).checked;
+
+		if (name.includes('.')) {
+			const [category, field] = name.split('.');
+			if (category === 'parking' && formData.parking) {
+				setFormData(prev => ({
+					...prev,
+					parking: {
+						...prev.parking!,
+						[field]: type === 'checkbox' ? checked : value
+					}
+				}));
+			}
+		} else {
+			setFormData(prev => ({
+				...prev,
+				[name]: type === 'checkbox' ? checked : value
+			}));
+		}
+	};
 
 	return (
 		<form className={styles.form}>
-			<h2 className={styles.title}>УСЛОВИЯ АРЕНДЫ</h2>
-			{rentType==="Долгосрочная аренда" ? <>
-			<div className={styles.formGroup}>
-				<label>Арендная плата</label>
-				<input
-					type="text"
-					name="rentPrice"
-					value={formData.rentPrice}
-					onChange={handleChange}
-					placeholder="₽ в месяц"
-					className={styles.input}
-				/>
-			</div>
+			<h2 className={styles.title}>О ДОМЕ</h2>
 
 			<div className={styles.formGroup}>
-				<label>Оплата по счётчикам</label>
+				<label>Готовность</label>
 				<select
-					name="paymentBy"
-					value={formData.paymentBy}
+					name="readiness"
+					value={formData.readiness}
 					onChange={handleChange}
 					className={styles.select}
 				>
-					<option value="Арендатор">Арендатор</option>
-					<option value="Собственник">Собственник</option>
+					<option value="">Выберите готовность</option>
+					<option value="Готово к проживанию">Готово к проживанию</option>
+					<option value="Требует ремонта">Требует ремонта</option>
 				</select>
 			</div>
 
 			<div className={styles.formGroup}>
-				<label>Другие ЖКУ</label>
+				<label>Тип дома</label>
 				<select
-					name="utilities"
-					value={formData.utilities}
+					name="buildingType"
+					value={formData.buildingType}
 					onChange={handleChange}
 					className={styles.select}
 				>
-					<option value="Собственник">Собственник</option>
-					<option value="Арендатор">Арендатор</option>
+					<option value="">Выберите тип дома</option>
+					<option value="Кирпичный">Кирпичный</option>
+					<option value="Панельный">Панельный</option>
+					<option value="Монолитный">Монолитный</option>
+					<option value="Блочный">Блочный</option>
 				</select>
 			</div>
 
 			<div className={styles.formGroup}>
-				<label>Комиссия</label>
-				<input
-					type="text"
-					name="commission"
-					value={formData.commission}
-					onChange={handleChange}
-					placeholder="%"
-					className={styles.input}
-				/>
-			</div>
-
-			<div className={styles.formGroup}>
-				<label>Залог</label>
-				<input
-					type="text"
-					name="deposit"
-					value={formData.deposit}
-					onChange={handleChange}
-					placeholder="Введите размер залога за весь период"
-					className={styles.input}
-				/>
-			</div>
-			</>:<>
-			<div className={styles.formGroup}>
-				<label>Арендная плата</label>
+				<label>Пассажирский лифт</label>
 				<select
-					name="price"
-					value={formData.price}
+					name="passengerElevator"
+					value={formData.passengerElevator}
 					onChange={handleChange}
 					className={styles.select}
 				>
-					<option value="4 500">Минимум 4 500₽ за сутки</option>
-					<option value="5 000">Минимум 5 000₽ за сутки</option>
+					<option value="">Выберите количество</option>
+					<option value="0">Нет</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4+">4+</option>
 				</select>
 			</div>
+
 			<div className={styles.formGroup}>
-				<label>Залог</label>
-				<input
-					type="text"
-					name="deposit"
-					value={formData.deposit}
+				<label>Грузовой лифт</label>
+				<select
+					name="freightElevator"
+					value={formData.freightElevator}
 					onChange={handleChange}
-					placeholder="Введите размер залога за весь период"
-					className={styles.input}
-				/>
+					className={styles.select}
+				>
+					<option value="">Выберите количество</option>
+					<option value="0">Нет</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
 			</div>
-			</>}
+
+			<div className={styles.formGroup}>
+				<label>Парковка</label>
+				<div className={styles.checkboxGroup}>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="parking.underground"
+							checked={formData.parking?.underground ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Подземная
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="parking.ground"
+							checked={formData.parking?.ground ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Наземная
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="parking.multilevel"
+							checked={formData.parking?.multilevel ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Многоуровневая
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="parking.barrier"
+							checked={formData.parking?.barrier ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Шлагбаум
+					</label>
+				</div>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Безопасность</label>
+				<div className={styles.checkboxGroup}>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="security"
+							checked={formData.security}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Охрана
+					</label>
+				</div>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Вентиляция</label>
+				<div className={styles.checkboxGroup}>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="ventilation"
+							checked={formData.ventilation}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Приточная
+					</label>
+				</div>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Кондиционирование</label>
+				<div className={styles.checkboxGroup}>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="conditioning"
+							checked={formData.conditioning}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Центральное
+					</label>
+				</div>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Отопление</label>
+				<select
+					name="heating"
+					value={formData.heating}
+					onChange={handleChange}
+					className={styles.select}
+				>
+					<option value="">Выберите тип отопления</option>
+					<option value="Центральное">Центральное</option>
+					<option value="Автономное">Автономное</option>
+				</select>
+			</div>
 
 			<div className={styles.buttons}>
 				<button type="button" onClick={onBack} className={styles.backButton}>

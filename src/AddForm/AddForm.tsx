@@ -117,7 +117,6 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 					onSave={handleSave}
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
-					rentType={formData.rentType}
 				/>
 			)}
 			{currentStep === 5 && (

@@ -1,12 +1,5 @@
 import styles from '../AddForm.module.css'
-
-interface FormData {
-	title: string;
-	propertyType: string;
-	listingType: string;
-	address: string;
-	rentType: string;
-}
+import { FormData } from '../../types/form'
 
 interface FirstStepProps {
 	onNext: () => void;

@@ -37,7 +37,7 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="/main/ads" className={styles.link}>
+            <Link to="/main/sales" className={styles.link}>
               <span className={styles.icon}><img src="/img/footer/advertisements.png" alt="ads" /></span>
               Объявления
             </Link>

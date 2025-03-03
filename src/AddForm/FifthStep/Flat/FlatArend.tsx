@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import styles from '../../AddForm.module.css'
-import { PriceData } from '../FifthStep'
+import styles from '../FifthStep.module.css'
+import { PriceData } from '../../../types/form'
 
 interface FlatArendProps {
 	onBack: () => void;
@@ -13,15 +13,30 @@ interface FlatArendProps {
 
 export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpdate, initialData }: FlatArendProps) {
 	const [formData, setFormData] = useState<PriceData>({
-		price: 0,
-		mortgage: false,
-		commission: 0,
+		price: initialData?.price || 0,
+		mortgage: initialData?.mortgage || false,
+		commission: initialData?.commission || 0,
 		rentType: initialData?.rentType || '',
 		minRentPeriod: initialData?.minRentPeriod || '',
-		maintenance: false,
+		maintenance: initialData?.maintenance || false,
 		vat: initialData?.vat || '',
-		onlineShow: false,
-		deposit: 0,
+		onlineShow: initialData?.onlineShow || false,
+		deposit: initialData?.deposit || 0,
+		utilities: {
+			included: initialData?.utilities?.included || false,
+			electricity: initialData?.utilities?.electricity || false,
+			gas: initialData?.utilities?.gas || false,
+			water: initialData?.utilities?.water || false,
+			internet: initialData?.utilities?.internet || false
+		},
+		rules: {
+			children: initialData?.rules?.children || false,
+			pets: initialData?.rules?.pets || false,
+			smoking: initialData?.rules?.smoking || false,
+			party: initialData?.rules?.party || false,
+			docs: initialData?.rules?.docs || false,
+			month: initialData?.rules?.month || false
+		},
 		showingTime: {
 			everyday: true,
 			startTime: '09:00',

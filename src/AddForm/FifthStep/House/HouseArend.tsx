@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import styles from '../../AddForm.module.css'
-import { PriceData } from '../FifthStep'
+import styles from '../FifthStep.module.css'
+import { PriceData } from '../../../types/form'
 
 interface HouseArendProps {
 	onNext: () => void;
@@ -11,17 +11,24 @@ interface HouseArendProps {
 }
 
 export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseArendProps) {
-	const [formData, setFormData] = useState<PriceData>({
+	const defaultData: PriceData = {
 		price: 0,
 		mortgage: false,
 		commission: 0,
-		rentType: initialData?.rentType || '',
-		minRentPeriod: initialData?.minRentPeriod || '',
+		rentType: '',
+		minRentPeriod: '',
 		maintenance: false,
-		vat: initialData?.vat || '',
+		vat: '',
 		onlineShow: false,
 		deposit: 0,
-		maxGuests: initialData?.maxGuests || 0,
+		maxGuests: 0,
+		utilities: {
+			included: false,
+			electricity: false,
+			gas: false,
+			water: false,
+			internet: false
+		},
 		rules: {
 			children: false,
 			pets: false,
@@ -45,7 +52,9 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 				sunday: true
 			}
 		}
-	})
+	};
+
+	const [formData, setFormData] = useState<PriceData>(initialData || defaultData);
 
 	useEffect(() => {
 		if (onDataUpdate) {
@@ -55,7 +64,7 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value, type } = e.target;
-		setFormData(prev => ({
+		setFormData((prev: PriceData) => ({
 			...prev,
 			[name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
 		}));
