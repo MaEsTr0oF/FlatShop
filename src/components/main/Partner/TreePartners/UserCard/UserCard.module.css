@@ -1,0 +1,136 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #1C1C1C;
+  border-radius: 8px;
+  width: 400px;
+  color: white;
+  position: relative;
+}
+
+.card.active {
+  background: #E31235;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #333;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+}
+
+.role {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 4px;
+}
+
+.id {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+.stats {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.partnersCount {
+  margin-bottom: 12px;
+}
+
+.partnersCount span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.partnersCount p {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.chatButton,
+.detailsButton,
+.openButton {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.chatButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.chatButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.detailsButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.detailsButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.openButton {
+  background: white;
+  color: #E31235;
+}
+
+.openButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.card.active .chatButton,
+.card.active .detailsButton {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.card.active .chatButton:hover,
+.card.active .detailsButton:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.card.active .openButton {
+  background: white;
+  color: #E31235;
+} 

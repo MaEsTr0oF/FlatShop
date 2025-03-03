@@ -97,7 +97,7 @@ export default function Reviews() {
         label="Начни зарабатывать уже сегодня!"
         buttonText="Разместить объявление"
         subtitle=""
-        to="/main/ads"
+        to="/main/sales"
       />
     </>
   );
