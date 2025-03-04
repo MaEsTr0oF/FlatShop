@@ -18,7 +18,11 @@
   margin-bottom: 2rem;
   position: relative;
 }
-
+.logo {
+	position: absolute;
+	left:50%;
+	transform: translateX(-50%);
+}
 .backButton {
   position: absolute;
   top: 2rem;
@@ -35,7 +39,7 @@
 .stepIndicator {
   text-align: right;
   color: #666;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .stepIndicator span {

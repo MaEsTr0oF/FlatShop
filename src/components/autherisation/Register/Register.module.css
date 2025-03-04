@@ -9,6 +9,7 @@
 }
 
 .registerForm {
+	position: relative;
   background: white;
   padding: 2rem;
   border-radius: 20px;
@@ -17,7 +18,11 @@
   max-width: 800px;
   margin-bottom: 2rem;
 }
-
+.logo {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
 .stepIndicator {
   text-align: right;
   color: #666;

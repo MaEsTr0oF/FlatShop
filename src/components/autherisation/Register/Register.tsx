@@ -37,7 +37,13 @@ export default function Register() {
     if (!cookiePolicy) {
       newErrors.push('Необходимо принять Политику использования файлов Cookie')
     }
-
+	 if(!email) {
+		newErrors.push('Необходимо ввести email')
+	 }
+	 if(!phone) {
+		newErrors.push('Необходимо ввести номер телефона')
+	 }
+	 
     if (!isCaptchaVerified) {
       newErrors.push('Пожалуйста, подтвердите, что вы не робот')
     }
@@ -49,7 +55,7 @@ export default function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      navigate('/sms-code')
+		navigate('/sms-code', { state: { phone } })
     }
   }
 
@@ -60,6 +66,7 @@ export default function Register() {
   return (
     <div className={styles.registerContainer}>
       <form onSubmit={handleSubmit} className={styles.registerForm}>
+		<img className={styles.logo} src="/img/logo.png" alt="Движение" />
         <div className={styles.stepIndicator}>
           <span>01</span>/04
         </div>

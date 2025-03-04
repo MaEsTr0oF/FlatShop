@@ -8,8 +8,8 @@ import { useState } from 'react'
 export default function Partners() {
 	const [isSwapped, setIsSwapped] = useState(false)
 	const [showTooltip, setShowTooltip] = useState(false)
-	
-	const analyticsData = [
+	const [choosenCard, setChoosenCard] = useState(1)
+	const analyticsData1 = [
 		{ id: 1, text: 'Продажа квартир', percentage: 38, color: '#E31235' },
 		{ id: 2, text: 'Продажа домов', percentage: 19, color: '#FF4B6A' },
 		{ id: 3, text: 'Продажа комнаты', percentage: 24, color: '#FF8095' },
@@ -17,9 +17,17 @@ export default function Partners() {
 		{ id: 5, text: 'Продажа участков', percentage: 0, color: '#FFFFFF' },
 		{ id: 6, text: 'Долгострочная аренда', percentage: 0, color: '#FFFFFF' },
 	]
-
+	const analyticsData2 = [
+		{ id: 1, text: 'Текст 1', percentage: 38, color: '#E31235' },
+		{ id: 2, text: 'Текст 2', percentage: 19, color: '#FF4B6A' },
+		{ id: 3, text: 'Текст 3', percentage: 24, color: '#FF8095' },
+		{ id: 4, text: 'Текст 4', percentage: 19, color: '#333333' },
+		{ id: 5, text: 'Текст 5', percentage: 0, color: '#FFFFFF' },
+		{ id: 6, text: 'Текст 6', percentage: 0, color: '#FFFFFF' },
+	]
 	const handleCardClick = () => {
 		setIsSwapped(prev => !prev)
+		setChoosenCard(prev => (prev === 1 ? 2 : 1))
 	}
 
 	const handleAdviceClick = () => {
@@ -68,7 +76,7 @@ export default function Partners() {
 						/>
 					</div>
 				</div>
-				<Analytics items={analyticsData} totalPercentage={15} />
+				<Analytics items={choosenCard === 1 ? analyticsData1 : analyticsData2} totalPercentage={15} />
 			</div>
 			
 			<Operations />

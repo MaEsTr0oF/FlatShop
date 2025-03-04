@@ -30,6 +30,17 @@
   border: 1px solid #E0E0E0;
   border-radius: 8px;
   font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search input:focus {
+  outline: none;
+  border-color: #E31235;
+  box-shadow: 0 0 0 3px rgba(227, 18, 53, 0.1);
+}
+
+.search input:hover {
+  border-color: #999;
 }
 
 .search input::placeholder {
@@ -129,6 +140,12 @@
 .paginationArrow:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.paginationEllipsis {
+  color: #666;
+  font-size: 14px;
+  padding: 0 4px;
 }
 
 .sort {

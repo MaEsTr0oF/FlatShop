@@ -50,7 +50,11 @@ export default function Open() {
 	return (
 		<div className={styles.loginContainer}>
 			<form onSubmit={handleSubmit} className={styles.loginForm}>
-				<h2>Вход</h2>
+				<img className={styles.logo} src="/img/logo.png" alt="Движение" />
+				<h2>
+					Вход
+					
+				</h2>
 				<div className={styles.formGroup}>
 					<label>Номер телефона</label>
 					<input

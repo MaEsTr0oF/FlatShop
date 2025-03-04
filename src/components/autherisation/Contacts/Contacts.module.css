@@ -18,7 +18,11 @@
   margin-bottom: 2rem;
   position: relative;
 }
-
+.logo {
+	position: absolute;
+	left:50%;
+	transform: translateX(-50%);
+}
 .backButton {
   position: absolute;
   top: 2rem;
@@ -32,7 +36,7 @@
 .stepIndicator {
   text-align: right;
   color: #666;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .stepIndicator span {
@@ -115,7 +119,9 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3C/svg%3E");
   background-size: 20px;
 }
-
+.selectWrapper{
+	margin-bottom: 1rem;
+}
 .selectWrapper,
 .inputWrapper {
   flex: 1;
@@ -436,5 +442,182 @@ input::placeholder {
   padding: 8px 16px;
   border-radius: 4px;
 }
+.progressBar {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 800px;
+	margin-top: 2rem;
+	position: relative;
+ }
+ 
+ .progressBar {
+	 display: flex;
+	 justify-content: center;
+	 width: 100%;
+	 max-width: 800px;
+	 margin-top: 2rem;
+	 position: relative;
+  }
+  
+  .step {
+	 display: flex;
+	 align-items: center;
+	 width: 100%;
+  }
+  
+  .line {
+	 flex: 1;
+	 height: 2px;
+	 background-color: #E8E8E8;
+  }
+  
+  .line.complete {
+	  background: linear-gradient(to right, #333 50%, #e31235 50%);
+  }
+  
+  .line.progress {
+	 background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
+  }
+  
+  .line.grey {
+	 background-color: #E8E8E8;
+  }
+  .line.finish {
+	 background-color: #333;
+  }
+  .stepContent {
+	 display: flex;
+	 align-items: center;
+	 gap: 0.5rem;
+	 padding: 0 0.5rem;
+	 position: relative;
+	 z-index: 1;
+  }
+  
+  .stepContent img {
+	 width: 24px;
+	 height: 24px;
+  }
+  
+  .stepContent span {
+	 font-size: 14px;
+	 color: #333;
+	 white-space: nowrap;
+  }
+  .stepContent h3{
+	  background-color: rgba(255, 255, 255, 0.1);
+	  width: 24px;
+	  height:24px;
+	  border-radius: 4px;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  opacity: 0.5;
+  }
+  .stepContent span.active {
+	 color: #000;
+	 font-weight: 500;
+  }
+  
+  .step:first-child .stepContent {
+	 background-color: transparent;
+	 color: black;
+	 padding: 8px 16px;
+	 border-radius: 4px;
+  }
+  .step:first-child .stepContent span{
+	  color: black;
+	  opacity: 0.5;
+	}
+  .step .stepContent:nth-of-type(2) {
+	 padding: 8px 16px;
+	 border-radius: 4px;
+	 opacity: 1;
+	 background-color: #333;
+  }
+  
+  .step .stepContent:nth-of-type(2) span {
+	 color: white;
+	 opacity: 1;
+  }
+  
+  .step .stepContent:nth-of-type(3),
+  .step .stepContent:nth-of-type(4) {
+	 background-color: #333;
+	 padding: 8px 16px;
+	 border-radius: 4px;
+	 opacity: 1;
+	 color: white;
+  }
+  .step .stepContent:nth-of-type(4) h3{
+	  color: white;
+	  opacity: 1;
+  }
+  .step .stepContent:nth-of-type(4) span{
+	  color: white;
+	  opacity: 1;
+  } 
+  .step .stepContent:nth-of-type(6){
+	 background-color: #e31235;
+  }
+  .step .stepContent:nth-of-type(6) h3{
+	 color: white;
+	 opacity: 1;
+	 background-color: #e31235;
+ }
+ .step .stepContent:nth-of-type(6) span{
+	 color: white;
+	 opacity: 1;
+	 background-color: #e31235;
+ } 
 
-.step:first-
+.errors {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.error {
+  background: rgba(227, 18, 53, 0.9);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(227, 18, 53, 0.2);
+  animation: slideIn 0.3s ease forwards;
+  backdrop-filter: blur(4px);
+}
+
+.error::before {
+  content: '!';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: white;
+  color: #E31235;
+  border-radius: 50%;
+  margin-right: 12px;
+  font-weight: bold;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+} 

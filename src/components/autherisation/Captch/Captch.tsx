@@ -28,6 +28,7 @@ export default function Captch({ onVerify }: CaptchProps) {
 			onClick={handleCaptchaClick}
 		>
 			<span>Я не робот</span>
+			<img className={styles.recaptchaImage} src="/img/recaptcha.png" alt="captch" />
 		</div>
 		<div className={styles.recaptchaLogo}>reCAPTCHA</div>
 	</div>

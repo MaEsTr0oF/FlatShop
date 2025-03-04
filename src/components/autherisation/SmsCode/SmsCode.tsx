@@ -4,11 +4,11 @@ import styles from './SmsCode.module.css'
 
 export default function SmsCode() {
   const [smsCode, setSmsCode] = useState('')
-  const [timer, setTimer] = useState(2) // 1:59 в секундах
+  const [timer, setTimer] = useState(120) 
   const navigate = useNavigate()
   const location = useLocation()
   const phone = location.state?.phone || ''
-
+	console.log(phone)
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prevTimer) => {
@@ -35,9 +35,11 @@ export default function SmsCode() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log('SMS код:', smsCode)
-	//  if(smsCode == '123456'){
+	 if(smsCode == '123'){
 		navigate('/contacts')
-	//  }
+	}else{
+		alert('Неверный код')
+	}
   }
   const handleResend = () => {
     console.log('Отправить код повторно')
@@ -47,6 +49,7 @@ export default function SmsCode() {
   return (
     <div className={styles.smsContainer}>
       <form onSubmit={handleSubmit} className={styles.smsForm}>
+		<img className={styles.logo} src="/img/logo.png" alt="Движение" />
         <button type="button" onClick={handleBack} className={styles.backButton}>
           Вернуться назад
         </button>

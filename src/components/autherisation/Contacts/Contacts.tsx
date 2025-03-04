@@ -1,7 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Contacts.module.css'
 import PhotoEditor from '../PhotoEditor/PhotoEditor'
+
+interface Error {
+  id: string;
+  message: string;
+}
 
 export default function Contacts() {
   const [firstName, setFirstName] = useState('')
@@ -14,26 +19,60 @@ export default function Contacts() {
   const [showPhotoEditor, setShowPhotoEditor] = useState(false)
   const [selectedPhoto, setSelectedPhoto] = useState<File | null>(null)
   const [previewImage, setPreviewImage] = useState<string>('')
-  const [errors, setErrors] = useState<string[]>([])
+  const [errors, setErrors] = useState<Error[]>([])
   
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors(prev => prev.slice(1))
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [errors])
+
+  const addError = (message: string) => {
+    const newError = {
+      id: Date.now().toString(),
+      message
+    }
+    setErrors(prev => [...prev, newError])
+  }
 
   const handleBack = () => {
     navigate(-1)
   }
 
   const validateForm = (): boolean => {
-    const newErrors: string[] = []
+    let isValid = true
 
-    if (!lastName) newErrors.push('Введите фамилию')
-    if (!firstName) newErrors.push('Введите имя')
-    if (!gender) newErrors.push('Выберите пол')
-    if (!birthDate) newErrors.push('Введите дату рождения')
-    if (!city) newErrors.push('Введите город')
-    if (!photo) newErrors.push('Загрузите фото профиля')
+    if (!lastName) {
+      addError('Введите фамилию')
+      isValid = false
+    }
+    if (!firstName) {
+      addError('Введите имя')
+      isValid = false
+    }
+    if (!gender) {
+      addError('Выберите пол')
+      isValid = false
+    }
+    if (!birthDate) {
+      addError('Введите дату рождения')
+      isValid = false
+    }
+    if (!city) {
+      addError('Введите город')
+      isValid = false
+    }
+    if (!photo) {
+      addError('Загрузите фото профиля')
+      isValid = false
+    }
 
-    setErrors(newErrors)
-    return newErrors.length === 0
+    return isValid
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -69,6 +108,7 @@ export default function Contacts() {
   return (
     <div className={styles.contactsContainer}>
       <form onSubmit={handleSubmit} className={styles.contactsForm}>
+		<img className={styles.logo} src="/img/logo.png" alt="Движение" />
         <button type="button" onClick={handleBack} className={styles.backButton}>
           Вернуться назад
         </button>
@@ -81,8 +121,10 @@ export default function Contacts() {
 
         {errors.length > 0 && (
           <div className={styles.errors}>
-            {errors.map((error, index) => (
-              <p key={index} className={styles.error}>{error}</p>
+            {errors.map(error => (
+              <div key={error.id} className={styles.error}>
+                {error.message}
+              </div>
             ))}
           </div>
         )}

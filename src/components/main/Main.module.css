@@ -25,12 +25,17 @@
 }
 
 .sidebarArea {
-	padding-top: 65px;
+  padding-top: 85px;
   grid-area: sidebar;
   background: white;
   border-right: 1px solid #eee;
+  position: relative;
 }
-
+.logo{
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
 .footer {
   margin-top: auto;
   padding: 2rem;

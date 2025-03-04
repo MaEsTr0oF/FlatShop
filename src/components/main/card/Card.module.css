@@ -7,8 +7,9 @@
   overflow: hidden;
 }
 .card h2{
+	font-family: 'Raleway', sans-serif;
 	font-size: 14px;
-	opacity: 0.4;
+	opacity: 0.8;
 	margin-bottom: 5px;
 }
 .partners {
@@ -43,8 +44,9 @@
   margin-bottom: 10px;
 }
 .accountInfo h2{
+	font-family: 'Raleway', sans-serif;
 	font-size: 14px;
-	opacity: 0.4;
+	opacity: 0.8;
 	margin-bottom: 5px;
 }
 .accountNumber {

@@ -10,7 +10,9 @@ export default function Finish() {
 
   return (
     <div className={styles.finishContainer}>
+		<img className={styles.logo} src="/img/logo.png" alt="Движение" />
       <div className={styles.finishContent}>
+		
         <h2>Регистрация завершена</h2>
         <p className={styles.subtitle}>Смотреть видео о работе сервиса</p>
         

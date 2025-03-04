@@ -15,8 +15,10 @@ import { useState } from 'react';
 import LinearBonus from './LinearBonus/LinearBonus'
 import LevelActivation from './LevelActivation/LevelActivation'
 import NotWork from './NotWork/NotWork'
+import PersonalSalesMoney from './PersonalSalesMoney/PersonalSalesMoney'
 export default function Marketing() {
 	const [activeCard, setActiveCard] = useState(0);
+	const haveMoney = false;
 	const scrollLeft = () => {
 		const container = document.querySelector(`.${styles.cards}`);
 		if (container) {
@@ -85,7 +87,7 @@ export default function Marketing() {
 					</svg>
 				</button>
 			</div>
-			{activeCard === 0 && <PersonalSales />}
+			{activeCard === 0 && haveMoney ? <PersonalSales /> : <PersonalSalesMoney />}	
 			{activeCard === 1 && <LinearBonus />}
 			{activeCard === 2 && <LevelActivation />}
 			{activeCard === 3 && <NotWork />}

@@ -21,7 +21,65 @@ export default function Operations() {
   const itemsPerPage = 10
 
   const operations: Operation[] = [
-    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 9', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345321', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 9', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345322', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
+    { id: '345324', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
+    { id: '345325', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 5', description: 'Продажа дома', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 6', description: 'Сдача дома в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача комнаты в долгосрочную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача дома в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа комнаты', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 9', description: 'Продажа квартиры', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 5', description: 'Продажа дома', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 6', description: 'Сдача дома в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача комнаты в долгосрочную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача дома в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа комнаты', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа квартиры', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 5', description: 'Продажа дома', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 6', description: 'Сдача дома в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача комнаты в долгосрочную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача дома в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 11', description: 'Продажа комнаты', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 10', description: 'Продажа квартиры', amount: 50000 },{ id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 9', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 5', description: 'Продажа дома', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 6', description: 'Сдача дома в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача комнаты в долгосрочную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача дома в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа комнаты', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 9', description: 'Продажа квартиры', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 5', description: 'Продажа дома', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 6', description: 'Сдача дома в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача комнаты в долгосрочную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача дома в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа комнаты', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа квартиры', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Продажа квартиры', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 5', description: 'Продажа дома', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 6', description: 'Сдача дома в посуточную аренду', amount: 50000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача комнаты в долгосрочную аренду', amount: 700 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 1', description: 'Сдача дома в долгосрочную аренду', amount: 100000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 11', description: 'Продажа комнаты', amount: 1000 },
+    { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 10', description: 'Продажа квартиры', amount: 50000 },{ id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 9', description: 'Продажа квартиры', amount: 1000 },
     { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 2', description: 'Сдача квартиры в посуточную аренду', amount: 50000 },
     { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 3', description: 'Сдача квартиры в посуточную аренду', amount: 700 },
     { id: '345323', date: '25.01.2025', time: '09:00:00', type: 'Тип операции 4', description: 'Сдача квартиры в долгосрочную аренду', amount: 100000 },
@@ -80,8 +138,7 @@ export default function Operations() {
   }
 
   const filteredOperations = operations.filter(op => 
-    op.id.includes(searchQuery) || 
-    op.description.toLowerCase().includes(searchQuery.toLowerCase())
+    op.id.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   const sortedOperations = sortOperations(filteredOperations)
@@ -160,15 +217,68 @@ export default function Operations() {
         >
           &lt;
         </button>
-        {pages.map(page => (
-          <button
-            key={page}
-            className={`${styles.paginationButton} ${currentPage === page ? styles.active : ''}`}
-            onClick={() => handlePageChange(page)}
-          >
-            {page}
-          </button>
-        ))}
+        {totalPages <= 4 ? (
+          // Если страниц 4 или меньше, показываем все
+          pages.map(page => (
+            <button
+              key={page}
+              className={`${styles.paginationButton} ${currentPage === page ? styles.active : ''}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))
+        ) : (
+          <>
+            {/* Показываем первую страницу и многоточие если текущая страница далеко от начала */}
+            {currentPage > 3 && (
+              <>
+                <button
+                  className={`${styles.paginationButton}`}
+                  onClick={() => handlePageChange(1)}
+                >
+                  1
+                </button>
+                <span className={styles.paginationEllipsis}>...</span>
+              </>
+            )}
+
+            {/* Показываем скользящее окно из 4 страниц */}
+            {pages
+              .filter(page => {
+                if (currentPage <= 3) {
+                  return page >= 1 && page <= 4;
+                } else if (currentPage >= totalPages - 2) {
+                  return page >= totalPages - 3 && page <= totalPages;
+                } else {
+                  return page >= currentPage - 1 && page <= currentPage + 2;
+                }
+              })
+              .map(page => (
+                <button
+                  key={page}
+                  className={`${styles.paginationButton} ${currentPage === page ? styles.active : ''}`}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ))
+            }
+
+            {/* Показываем многоточие и последнюю страницу если текущая страница далеко от конца */}
+            {currentPage < totalPages - 2 && (
+              <>
+                <span className={styles.paginationEllipsis}>...</span>
+                <button
+                  className={`${styles.paginationButton}`}
+                  onClick={() => handlePageChange(totalPages)}
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+          </>
+        )}
         <button 
           className={styles.paginationArrow}
           onClick={() => handlePageChange(currentPage + 1)}

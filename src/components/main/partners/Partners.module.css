@@ -43,7 +43,8 @@
 }
 .cardsHeader{
 	display: flex;
-	justify-content: center;
+	justify-content: end;
+	padding-right: 47px;
 	align-items: start;
 	width: 100%;
 	gap: 10px;

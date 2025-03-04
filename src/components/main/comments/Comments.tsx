@@ -40,7 +40,7 @@ const Comments = () => {
         partner={partners[1]} 
         title="САМЫЙ АКТИВНЫЙ ПАРТНЕР" 
       />
-		<button className={styles.analytics_button}>Пополнить баланс</button>
+		<button className={styles.analytics_button}>Смотреть всех</button>
     </div>
   )
 }

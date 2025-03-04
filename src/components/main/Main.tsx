@@ -28,6 +28,7 @@ export default function Main() {
           </Routes>
         </div>
         <div className={styles.sidebarArea}>
+		  <img className={styles.logo} src="/img/logo.png" alt="Движение" />
           <Footer />
         </div>
       </div>
