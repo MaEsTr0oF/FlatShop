@@ -1,0 +1,134 @@
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+ }
+ 
+ .topSection {
+	display: flex;
+	gap: 24px;
+ }
+ 
+ .salesSection, .analyticsSection {
+	display: flex;
+	flex-direction: column;
+ }
+ 
+ .salesSection {
+	width: 344px;
+ }
+ 
+ .analyticsSection {
+	flex: 1;
+ }
+ 
+ .sectionTitle {
+	font-family: 'Druk Cyr', sans-serif;
+	font-size: 30px;
+	font-weight: 500;
+	color: #141414;
+	text-transform: uppercase;
+	margin-bottom: 24px;
+	padding-left: 10px;
+ }
+ 
+ .card {
+	width: 100%;
+	background: #E20338;
+	border-radius: 10px;
+	padding: 32px;
+	color: white;
+	position: relative;
+	min-height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	overflow: hidden;
+ }
+ 
+ .card::after {
+	content: '';
+	position: absolute;
+	top: -30%;
+	right: -30%;
+	width: 220px;
+	height: 220px;
+	background: rgba(63, 55, 55, 0.4);
+	border-radius: 50%;
+	z-index: 1;
+ }
+ 
+ .analyticsCard {
+	background: white;
+	border-radius: 10px;
+ }
+ 
+ .analyticsTitle {
+	font-family: 'Druk Cyr', sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	color: #141414;
+	text-transform: uppercase;
+	margin-bottom: 24px;
+ }
+ 
+ .header {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 32px;
+ }
+ 
+ .header span {
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.6);
+	font-weight: 500;
+	text-transform: uppercase;
+ }
+ 
+ .totalAmount {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+ }
+ 
+ .totalAmount span {
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.6);
+	font-weight: 500;
+	text-transform: uppercase;
+ }
+ 
+ .amount {
+	font-family: 'Druk Cyr', sans-serif;
+	font-size: 40px;
+	font-weight: 500;
+	line-height: 1;
+ }
+ 
+ .amount1 {
+	font-family: 'Druk Cyr', sans-serif;
+	font-size: 40px;
+	font-weight: 500;
+	line-height: 1;
+	color: rgba(255, 255, 255, 0.4);
+ }
+ 
+ .label {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-family: 'Druk Cyr', sans-serif;
+	padding: 8px 8px;
+	border-radius: 4px;
+	font-size: 30px;
+	font-weight: 500;
+	text-transform: uppercase;
+	z-index: 2;
+	opacity: 0.9;
+ }

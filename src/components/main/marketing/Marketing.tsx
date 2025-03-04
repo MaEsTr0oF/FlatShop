@@ -16,9 +16,15 @@ import LinearBonus from './LinearBonus/LinearBonus'
 import LevelActivation from './LevelActivation/LevelActivation'
 import NotWork from './NotWork/NotWork'
 import PersonalSalesMoney from './PersonalSalesMoney/PersonalSalesMoney'
+import LinearBonusPartner from './LinerBonusPartner/LinerBonusPartner'
+import LevelActivationHave from './LevelActivationHave/LevelActivationHave'
+
 export default function Marketing() {
 	const [activeCard, setActiveCard] = useState(0);
 	const haveMoney = false;
+	const havePartner = true;
+	const level = 1;
+
 	const scrollLeft = () => {
 		const container = document.querySelector(`.${styles.cards}`);
 		if (container) {
@@ -32,66 +38,70 @@ export default function Marketing() {
 			container.scrollBy({ left: 290, behavior: 'smooth' });
 		}
 	};
+
 	return (
 		<>
 			<div className={styles.container}>
 				<h2 className={styles.title}>Маркетинг</h2>
 				<div className={styles.cardsContainer}>
-				<button className={`${styles.navButton} ${styles.prevButton}`} onClick={scrollLeft}>
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-						<path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-					</svg>
-				</button>
-				
-				<div className={styles.cards}>
-					<Card 
-						image={activeCard === 0 ? personalSalesActive : personalSales} 
-						firstLine="ЛИЧНЫЕ" 
-						secondLine="ПРОДАЖИ" 
-						active={activeCard === 0}
-						onClick={() => setActiveCard(0)}
-					/>
-					<Card 
-						image={activeCard === 1 ? linearBonusActive : linearBonus} 
-						firstLine="ЛИНЕЙНЫЙ" 
-						secondLine="БОНУС"
-						active={activeCard === 1}
-						onClick={() => setActiveCard(1)}
-					/>
-					<Card 
-						image={activeCard === 2 ? levelActivationActive : levelActivation} 
-						firstLine="УРОВНЕВАЯ" 
-						secondLine="АКТИВАЦИЯ"
-						active={activeCard === 2}
-						onClick={() => setActiveCard(2)}
-					/>
-					<Card 
-						image={activeCard === 3 ? careerBonusActive : careerBonus} 
-						firstLine="КАРЬЕРНЫЙ" 
-						secondLine="БОНУС"
-						active={activeCard === 3}
-						onClick={() => setActiveCard(3)}
-					/>
-					<Card 
-						image={activeCard === 4 ? leaderBonusActive : leaderBonus} 
-						firstLine="ЛИДЕРСКИЙ" 
-						secondLine="БОНУС"
-						active={activeCard === 4}
-						onClick={() => setActiveCard(4)}
-					/>
-				</div>
+					<button className={`${styles.navButton} ${styles.prevButton}`} onClick={scrollLeft}>
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+						</svg>
+					</button>
+					
+					<div className={styles.cards}>
+						<Card 
+							image={activeCard === 0 ? personalSalesActive : personalSales} 
+							firstLine="ЛИЧНЫЕ" 
+							secondLine="ПРОДАЖИ" 
+							active={activeCard === 0}
+							onClick={() => setActiveCard(0)}
+						/>
+						<Card 
+							image={activeCard === 1 ? linearBonusActive : linearBonus} 
+							firstLine="ЛИНЕЙНЫЙ" 
+							secondLine="БОНУС"
+							active={activeCard === 1}
+							onClick={() => setActiveCard(1)}
+						/>
+						<Card 
+							image={activeCard === 2 ? levelActivationActive : levelActivation} 
+							firstLine="УРОВНЕВАЯ" 
+							secondLine="АКТИВАЦИЯ"
+							active={activeCard === 2}
+							onClick={() => setActiveCard(2)}
+						/>
+						<Card 
+							image={activeCard === 3 ? careerBonusActive : careerBonus} 
+							firstLine="КАРЬЕРНЫЙ" 
+							secondLine="БОНУС"
+							active={activeCard === 3}
+							onClick={() => setActiveCard(3)}
+						/>
+						<Card 
+							image={activeCard === 4 ? leaderBonusActive : leaderBonus} 
+							firstLine="ЛИДЕРСКИЙ" 
+							secondLine="БОНУС"
+							active={activeCard === 4}
+							onClick={() => setActiveCard(4)}
+						/>
+					</div>
 
-				<button className={`${styles.navButton} ${styles.nextButton}`} onClick={scrollRight}>
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-						<path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-					</svg>
-				</button>
-			</div>
-			{activeCard === 0 && haveMoney ? <PersonalSales /> : <PersonalSalesMoney />}	
-			{activeCard === 1 && <LinearBonus />}
-			{activeCard === 2 && <LevelActivation />}
-			{activeCard === 3 && <NotWork />}
-			{activeCard === 4 && <NotWork />}
+					<button className={`${styles.navButton} ${styles.nextButton}`} onClick={scrollRight}>
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+						</svg>
+					</button>
+				</div>
+				{activeCard === 0 && haveMoney && <PersonalSales />}	
+				{activeCard === 0 && !haveMoney && <PersonalSalesMoney />}
+				{activeCard === 1 && havePartner && <LinearBonusPartner />}
+				{activeCard === 1 && !havePartner && <LinearBonus />}
+				{activeCard === 2 && level < 1 && <LevelActivation />}	
+				{activeCard === 2 && level > 0 && <LevelActivationHave level={level} />}
+				{activeCard === 3 && <NotWork />}
+				{activeCard === 4 && <NotWork />}
 			</div>
 		</>
 	)
