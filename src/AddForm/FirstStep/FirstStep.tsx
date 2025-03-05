@@ -1,19 +1,6 @@
 import styles from '../AddForm.module.css'
 import { FormData } from '../../types/form'
-import { useEffect, useRef, useState } from 'react'
-
-declare global {
-  interface Window {
-    ymaps: {
-      ready: (callback: () => void) => void;
-      Map: new (element: HTMLElement, options: {
-        center: [number, number];
-        zoom: number;
-        controls?: string[];
-      }) => any;
-    };
-  }
-}
+import { useEffect, useRef, useState } from 'react';
 
 interface FirstStepProps {
 	onNext: () => void;
@@ -22,76 +9,159 @@ interface FirstStepProps {
 	updateFormData: (data: Partial<FormData>) => void;
 }
 
+interface YMap {
+	destroy(): void;
+	setCenter(center: number[]): void;
+	setZoom(zoom: number): void;
+}
+
+interface YMaps {
+	Map: new (element: HTMLElement, options: MapOptions) => YMap;
+	ready: (callback: () => void) => void;
+}
+
+interface MapOptions {
+	center: [number, number];
+	zoom: number;
+	controls?: string[];
+}
+
+declare global {
+	interface Window {
+		ymaps: YMaps;
+	}
+}
+
+const YMAPS_API_KEY = '3737c631-6faf-49c6-92b3-0a2f5d026ecf';
+let isScriptLoading = false;
+
 export default function FirstStep({ onNext, onSave, formData, updateFormData }: FirstStepProps) {
 	const mapRef = useRef<HTMLDivElement>(null);
-	const [mapError, setMapError] = useState<string | null>(null);
+	const [mapError, setMapError] = useState<string>('');
 	const [isMapLoading, setIsMapLoading] = useState(true);
-	
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target;
-		updateFormData({ [name]: value });
+	const mapInstance = useRef<YMap | null>(null);
+
+	const handleError = (err: unknown) => {
+		const errorMessage = err instanceof Error ? err.message : 'Неизвестная ошибка';
+		console.error('Map error:', err);
+		setMapError(`Ошибка при инициализации карты: ${errorMessage}`);
+		setIsMapLoading(false);
 	};
 
 	useEffect(() => {
-		let mapInstance: any = null;
-
-		const loadYMaps = () => {
-			return new Promise((resolve, reject) => {
-				// Проверяем, загружен ли уже скрипт
-				const existingScript = document.querySelector('script[src*="api-maps.yandex.ru"]');
-				
-				if (!existingScript) {
-					const script = document.createElement('script');
-					script.src = 'https://api-maps.yandex.ru/2.1/?apikey=3737c631-6faf-49c6-92b3-0a2f5d026ecf&lang=ru_RU';
-					script.async = true;
-					script.onload = () => resolve(true);
-					script.onerror = () => reject(new Error('Ошибка загрузки API Яндекс.Карт'));
-					document.head.appendChild(script);
-				} else {
-					resolve(true);
-				}
-			});
-		};
-
 		const initMap = async () => {
 			try {
-				await loadYMaps();
+				if (!mapRef.current) {
+					console.error('Map container not found');
+					setMapError('Ошибка инициализации карты: контейнер не найден');
+					setIsMapLoading(false);
+					return;
+				}
 
-				if (!mapRef.current) return;
+				// Если API уже загружен, просто инициализируем карту
+				if (window.ymaps) {
+					window.ymaps.ready(() => {
+						try {
+							if (mapRef.current && !mapInstance.current) {
+								const mapContainer = mapRef.current;
+								if (mapContainer.offsetWidth === 0 || mapContainer.offsetHeight === 0) {
+									console.error('Map container has zero dimensions');
+									setMapError('Ошибка инициализации карты: неверные размеры контейнера');
+									setIsMapLoading(false);
+									return;
+								}
 
-				// Ждем, пока API будет готов
-				await new Promise(resolve => window.ymaps.ready(resolve));
+								mapInstance.current = new window.ymaps.Map(mapRef.current, {
+									center: [55.76, 37.64],
+									zoom: 10,
+									controls: ['zoomControl', 'geolocationControl']
+								});
+								console.log('Map initialized successfully');
+								setIsMapLoading(false);
+							}
+						} catch (err: unknown) {
+							handleError(err);
+						}
+					});
+					return;
+				}
 
-				mapInstance = new window.ymaps.Map(mapRef.current, {
-					center: [55.76, 37.64],
-					zoom: 7,
-					controls: ['zoomControl', 'searchControl']
-				});
+				// Если скрипт уже загружается, ждем
+				if (isScriptLoading) {
+					const checkYMaps = setInterval(() => {
+						if (window.ymaps) {
+							clearInterval(checkYMaps);
+							window.ymaps.ready(() => {
+								try {
+									if (mapRef.current && !mapInstance.current) {
+										mapInstance.current = new window.ymaps.Map(mapRef.current, {
+											center: [55.76, 37.64],
+											zoom: 10,
+											controls: ['zoomControl', 'geolocationControl']
+										});
+										console.log('Map initialized successfully (after wait)');
+										setIsMapLoading(false);
+									}
+								} catch (err: unknown) {
+									handleError(err);
+								}
+							});
+						}
+					}, 100);
+					return;
+				}
 
-				setIsMapLoading(false);
-				setMapError(null);
+				// Если скрипт еще не загружается, начинаем загрузку
+				isScriptLoading = true;
+				const script = document.createElement('script');
+				script.src = `https://api-maps.yandex.ru/2.1/?apikey=${YMAPS_API_KEY}&lang=ru_RU`;
+				script.async = true;
+				
+				script.onload = () => {
+					window.ymaps.ready(() => {
+						try {
+							if (mapRef.current && !mapInstance.current) {
+								mapInstance.current = new window.ymaps.Map(mapRef.current, {
+									center: [55.76, 37.64],
+									zoom: 10,
+									controls: ['zoomControl', 'geolocationControl']
+								});
+								console.log('Map initialized successfully (after script load)');
+								setIsMapLoading(false);
+							}
+						} catch (err: unknown) {
+							handleError(err);
+						}
+					});
+				};
 
-				// Добавляем обработчик клика по карте
-				mapInstance.events.add('click', (e: any) => {
-					const coords = e.get('coords');
-					console.log('Clicked coordinates:', coords);
-				});
+				script.onerror = (err: Event | string) => {
+					console.error('Error loading Yandex Maps script:', err);
+					isScriptLoading = false;
+					setMapError('Ошибка загрузки API Яндекс.Карт');
+					setIsMapLoading(false);
+				};
 
-			} catch (error) {
-				console.error('Error initializing map:', error);
-				setMapError('Ошибка при инициализации карты');
-				setIsMapLoading(false);
+				document.head.appendChild(script);
+			} catch (err: unknown) {
+				handleError(err);
 			}
 		};
 
 		initMap();
 
 		return () => {
-			if (mapInstance) {
-				mapInstance.destroy();
+			if (mapInstance.current) {
+				mapInstance.current.destroy();
+				mapInstance.current = null;
 			}
 		};
 	}, []);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value } = e.target;
+		updateFormData({ [name]: value });
+	};
 
 	return (
 		<div className={styles.stepContainer}>
@@ -167,11 +237,13 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 						className={styles.input}
 					/>
 				</div>
-				<div className={styles.mapContainer}>
-					<div ref={mapRef} className={styles.map}></div>
-					{isMapLoading && <div className={styles.mapError}>Загрузка карты...</div>}
-					{!isMapLoading && mapError && <div className={styles.mapError}>{mapError}</div>}
+
+				<div className={styles.mapContainer} style={{ width: '100%', height: '400px', position: 'relative' }}>
+					{isMapLoading && <div className={styles.mapLoading}>Загрузка карты...</div>}
+					{mapError && <div className={styles.mapError}>{mapError}</div>}
+					<div ref={mapRef} className={styles.map} style={{ width: '100%', height: '100%' }}></div>
 				</div>
+
 				<div className={styles.buttons}>
 					<button
 						type="button"
