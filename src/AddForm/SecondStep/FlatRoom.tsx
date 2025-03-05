@@ -111,9 +111,7 @@ export default function FlatRoom({
 							<option value="апартаменты">Апартаменты</option>
 						</select>
 					</div>
-				</>}
-				{formData.type!="апартаменты" || !(propertyType==="Комната" && listingType==="Аренда") && <>
-				<div className={styles.formGroup}>
+					<div className={styles.formGroup}>
 					<label>Количество комнат</label>
 					<input
 						type="number"
@@ -124,7 +122,6 @@ export default function FlatRoom({
 						className={styles.input}
 					/>
 				</div>
-				
 				<div className={styles.formGroup}>
 					<label>Тип комнат</label>
 					<div className={styles.checkboxGroup}>
@@ -379,7 +376,96 @@ export default function FlatRoom({
 						<option value="Без ремонта">Без ремонта</option>
 					</select>
 				</div>
-
+				<div className={styles.formGroup}>
+					<label>Мебель</label>
+					<div className={styles.checkboxGroup}>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="furniture.kitchen"
+								checked={formData.furniture?.kitchen || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Кухня
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="furniture.sleeping"
+								checked={formData.furniture?.sleeping || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Спальные места
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="furniture.clothes"
+								checked={formData.furniture?.clothes || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Хранение одежды
+						</label>
+					</div>
+				</div>
+				<div className={styles.formGroup}>
+					<label>Техника</label>
+					<div className={styles.checkboxGroup}>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="appliances.refrigerator"
+								checked={formData.appliances?.refrigerator || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Холодильник
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="appliances.washer"
+								checked={formData.appliances?.washer || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Стиральная машина
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="appliances.conditioner"
+								checked={formData.appliances?.conditioner || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Кондиционер
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="appliances.dishwasher"
+								checked={formData.appliances?.dishwasher || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Посудомоечная машина
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="appliances.waterHeater"
+								checked={formData.appliances?.waterHeater || false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Водонагреватель
+						</label>
+					</div>
+				</div>
 				<div className={styles.buttons}>
 					<button
 						type="button"

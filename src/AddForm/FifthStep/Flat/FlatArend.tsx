@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
+import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
+import ButtonGroup from '../../components/ButtonGroup'
 
 interface FlatArendProps {
-	onBack: () => void;
 	onNext: () => void;
+	onBack: () => void;
 	onSave: () => void;
-	rentType: string;
 	onDataUpdate: (data: PriceData) => void;
-	initialData?: PriceData;
+	initialData: PriceData | null;
+	rentType: string;
 }
 
 export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpdate, initialData }: FlatArendProps) {
@@ -16,7 +17,7 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 		price: initialData?.price || 0,
 		mortgage: initialData?.mortgage || false,
 		commission: initialData?.commission || 0,
-		rentType: initialData?.rentType || '',
+		rentType: initialData?.rentType || rentType,
 		minRentPeriod: initialData?.minRentPeriod || '',
 		maintenance: initialData?.maintenance || false,
 		vat: initialData?.vat || '',
@@ -55,10 +56,10 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 	});
 
 	useEffect(() => {
-		if (initialData) {
-			setFormData(initialData);
+		if (onDataUpdate) {
+			onDataUpdate(formData);
 		}
-	}, [initialData]);
+	}, [formData, onDataUpdate]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value, type } = e.target;
@@ -68,14 +69,6 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 			...prev,
 			[name]: type === 'checkbox' ? checked : value
 		}));
-	};
-
-	const handleSubmit = () => {
-		onDataUpdate(formData);
-		if (onSave) {
-			onSave();
-		}
-		onNext();
 	};
 
 	return (
@@ -132,76 +125,43 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 					<span className={styles.checkmark}></span>
 					Можно курить
 				</label>
-				{rentType === 'Посуточная аренда' && <>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="rules.party"
-						checked={formData.rules?.party ?? false}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Разрешены вечеринки
-				</label>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="rules.docs"
-						checked={formData.rules?.docs ?? false}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Есть отчётные документы
-				</label>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="rules.month"
-						checked={formData.rules?.month ?? false}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Возможна помесячная аренда
-				</label>
-				</>
-				}
+				{rentType === 'Посуточная аренда' && (
+					<>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="rules.party"
+								checked={formData.rules?.party ?? false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Разрешены вечеринки
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="rules.docs"
+								checked={formData.rules?.docs ?? false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Есть отчётные документы
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="rules.month"
+								checked={formData.rules?.month ?? false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Возможна помесячная аренда
+						</label>
+					</>
+				)}
 			</div>
 
-			<div className={styles.buttonGroup}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={handleSubmit} className={styles.nextButton}>
-					Выставить объявление
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
-
-			<div className={styles.progressBar}>
-				<div className={styles.progressLine} style={{ '--progress-width': '100%' } as React.CSSProperties} />
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
-					<div className={styles.stepTitle}>Новое объявление</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>02</div>
-					<div className={styles.stepTitle}>О квартире</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>03</div>
-					<div className={styles.stepTitle}>Фото и описание</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>04</div>
-					<div className={styles.stepTitle}>О доме</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.active}`}>05</div>
-					<div className={styles.stepTitle}>Условия сделки</div>
-				</div>
-			</div>
+			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
-	)
+	);
 } 

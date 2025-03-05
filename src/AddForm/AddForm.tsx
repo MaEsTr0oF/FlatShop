@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import FirstStep from './FirstStep/FirstStep'
 import SecondStep from './SecondStep/SecondStep'
 import ThirdStep from './ThirdStep/ThirdStep'
@@ -19,10 +19,9 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 		const savedData = localStorage.getItem('formData');
 		return savedData ? JSON.parse(savedData) : {
 			title: '',
-			propertyType: 'Квартира',
-			listingType: 'Продажа',
+			propertyType: '',
+			listingType: '',
 			address: '',
-			rentType: 'Долгосрочная аренда',
 			secondStepData: null,
 			thirdStepData: null,
 			fourthStepData: null,
@@ -36,51 +35,49 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 	}, [currentStep, formData]);
 
 	const handleNext = () => {
-		setCurrentStep(prev => prev + 1);
-	}
+		setCurrentStep(prev => Math.min(prev + 1, 5));
+	};
 
 	const handleBack = () => {
-		setCurrentStep(prev => prev - 1);
-	}
+		setCurrentStep(prev => Math.max(prev - 1, 1));
+	};
+
+	const handleSubmit = () => {
+		onSubmit(formData);
+	};
 
 	const handleSave = () => {
 		localStorage.setItem('formData', JSON.stringify(formData));
-		localStorage.setItem('currentStep', currentStep.toString());
 		onClose();
-	}
+	};
 
-	const handleSubmit = () => {
-		console.log('Итоговые данные формы:', formData);
-		onSubmit(formData);
-		// Очищаем localStorage после успешной отправки формы
-		localStorage.removeItem('formData');
-		localStorage.removeItem('currentStep');
-		onClose();
-	}
-
-	const updateFormData = (newData: Partial<FormData>) => {
+	const updateFormData = (data: Partial<FormData>) => {
 		setFormData(prev => ({
 			...prev,
-			...newData
+			...data
 		}));
-	}
+	};
 
-	const updateStepData = (step: number, data: StepData) => {
-		const stepDataMap: Record<number, keyof FormData> = {
-			2: 'secondStepData',
-			3: 'thirdStepData',
-			4: 'fourthStepData',
-			5: 'fifthStepData'
-		}
-		
-		const key = stepDataMap[step];
-		if (key) {
-			setFormData(prev => ({
-				...prev,
-				[key]: data
-			}));
-		}
-	}
+	const updateStepData = useCallback((step: number, data: StepData) => {
+		setFormData(prev => {
+			const newData = { ...prev };
+			switch (step) {
+				case 2:
+					newData.secondStepData = data as SecondStepData;
+					break;
+				case 3:
+					newData.thirdStepData = data as ThirdStepData;
+					break;
+				case 4:
+					newData.fourthStepData = data as FourthStepData;
+					break;
+				case 5:
+					newData.fifthStepData = data as PriceData;
+					break;
+			}
+			return newData;
+		});
+	}, []);
 
 	return (
 		<div className={styles.container}>
@@ -123,10 +120,13 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 				<FifthStep
 					onNext={handleSubmit}
 					onBack={handleBack}
-				
+					propertyType={formData.propertyType}
+					listingType={formData.listingType}
 					onSave={handleSave}
+					onDataUpdate={(data: PriceData) => updateStepData(5, data)}
+					initialData={formData.fifthStepData}
 				/>
 			)}
 		</div>
-	)
+	);
 } 

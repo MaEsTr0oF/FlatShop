@@ -14,8 +14,20 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 	const [formData, setFormData] = useState<FourthStepData>(initialData || {
 		readiness: '',
 		buildingType: '',
+		yearOfConstruction: new Date().getFullYear(),
+		floorCount: 1,
 		passengerElevator: '',
 		freightElevator: '',
+		houseFeatures: {
+			concierge: false,
+			garbage: false,
+			gas: false,
+		},
+		yardFeatures: {
+			playground: false,
+			sportsGround: false,
+			closedTerritory: false,
+		},
 		parking: {
 			underground: false,
 			ground: false,
@@ -52,11 +64,29 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 						[field]: type === 'checkbox' ? checked : value
 					}
 				}));
+			} else if (category === 'houseFeatures' && formData.houseFeatures) {
+				setFormData(prev => ({
+					...prev,
+					houseFeatures: {
+						...prev.houseFeatures!,
+						[field]: type === 'checkbox' ? checked : value
+					}
+				}));
+			} else if (category === 'yardFeatures' && formData.yardFeatures) {
+				setFormData(prev => ({
+					...prev,
+					yardFeatures: {
+						...prev.yardFeatures!,
+						[field]: type === 'checkbox' ? checked : value
+					}
+				}));
 			}
 		} else {
 			setFormData(prev => ({
 				...prev,
-				[name]: type === 'checkbox' ? checked : value
+				[name]: type === 'checkbox' ? checked : 
+					(name === 'yearOfConstruction' || name === 'floorCount') ? 
+					parseInt(value) || value : value
 			}));
 		}
 	};
@@ -64,20 +94,6 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 	return (
 		<form className={styles.form}>
 			<h2 className={styles.title}>О ДОМЕ</h2>
-
-			<div className={styles.formGroup}>
-				<label>Готовность</label>
-				<select
-					name="readiness"
-					value={formData.readiness}
-					onChange={handleChange}
-					className={styles.select}
-				>
-					<option value="">Выберите готовность</option>
-					<option value="Готово к проживанию">Готово к проживанию</option>
-					<option value="Требует ремонта">Требует ремонта</option>
-				</select>
-			</div>
 
 			<div className={styles.formGroup}>
 				<label>Тип дома</label>
@@ -93,6 +109,68 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 					<option value="Монолитный">Монолитный</option>
 					<option value="Блочный">Блочный</option>
 				</select>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Особенности дома</label>
+				<div className={styles.checkboxGroup}>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="houseFeatures.concierge"
+							checked={formData.houseFeatures?.concierge ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Консьерж
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="houseFeatures.garbage"
+							checked={formData.houseFeatures?.garbage ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Мусоропровод
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="houseFeatures.gas"
+							checked={formData.houseFeatures?.gas ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Газ
+					</label>
+				</div>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Год постройки</label>
+				<input
+					type="number"
+					name="yearOfConstruction"
+					value={formData.yearOfConstruction}
+					onChange={handleChange}
+					min="1900"
+					step="1"
+					className={styles.input}
+				/>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Количество этажей</label>
+				<input
+					type="number"
+					name="floorCount"
+					value={formData.floorCount}
+					onChange={handleChange}
+					min="1"
+					step="1"
+					className={styles.input}
+				/>
 			</div>
 
 			<div className={styles.formGroup}>
@@ -128,6 +206,42 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 			</div>
 
 			<div className={styles.formGroup}>
+				<label>Двор</label>
+				<div className={styles.checkboxGroup}>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="yardFeatures.playground"
+							checked={formData.yardFeatures?.playground ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Детская площадка
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="yardFeatures.sportsGround"
+							checked={formData.yardFeatures?.sportsGround ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Спортивная площадка
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="yardFeatures.closedTerritory"
+							checked={formData.yardFeatures?.closedTerritory ?? false}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Закрытая территория
+					</label>
+				</div>
+			</div>
+
+			<div className={styles.formGroup}>
 				<label>Парковка</label>
 				<div className={styles.checkboxGroup}>
 					<label className={styles.checkbox}>
@@ -148,7 +262,7 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
-						Наземная
+						Надземная многоуровневая
 					</label>
 					<label className={styles.checkbox}>
 						<input
@@ -158,7 +272,7 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
-						Многоуровневая
+						Открытая во дворе
 					</label>
 					<label className={styles.checkbox}>
 						<input
@@ -168,7 +282,7 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
-						Шлагбаум
+						За шлагбаумом во дворе
 					</label>
 				</div>
 			</div>

@@ -9,15 +9,58 @@ interface FirstStepProps {
 	updateFormData: (data: Partial<FormData>) => void;
 }
 
+interface GeoObject {
+	geometry: {
+		getCoordinates(): number[];
+	};
+	getAddressLine(): string;
+}
+
+interface GeoObjectCollection {
+	get(index: number): GeoObject;
+	getLength(): number;
+}
+
+interface GeocodeResult {
+	geoObjects: GeoObjectCollection;
+}
+
+interface PlacemarkProperties {
+	balloonContent: string;
+}
+
+interface PlacemarkOptions {
+	preset: string;
+}
+
+interface Placemark {
+	geometry: {
+		getCoordinates(): number[];
+	};
+	properties: PlacemarkProperties;
+	options: PlacemarkOptions;
+}
+
 interface YMap {
 	destroy(): void;
 	setCenter(center: number[]): void;
 	setZoom(zoom: number): void;
+	geoObjects: {
+		add(object: Placemark): void;
+		remove(object: Placemark): void;
+		removeAll(): void;
+	};
 }
 
 interface YMaps {
 	Map: new (element: HTMLElement, options: MapOptions) => YMap;
 	ready: (callback: () => void) => void;
+	geocode(request: string): Promise<GeocodeResult>;
+	Placemark: new (
+		geometry: number[],
+		properties: { balloonContent: string },
+		options: { preset: string }
+	) => Placemark;
 }
 
 interface MapOptions {
@@ -40,12 +83,65 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 	const [mapError, setMapError] = useState<string>('');
 	const [isMapLoading, setIsMapLoading] = useState(true);
 	const mapInstance = useRef<YMap | null>(null);
+	const currentPlacemark = useRef<Placemark | null>(null);
+	const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	const handleError = (err: unknown) => {
 		const errorMessage = err instanceof Error ? err.message : 'Неизвестная ошибка';
 		console.error('Map error:', err);
 		setMapError(`Ошибка при инициализации карты: ${errorMessage}`);
 		setIsMapLoading(false);
+	};
+
+	const searchAddress = async (address: string) => {
+		if (!window.ymaps || !mapInstance.current) return;
+
+		try {
+			// Очищаем предыдущую метку
+			if (currentPlacemark.current) {
+				mapInstance.current.geoObjects.remove(currentPlacemark.current);
+				currentPlacemark.current = null;
+			}
+
+			if (!address.trim()) return;
+
+			const result = await window.ymaps.geocode(address);
+			if (result.geoObjects.getLength() > 0) {
+				const firstGeoObject = result.geoObjects.get(0);
+				const coords = firstGeoObject.geometry.getCoordinates();
+				
+				// Создаем метку
+				currentPlacemark.current = new window.ymaps.Placemark(coords, {
+					balloonContent: firstGeoObject.getAddressLine()
+				}, {
+					preset: 'islands#redDotIcon'
+				});
+
+				// Добавляем метку на карту
+				mapInstance.current.geoObjects.add(currentPlacemark.current);
+				
+				// Центрируем карту на найденной точке
+				mapInstance.current.setCenter(coords);
+				mapInstance.current.setZoom(16);
+			}
+		} catch (err) {
+			console.error('Ошибка при поиске адреса:', err);
+		}
+	};
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value } = e.target;
+		updateFormData({ [name]: value });
+
+		// Если изменилось поле адреса, запускаем поиск с задержкой
+		if (name === 'address') {
+			if (searchTimeout.current) {
+				clearTimeout(searchTimeout.current);
+			}
+			searchTimeout.current = setTimeout(() => {
+				searchAddress(value);
+			}, 500); // Задержка 500мс для предотвращения частых запросов
+		}
 	};
 
 	useEffect(() => {
@@ -152,16 +248,15 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 
 		return () => {
 			if (mapInstance.current) {
+				mapInstance.current.geoObjects.removeAll();
 				mapInstance.current.destroy();
 				mapInstance.current = null;
 			}
+			if (searchTimeout.current) {
+				clearTimeout(searchTimeout.current);
+			}
 		};
 	}, []);
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target;
-		updateFormData({ [name]: value });
-	};
 
 	return (
 		<div className={styles.stepContainer}>

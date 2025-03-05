@@ -1,28 +1,32 @@
-import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
+import { useState, useCallback } from 'react'
+import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
+import ButtonGroup from '../../components/ButtonGroup'
 
 interface HouseSaleProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
-	onDataUpdate?: (data: PriceData) => void;
-	initialData?: PriceData | null;
+	onDataUpdate: (data: PriceData) => void;
+	initialData: PriceData | null;
 }
 
 export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseSaleProps) {
-	const [formData, setFormData] = useState<PriceData>(initialData || {
-		price: 0,
-		mortgage: false,
-		commission: 0,
-		utilities: {
+	const [formData, setFormData] = useState<PriceData>(() => ({
+		price: initialData?.price || 0,
+		priceType: initialData?.priceType || 'fixed',
+		mortgage: initialData?.mortgage || false,
+		shareSale: initialData?.shareSale || false,
+		auction: initialData?.auction || false,
+		commission: initialData?.commission || 0,
+		utilities: initialData?.utilities || {
 			included: false,
 			electricity: false,
 			gas: false,
 			water: false,
 			internet: false
 		},
-		rules: {
+		rules: initialData?.rules || {
 			children: false,
 			pets: false,
 			smoking: false,
@@ -30,7 +34,7 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 			docs: false,
 			month: false
 		},
-		showingTime: {
+		showingTime: initialData?.showingTime || {
 			everyday: true,
 			startTime: '09:00',
 			endTime: '21:00',
@@ -45,43 +49,55 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 				sunday: true
 			}
 		}
-	});
+	}));
 
-	useEffect(() => {
-		if (onDataUpdate) {
-			onDataUpdate(formData);
-		}
-	}, [formData, onDataUpdate]);
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value, type } = e.target;
-		if (name.includes('.')) {
-			const [category, field] = name.split('.');
-			if (category === 'showingTime') {
-				setFormData((prev: PriceData) => ({
-					...prev,
-					showingTime: {
-						...prev.showingTime,
-						[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
-					}
-				}));
+		const isCheckbox = type === 'checkbox';
+		const checked = isCheckbox ? (e.target as HTMLInputElement).checked : undefined;
+		
+		setFormData(prev => {
+			let newData = { ...prev };
+			
+			if (name.includes('.')) {
+				const [category, field] = name.split('.');
+				if (category === 'showingTime' && newData.showingTime) {
+					newData = {
+						...newData,
+						showingTime: {
+							...newData.showingTime,
+							[field]: isCheckbox ? checked : value
+						}
+					};
+				}
+			} else {
+				newData = {
+					...newData,
+					[name]: isCheckbox ? checked : 
+						(name === 'price' || name === 'commission') ? 
+							parseFloat(value) || 0 : value
+				};
 			}
-		} else {
-			setFormData((prev: PriceData) => ({
-				...prev,
-				[name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : 
-					name === 'price' || name === 'commission' ? 
-						parseFloat(value) || 0 : value
-			}));
-		}
-	};
+			
+			onDataUpdate(newData);
+			return newData;
+		});
+	}, [onDataUpdate]);
 
 	return (
 		<form className={styles.form}>
 			<h2 className={styles.title}>УСЛОВИЯ СДЕЛКИ</h2>
 
 			<div className={styles.formGroup}>
-				
+				<div className={styles.priceType}>
+					<label className={styles.checkbox}>
+						Способ продажи
+					</label>
+					<select name="priceType" value={formData.priceType} onChange={handleChange} className={styles.select}>
+						<option value="fixed">Фиксированная</option>
+						<option value="negotiated">Свободная</option>
+					</select>
+				</div>
 				<div className={styles.formGroup}>
 					<label className={styles.checkbox}>
 						<input
@@ -96,12 +112,22 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 					<label className={styles.checkbox}>
 						<input
 							type="checkbox"
-							name="mortgage"
-							checked={formData.mortgage}
+							name="shareSale"
+							checked={formData.shareSale}
 							onChange={handleChange}
 						/>
 						<span className={styles.checkmark}></span>
 						Продажа доли
+					</label>
+					<label className={styles.checkbox}>
+						<input
+							type="checkbox"
+							name="auction"
+							checked={formData.auction}
+							onChange={handleChange}
+						/>
+						<span className={styles.checkmark}></span>
+						Аукцион
 					</label>
 				</div>
 				<label>Цена</label>
@@ -128,17 +154,8 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 					</label>
 				</div>
 			</div>
-			<div className={styles.buttonGroup}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
-					Выставить объявление
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
+
+			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
-	)
+	);
 } 

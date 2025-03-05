@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
-import styles from '../FifthStep.module.css'
+import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
+import ButtonGroup from '../../components/ButtonGroup'
 
 interface HouseArendProps {
 	onNext: () => void;
 	onBack: () => void;
 	onSave: () => void;
-	onDataUpdate?: (data: PriceData) => void;
-	initialData?: PriceData | null;
+	onDataUpdate: (data: PriceData) => void;
+	initialData: PriceData | null;
 }
 
 export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseArendProps) {
-	const defaultData: PriceData = {
+	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
 		mortgage: false,
 		commission: 0,
@@ -52,9 +53,7 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 				sunday: true
 			}
 		}
-	};
-
-	const [formData, setFormData] = useState<PriceData>(initialData || defaultData);
+	});
 
 	useEffect(() => {
 		if (onDataUpdate) {
@@ -122,41 +121,7 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 				</div>
 			</div>
 
-			<div className={styles.buttonGroup}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
-					Выставить объявление
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
-
-			<div className={styles.progressBar}>
-				<div className={styles.progressLine} style={{ '--progress-width': '100%' } as React.CSSProperties} />
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
-					<div className={styles.stepTitle}>Новое объявление</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>02</div>
-					<div className={styles.stepTitle}>О доме</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>03</div>
-					<div className={styles.stepTitle}>Фото и описание</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.completed}`}>04</div>
-					<div className={styles.stepTitle}>О здании</div>
-				</div>
-				<div className={styles.progressStep}>
-					<div className={`${styles.stepNumber} ${styles.active}`}>05</div>
-					<div className={styles.stepTitle}>Условия сделки</div>
-				</div>
-			</div>
+			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
-	)
+	);
 } 

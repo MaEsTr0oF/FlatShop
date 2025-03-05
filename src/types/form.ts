@@ -94,6 +94,18 @@ export interface FourthStepData {
 	buildingType?: string;
 	passengerElevator?: string;
 	freightElevator?: string;
+	yearOfConstruction?: number;
+	floorCount?: number;
+	houseFeatures?: {
+		concierge: boolean;
+		garbage: boolean;
+		gas: boolean;
+	};
+	yardFeatures?: {
+		playground: boolean;
+		sportsGround: boolean;
+		closedTerritory: boolean;
+	};
 	parking?: {
 		underground: boolean;
 		ground: boolean;
@@ -115,6 +127,8 @@ export interface PriceData {
 	priceType?: string;
 	mortgage?: boolean;
 	commission?: number;
+	shareSale?: boolean;
+	auction?: boolean;
 	utilities: {
 		included: boolean;
 		electricity: boolean;
