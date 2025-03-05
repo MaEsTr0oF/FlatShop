@@ -159,8 +159,8 @@ export interface FormData {
 	title: string;
 	propertyType: string;
 	listingType: string;
+	rentType?: string;
 	address: string;
-	rentType: string;
 
 	// Данные второго шага
 	secondStepData: SecondStepData | null;

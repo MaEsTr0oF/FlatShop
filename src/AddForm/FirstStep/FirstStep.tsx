@@ -1,5 +1,19 @@
 import styles from '../AddForm.module.css'
 import { FormData } from '../../types/form'
+import { useEffect, useRef, useState } from 'react'
+
+declare global {
+  interface Window {
+    ymaps: {
+      ready: (callback: () => void) => void;
+      Map: new (element: HTMLElement, options: {
+        center: [number, number];
+        zoom: number;
+        controls?: string[];
+      }) => any;
+    };
+  }
+}
 
 interface FirstStepProps {
 	onNext: () => void;
@@ -9,10 +23,75 @@ interface FirstStepProps {
 }
 
 export default function FirstStep({ onNext, onSave, formData, updateFormData }: FirstStepProps) {
+	const mapRef = useRef<HTMLDivElement>(null);
+	const [mapError, setMapError] = useState<string | null>(null);
+	const [isMapLoading, setIsMapLoading] = useState(true);
+	
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target
-		updateFormData({ [name]: value })
-	}
+		const { name, value } = e.target;
+		updateFormData({ [name]: value });
+	};
+
+	useEffect(() => {
+		let mapInstance: any = null;
+
+		const loadYMaps = () => {
+			return new Promise((resolve, reject) => {
+				// Проверяем, загружен ли уже скрипт
+				const existingScript = document.querySelector('script[src*="api-maps.yandex.ru"]');
+				
+				if (!existingScript) {
+					const script = document.createElement('script');
+					script.src = 'https://api-maps.yandex.ru/2.1/?apikey=3737c631-6faf-49c6-92b3-0a2f5d026ecf&lang=ru_RU';
+					script.async = true;
+					script.onload = () => resolve(true);
+					script.onerror = () => reject(new Error('Ошибка загрузки API Яндекс.Карт'));
+					document.head.appendChild(script);
+				} else {
+					resolve(true);
+				}
+			});
+		};
+
+		const initMap = async () => {
+			try {
+				await loadYMaps();
+
+				if (!mapRef.current) return;
+
+				// Ждем, пока API будет готов
+				await new Promise(resolve => window.ymaps.ready(resolve));
+
+				mapInstance = new window.ymaps.Map(mapRef.current, {
+					center: [55.76, 37.64],
+					zoom: 7,
+					controls: ['zoomControl', 'searchControl']
+				});
+
+				setIsMapLoading(false);
+				setMapError(null);
+
+				// Добавляем обработчик клика по карте
+				mapInstance.events.add('click', (e: any) => {
+					const coords = e.get('coords');
+					console.log('Clicked coordinates:', coords);
+				});
+
+			} catch (error) {
+				console.error('Error initializing map:', error);
+				setMapError('Ошибка при инициализации карты');
+				setIsMapLoading(false);
+			}
+		};
+
+		initMap();
+
+		return () => {
+			if (mapInstance) {
+				mapInstance.destroy();
+			}
+		};
+	}, []);
 
 	return (
 		<div className={styles.stepContainer}>
@@ -84,14 +163,15 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 						name="address"
 						value={formData.address}
 						onChange={handleChange}
-						placeholder="Адрес"
+						placeholder="Введите адрес"
 						className={styles.input}
 					/>
-					<div className={styles.map}>
-						{/* Здесь будет компонент карты */}
-					</div>
 				</div>
-
+				<div className={styles.mapContainer}>
+					<div ref={mapRef} className={styles.map}></div>
+					{isMapLoading && <div className={styles.mapError}>Загрузка карты...</div>}
+					{!isMapLoading && mapError && <div className={styles.mapError}>{mapError}</div>}
+				</div>
 				<div className={styles.buttons}>
 					<button
 						type="button"
