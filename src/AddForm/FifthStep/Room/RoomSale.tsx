@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface RoomSaleProps {
 	onNext: () => void;
@@ -156,7 +155,6 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 				</label>
 			</div>
 
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
 	);
 } 

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface HouseArendProps {
 	onNext: () => void;
@@ -120,8 +119,6 @@ export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initi
 					</label>
 				</div>
 			</div>
-
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
 	);
 } 

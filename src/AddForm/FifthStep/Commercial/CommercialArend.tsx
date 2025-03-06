@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface CommercialArendProps {
 	onNext: () => void;
@@ -157,7 +156,6 @@ export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, 
 				</div>
 			</div>
 
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
 	);
 }

@@ -358,7 +358,7 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 			</form>
 
 			<div className={styles.progressBar}>
-				<div className={styles.progressLine} style={{ '--progress-width': '20%' } as React.CSSProperties} />
+				<div className={styles.progressLine} style={{ '--progress-width': '00%' } as React.CSSProperties} />
 				<div className={styles.progressStep}>
 					<div className={`${styles.stepNumber} ${styles.completed}`}>01</div>
 					<div className={styles.stepTitle}>Новое объявление</div>

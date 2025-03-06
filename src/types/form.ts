@@ -90,10 +90,10 @@ export interface ThirdStepData {
 }
 
 export interface FourthStepData {
-	readiness?: string;
-	buildingType?: string;
-	passengerElevator?: string;
-	freightElevator?: string;
+	readiness: string;
+	buildingType: string;
+	passengerElevator: string;
+	freightElevator: string;
 	yearOfConstruction?: number;
 	floorCount?: number;
 	houseFeatures?: {
@@ -106,20 +106,25 @@ export interface FourthStepData {
 		sportsGround: boolean;
 		closedTerritory: boolean;
 	};
-	parking?: {
+	parking: {
 		underground: boolean;
 		ground: boolean;
 		multilevel: boolean;
 		barrier: boolean;
 	};
-	security?: boolean;
-	ventilation?: boolean;
-	conditioning?: boolean;
-	heating?: string;
-	salePhotos?: File[];
-	rentPhotos?: File[];
-	videoUrl?: string;
-	description?: string;
+	security: boolean;
+	ventilation: boolean;
+	conditioning: boolean;
+	heating: string;
+	salePhotos: string[];
+	rentPhotos: string[];
+	videoUrl: string;
+	description: string;
+	price?: string;
+	utilities?: string;
+	otherUtilities?: string;
+	commission?: string;
+	deposit?: string;
 }
 
 export interface PriceData {

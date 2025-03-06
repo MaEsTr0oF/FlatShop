@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface FlatSaleProps {
 	onNext: () => void;
@@ -159,7 +158,17 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 				</label>
 			</div>
 
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
+			<div className={styles.buttons}>
+				<button type="button" onClick={onBack} className={styles.backButton}>
+					Назад
+				</button>
+				<button type="button" onClick={onNext} className={styles.nextButton}>
+					Выставить объявление
+				</button>
+				<button type="button" onClick={onSave} className={styles.saveButton}>
+					Сохранить и выйти
+				</button>
+			</div>
 		</form>
 	);
 } 

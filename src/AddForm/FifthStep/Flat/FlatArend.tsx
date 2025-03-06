@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface FlatArendProps {
 	onNext: () => void;
@@ -160,8 +159,17 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 					</>
 				)}
 			</div>
-
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
+			<div className={styles.buttons}>
+				<button type="button" onClick={onBack} className={styles.backButton}>
+					Назад
+				</button>
+				<button type="button" onClick={onNext} className={styles.nextButton}>
+					Выставить объявление
+				</button>
+				<button type="button" onClick={onSave} className={styles.saveButton}>
+					Сохранить и выйти
+				</button>
+			</div>
 		</form>
 	);
 } 

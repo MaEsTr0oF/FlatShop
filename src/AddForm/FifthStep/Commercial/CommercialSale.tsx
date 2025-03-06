@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface CommercialSaleProps {
 	onNext: () => void;
@@ -153,7 +152,6 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 				</label>
 			</div>
 
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
 	);
 }

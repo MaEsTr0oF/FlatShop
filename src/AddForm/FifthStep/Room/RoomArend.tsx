@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
-import ButtonGroup from '../../components/ButtonGroup'
 
 interface RoomArendProps {
 	onNext: () => void;
@@ -237,7 +236,6 @@ export default function RoomArend({ onNext, onBack, onSave, onDataUpdate, initia
 				</label>
 			</div>
 
-			<ButtonGroup onNext={onNext} onBack={onBack} onSave={onSave} />
 		</form>
 	);
 } 
