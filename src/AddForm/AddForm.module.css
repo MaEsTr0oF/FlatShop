@@ -11,6 +11,14 @@
 	z-index: 1000;
 	padding: 5vh 0;
 	overflow-y: auto;
+	width: 800px;
+	max-height: calc(100vh - 80px);
+	margin: 0 auto;
+	padding: 40px;
+	background: white;
+	border-radius: 12px;
+	scrollbar-width: thin;
+	scrollbar-color: #E31235 #F5F5F5;
 }
 
 .container::-webkit-scrollbar {
@@ -39,11 +47,11 @@
 }
 
 .header {
-	margin-bottom: 32px;
+	margin-bottom: 40px;
 }
 
 .step {
-	font-size: 16px;
+	font-size: 14px;
 	color: #666;
 	margin-bottom: 8px;
 }
@@ -53,15 +61,12 @@
 }
 
 .title {
-	font-family: 'Druk Cyr', sans-serif;
 	font-size: 24px;
 	color: #333;
 	margin: 0;
 }
 
 .form {
-	position: relative;
-	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
@@ -75,59 +80,38 @@
 
 .formGroup label {
 	font-size: 14px;
+	color: #333;
 	font-weight: 500;
-	color: #333;
 }
 
-.input {
-	height: 48px;
-	padding: 0 16px;
-	border: 1px solid #E0E0E0;
-	border-radius: 8px;
-	font-size: 14px;
-	color: #333;
-	transition: all 0.2s;
+.input, .select {
 	width: 100%;
-}
-
-.input:hover {
-	border-color: #999;
-}
-
-.input:focus {
-	border-color: #E31235;
-	outline: none;
-}
-
-.input::placeholder {
-	color: #999;
-}
-
-.select {
-	height: 48px;
-	padding: 0 16px;
+	padding: 12px 16px;
 	border: 1px solid #E0E0E0;
 	border-radius: 8px;
 	font-size: 14px;
 	color: #333;
 	background: white;
-	cursor: pointer;
 	transition: all 0.2s;
-	width: 100%;
-	appearance: none;
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-	background-repeat: no-repeat;
-	background-position: right 16px center;
-	background-size: 16px;
 }
 
-.select:hover {
+.input:hover, .select:hover {
 	border-color: #999;
 }
 
-.select:focus {
-	border-color: #E31235;
+.input:focus, .select:focus {
 	outline: none;
+	border-color: #E31235;
+	box-shadow: 0 0 0 2px rgba(227, 18, 53, 0.1);
+}
+
+.select {
+	cursor: pointer;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23333333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 16px center;
+	padding-right: 40px;
 }
 
 .checkboxGroup {
@@ -180,7 +164,7 @@
 	transform: rotate(45deg);
 }
 
-.buttons {
+.buttonGroup {
 	display: flex;
 	gap: 12px;
 	margin-top: 32px;
@@ -209,6 +193,11 @@
 	background: #c60f2e;
 }
 
+.nextButton:disabled {
+	background: #ccc;
+	cursor: not-allowed;
+}
+
 .backButton {
 	background: #F5F5F5;
 	color: #333;
@@ -225,6 +214,14 @@
 
 .saveButton:hover {
 	background: #1a1a1a;
+}
+
+.buttons {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
 }
 
 .progressBar {
@@ -437,4 +434,78 @@
 	z-index: 1000;
 	overflow-y: auto;
 	padding: 20px;
+}
+
+.mapContainer {
+	width: 100%;
+	height: 400px;
+	position: relative;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #f5f5f5;
+}
+
+.mapLoading, .mapError {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 16px;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mapError {
+	color: #E31235;
+}
+
+.daysGroup {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-top: 12px;
+}
+
+.timeGroup {
+	display: flex;
+	gap: 24px;
+	margin-top: 16px;
+}
+
+.timeInput {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.timeInput label {
+	font-size: 14px;
+	color: #666;
+	min-width: 30px;
+}
+
+.timeInput input {
+	width: 120px;
+}
+
+.priceInputGroup {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.priceInputGroup input {
+	flex: 1;
+}
+
+.priceType {
+	margin-bottom: 16px;
+}
+
+.priceType label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: #333;
 } 

@@ -1,8 +1,8 @@
 .container {
-	width: 800px;
-	max-height: calc(100vh - 80px);
+	width: 100%;
+	max-width: 800px;
 	margin: 0 auto;
-	padding:0 40px;
+	padding: 20px;
 	background: white;
 	border-radius: 12px;
 	overflow-y: auto;
@@ -226,29 +226,30 @@
 }
 
 .buttons {
+	margin-top: 20px;
+	width: 100%;
 	display: flex;
-	gap: 16px;
-	margin-top: auto;
-	padding-top: 24px;
-	background: white;
-	position: sticky;
-	bottom: 0;
-	z-index: 1;
+	justify-content: space-between;
+	gap: 20px;
 }
 
-.nextButton, .backButton, .saveButton {
-	flex: 1;
-	padding: 12px 24px;
-	border: none;
+.nextButton,
+.backButton,
+.saveButton {
+	height: 48px;
 	border-radius: 8px;
 	font-size: 14px;
+	font-weight: 500;
+	padding: 0 24px;
 	cursor: pointer;
-	transition: background-color 0.2s;
+	transition: all 0.2s;
+	border: none;
 }
 
 .nextButton {
 	background: #E31235;
 	color: white;
+	flex: 1;
 }
 
 .nextButton:hover {
@@ -256,13 +257,12 @@
 }
 
 .backButton {
-	background: white;
+	background: #F5F5F5;
 	color: #333;
-	border: 1px solid #E0E0E0;
 }
 
 .backButton:hover {
-	background: #F5F5F5;
+	background: #E0E0E0;
 }
 
 .saveButton {
@@ -271,7 +271,7 @@
 }
 
 .saveButton:hover {
-	background: #222;
+	background: #1a1a1a;
 }
 
 .progressBar {
@@ -408,4 +408,66 @@
 	width: 100%;
 	margin: 0;
 	height: 100%;
+}
+
+.checkboxGroup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.checkbox input {
+	display: none;
+}
+
+.checkmark {
+	width: 20px;
+	height: 20px;
+	border: 2px solid #E0E0E0;
+	border-radius: 4px;
+	position: relative;
+	transition: all 0.2s;
+}
+
+.checkbox:hover .checkmark {
+	border-color: #999;
+}
+
+.checkbox input:checked + .checkmark {
+	background: #E31235;
+	border-color: #E31235;
+}
+
+.checkbox input:checked + .checkmark::after {
+	content: '';
+	position: absolute;
+	left: 6px;
+	top: 2px;
+	width: 4px;
+	height: 8px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.info {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #E0E0E0;
+	color: #666;
+	text-align: center;
+	line-height: 16px;
+	font-size: 12px;
+	margin-left: 4px;
+	cursor: help;
 } 

@@ -220,6 +220,7 @@ export default function RoomSale({ onNext, onBack, onSave }: RoomSaleProps) {
 
 			<div className={styles.formGroup}>
 				<div className={styles.checkboxGroup}>
+					<label>Больше особенностей</label>
 					<label className={styles.checkbox}>
 						<input
 							type="checkbox"

@@ -18,6 +18,8 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 		shareSale: false,
 		auction: false,
 		commission: 0,
+		vat: 'included',
+		hasCurrentTenant: false,
 		utilities: {
 			included: false,
 			electricity: false,
@@ -62,11 +64,43 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 		if (name.includes('.')) {
 			const [category, field] = name.split('.');
 			if (category === 'showingTime') {
+				if (field === 'everyday') {
+					const isChecked = (e.target as HTMLInputElement).checked;
+					setFormData(prev => ({
+						...prev,
+						showingTime: {
+							...prev.showingTime,
+							everyday: isChecked,
+							customDays: {
+								monday: isChecked,
+								tuesday: isChecked,
+								wednesday: isChecked,
+								thursday: isChecked,
+								friday: isChecked,
+								saturday: isChecked,
+								sunday: isChecked
+							}
+						}
+					}));
+				} else {
+					setFormData(prev => ({
+						...prev,
+						showingTime: {
+							...prev.showingTime,
+							[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+						}
+					}));
+				}
+			} else if (category === 'customDays') {
 				setFormData(prev => ({
 					...prev,
 					showingTime: {
 						...prev.showingTime,
-						[field]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+						everyday: false,
+						customDays: {
+							...prev.showingTime.customDays,
+							[field]: (e.target as HTMLInputElement).checked
+						}
 					}
 				}));
 			}
@@ -87,24 +121,14 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 			<div className={styles.formGroup}>
 				<div className={styles.priceType}>
 					<label className={styles.checkbox}>
-						Способ продажи
+						Тип сделки
 					</label>
 					<select name="priceType" value={formData.priceType} onChange={handleChange} className={styles.select}>
-						<option value="fixed">Фиксированная</option>
-						<option value="negotiated">Свободная</option>
+						<option value="fixed">Продажа</option>
+						<option value="negotiated">Переуступка права аренды</option>
 					</select>
 				</div>
 				<div className={styles.formGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="mortgage"
-							checked={formData.mortgage}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Ипотека
-					</label>
 					<label className={styles.checkbox}>
 						<input
 							type="checkbox"
@@ -137,6 +161,26 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 						className={styles.input}
 					/>
 				</div>
+				<label>Арендаторы</label>
+				<label className={styles.checkbox}>
+					<input
+						type="checkbox"
+						name="hasCurrentTenant"
+						checked={formData.hasCurrentTenant}
+						onChange={handleChange}
+					/>
+					<span className={styles.checkmark}></span>
+					Помещение сдано
+				</label>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>НДС</label>
+				<select name="vat" value={formData.vat} onChange={handleChange} className={styles.select}>
+					<option value="included">НДС включён</option>
+					<option value="not_included">НДС не включён</option>
+					<option value="none">Без НДС</option>
+				</select>
 			</div>
 
 			<div className={styles.formGroup}>
@@ -152,6 +196,7 @@ export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, i
 				</label>
 			</div>
 
+			
 		</form>
 	);
 }

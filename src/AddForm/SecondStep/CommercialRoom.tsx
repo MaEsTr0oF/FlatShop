@@ -55,6 +55,8 @@ export default function CommercialRoom({
 				>
 					<option value="Офис">Офис</option>
 					<option value="Коворкинг">Коворкинг</option>
+					<option value="Торговое помещение">Торговое помещение</option>
+					<option value="Свободного назначения">Свободного назначения</option>
 				</select>
 			</div>
 

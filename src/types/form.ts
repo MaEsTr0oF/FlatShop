@@ -1,5 +1,6 @@
 export interface SecondStepData {
-	type: 'квартира' | 'апартаменты' | 'дом' | 'Офис' | 'Коворкинг';
+	type: 'квартира' | 'апартаменты' | 'дом' | 'Офис' | 'Коворкинг' | 'Комната';
+	buildingType?: 'Блочный' | 'Кирпичный' | 'Монолитный' | 'Панельный';
 	roomCount: number;
 	beds?: BedInfo[];
 	bedType?: string;
@@ -60,7 +61,7 @@ export interface SecondStepData {
 	floorCount?: number;
 	landArea?: number;
 	wallMaterial?: 'Брус' | 'Кирпич' | 'Бетон';
-	parking?: 'Гараж' | 'Парковка' | 'Нет';
+	parking?: 'Гараж' | 'Подземный гараж' | 'На улице' | 'Без парковки';
 	bathroomLocation?: {
 		inHouse: boolean;
 		outside: boolean;
@@ -134,6 +135,7 @@ export interface PriceData {
 	commission?: number;
 	shareSale?: boolean;
 	auction?: boolean;
+	hasCurrentTenant?: boolean;
 	utilities: {
 		included: boolean;
 		electricity: boolean;

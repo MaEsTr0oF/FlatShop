@@ -24,7 +24,7 @@ export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, 
 		priceType: 'fixed',
 		mortgage: false,
 		commission: 0,
-		rentType: initialData?.rentType || '',
+		rentType: initialData?.rentType || 'subarend',
 		minRentPeriod: initialData?.minRentPeriod || '',
 		utilities: {
 			included: false,
@@ -34,7 +34,7 @@ export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, 
 			internet: false
 		},
 		maintenance: false,
-		vat: initialData?.vat || '',
+		vat: initialData?.vat || 'included',
 		onlineShow: false,
 		deposit: 0,
 		showingTime: {
@@ -84,78 +84,117 @@ export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, 
 
 	return (
 		<form className={styles.form}>
-			<h2 className={styles.title}>УСЛОВИЯ СДЕЛКИ</h2>
+			<h2 className={styles.title}>УСЛОВИЯ АРЕНДЫ</h2>
 
 			<div className={styles.formGroup}>
-				<label>Цена</label>
+				<label>Тип аренды</label>
+				<select 
+					name="rentType" 
+					value={formData.rentType} 
+					onChange={handleChange} 
+					className={styles.select}
+				>
+					<option value="subarend">Субаренда</option>
+					<option value="direct">Прямая</option>
+				</select>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Минимальный срок аренды</label>
+				<input
+					type="text"
+					name="minRentPeriod"
+					value={formData.minRentPeriod}
+					onChange={handleChange}
+					placeholder="Мес"
+					className={styles.input}
+				/>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Арендная плата</label>
 				<div className={styles.priceInputGroup}>
 					<input
 						type="text"
 						name="price"
 						value={formData.price}
 						onChange={handleChange}
-						placeholder="Введите цену"
+						placeholder="Стоимость"
 						className={styles.input}
 					/>
+					<select 
+						name="priceType" 
+						value={formData.priceType} 
+						onChange={handleChange} 
+						className={styles.select}
+						style={{ width: '150px' }}
+					>
+						<option value="month">В месяц</option>
+						<option value="year">В год</option>
+					</select>
 				</div>
 			</div>
 
 			<div className={styles.formGroup}>
-				<label>Коммунальные платежи</label>
-				<div className={styles.checkboxGroup}>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.included"
-							checked={formData.utilities?.included}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Включены в стоимость
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.electricity"
-							checked={formData.utilities?.electricity}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Электричество
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.water"
-							checked={formData.utilities?.water}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Вода
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.gas"
-							checked={formData.utilities?.gas}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Газ
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="utilities.internet"
-							checked={formData.utilities?.internet}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Интернет
-					</label>
-				</div>
+				<label className={styles.checkbox}>
+					<input
+						type="checkbox"
+						name="utilities.included"
+						checked={formData.utilities.included}
+						onChange={handleChange}
+					/>
+					<span className={styles.checkmark}></span>
+					Коммунальные услуги включены
+				</label>
 			</div>
 
+			<div className={styles.formGroup}>
+				<label className={styles.checkbox}>
+					<input
+						type="checkbox"
+						name="maintenance"
+						checked={formData.maintenance}
+						onChange={handleChange}
+					/>
+					<span className={styles.checkmark}></span>
+					Эксплуатационные расходы/услуги включены
+				</label>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>НДС</label>
+				<select name="vat" value={formData.vat} onChange={handleChange} className={styles.select}>
+					<option value="">Да</option>
+					<option value="not_included">Нет</option>
+				</select>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label className={styles.checkbox}>
+					<input
+						type="checkbox"
+						name="showingTime.online"
+						checked={formData.showingTime.online}
+						onChange={handleChange}
+					/>
+					<span className={styles.checkmark}></span>
+					Онлайн-показ
+				</label>
+			</div>
+
+			<div className={styles.formGroup}>
+				<label>Залог</label>
+				<input
+					type="text"
+					name="deposit"
+					value={formData.deposit}
+					onChange={handleChange}
+					placeholder="Размер залога"
+					className={styles.input}
+				/>
+			</div>
+
+			
 		</form>
 	);
 }

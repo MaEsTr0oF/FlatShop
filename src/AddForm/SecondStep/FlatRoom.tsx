@@ -97,7 +97,23 @@ export default function FlatRoom({
 					</select>
 				</div>
 			)}
-
+			{propertyType === "Комната" && listingType === "Аренда" && (
+				<div className={styles.formGroup}>
+					<label>Тип дома <span className={styles.info}>?</span></label>
+					<select
+						name="buildingType"
+						value={formData.buildingType || ''}
+						onChange={handleChange}
+						className={styles.select}
+					>
+						<option value="">Выберите тип дома</option>
+						<option value="Блочный">Блочный</option>
+						<option value="Кирпичный">Кирпичный</option>
+						<option value="Монолитный">Монолитный</option>
+						<option value="Панельный">Панельный</option>
+					</select>
+				</div>
+			)}
 			{propertyType === "Квартира" && (
 				<>
 					<div className={styles.formGroup}>
@@ -180,7 +196,7 @@ export default function FlatRoom({
 							className={styles.input}
 						/>
 					</div>
-
+					{propertyType === "Квартира" && <>
 					<div className={styles.formGroup}>
 						<label>Площадь кухни, м²</label>
 						<input
@@ -193,7 +209,7 @@ export default function FlatRoom({
 							className={styles.input}
 						/>
 					</div>
-
+					</>}
 					<div className={styles.formGroup}>
 						<label>Жилая площадь, м²</label>
 						<input
@@ -479,18 +495,30 @@ export default function FlatRoom({
 					</div>
 				</div>
 			)}
-
-			<div className={styles.buttons}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
-					Продолжить
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
+				<div className={styles.buttons}>
+					<button
+						type="button"
+						onClick={onBack}
+						className={styles.backButton}
+					>
+						Назад
+					</button>
+					<button
+						type="button"
+						onClick={onNext}
+						className={styles.nextButton}
+						
+					>
+						Продолжить
+					</button>
+					<button
+						type="button"
+						onClick={onSave}
+						className={styles.saveButton}
+					>
+						Сохранить и выйти
+					</button>
+				</div>
 		</form>
 	)
 }

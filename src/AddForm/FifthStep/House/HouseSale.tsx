@@ -88,16 +88,10 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 			<h2 className={styles.title}>УСЛОВИЯ СДЕЛКИ</h2>
 
 			<div className={styles.formGroup}>
-				<div className={styles.priceType}>
-					<label className={styles.checkbox}>
+				<div className={styles.formGroup}>
+				<label className={styles.checkbox}>
 						Способ продажи
 					</label>
-					<select name="priceType" value={formData.priceType} onChange={handleChange} className={styles.select}>
-						<option value="fixed">Фиксированная</option>
-						<option value="negotiated">Свободная</option>
-					</select>
-				</div>
-				<div className={styles.formGroup}>
 					<label className={styles.checkbox}>
 						<input
 							type="checkbox"
@@ -117,16 +111,6 @@ export default function HouseSale({ onNext, onBack, onSave, onDataUpdate, initia
 						/>
 						<span className={styles.checkmark}></span>
 						Продажа доли
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="auction"
-							checked={formData.auction}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Аукцион
 					</label>
 				</div>
 				<label>Цена</label>

@@ -94,148 +94,94 @@ export default function RoomArend({ onNext, onBack, onSave, onDataUpdate, initia
 
 	return (
 		<form className={styles.form}>
-			<h2 className={styles.title}>УСЛОВИЯ АРЕНДЫ</h2>
-
-			<div className={styles.formGroup}>
-				<div className={styles.priceType}>
-					<label className={styles.checkbox}>
-						Тип аренды
-					</label>
-					<select name="rentType" value={formData.rentType} onChange={handleChange} className={styles.select}>
-						<option value="long">Длительная</option>
-						<option value="short">Посуточная</option>
-					</select>
-				</div>
-
-				<label>Цена</label>
-				<div className={styles.priceInputGroup}>
-					<input
-						type="text"
-						name="price"
-						value={formData.price}
-						onChange={handleChange}
-						placeholder="Введите цену"
-						className={styles.input}
-					/>
-				</div>
-
-				<div className={styles.formGroup}>
-					<label>
-						Минимальный срок аренды (месяцев)
-						<input
-							type="number"
-							name="minRentPeriod"
-							value={formData.minRentPeriod}
-							onChange={handleChange}
-							min="1"
-							className={styles.input}
-						/>
-					</label>
-				</div>
-
-				<div className={styles.formGroup}>
-					<label>
-						Максимальное количество гостей
-						<input
-							type="number"
-							name="maxGuests"
-							value={formData.maxGuests}
-							onChange={handleChange}
-							min="1"
-							className={styles.input}
-						/>
-					</label>
-				</div>
+			<div className={styles.stepIndicator}>
+				<span className={styles.currentStep}>05</span>
+				<span className={styles.totalSteps}>/05</span>
 			</div>
 
-			<div className={styles.formGroup}>
-				<h3>Коммунальные услуги</h3>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="utilities.included"
-						checked={formData.utilities.included}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Включены в стоимость
-				</label>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="utilities.electricity"
-						checked={formData.utilities.electricity}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Электричество
-				</label>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="utilities.gas"
-						checked={formData.utilities.gas}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Газ
-				</label>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="utilities.water"
-						checked={formData.utilities.water}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Вода
-				</label>
-				<label className={styles.checkbox}>
-					<input
-						type="checkbox"
-						name="utilities.internet"
-						checked={formData.utilities.internet}
-						onChange={handleChange}
-					/>
-					<span className={styles.checkmark}></span>
-					Интернет
-				</label>
-			</div>
+			<h2 className={styles.title}>ПРАВИЛА ЗАСЕЛЕНИЯ</h2>
 
 			<div className={styles.formGroup}>
-				<h3>Правила проживания</h3>
+				<label>Максимум гостей</label>
+				<input
+					type="text"
+					name="maxGuests"
+					value={formData.maxGuests}
+					onChange={handleChange}
+					placeholder="Введите максимальное количество гостей"
+					className={styles.input}
+				/>
+			</div>
+
+			<div className={styles.rulesGroup}>
 				<label className={styles.checkbox}>
 					<input
 						type="checkbox"
 						name="rules.children"
-						checked={formData.rules.children}
+						checked={formData.rules?.children ?? false}
 						onChange={handleChange}
 					/>
 					<span className={styles.checkmark}></span>
 					Можно с детьми
 				</label>
+
 				<label className={styles.checkbox}>
 					<input
 						type="checkbox"
 						name="rules.pets"
-						checked={formData.rules.pets}
+						checked={formData.rules?.pets ?? false}
 						onChange={handleChange}
 					/>
 					<span className={styles.checkmark}></span>
 					Можно с животными
 				</label>
+
 				<label className={styles.checkbox}>
 					<input
 						type="checkbox"
 						name="rules.smoking"
-						checked={formData.rules.smoking}
+						checked={formData.rules?.smoking ?? false}
 						onChange={handleChange}
 					/>
 					<span className={styles.checkmark}></span>
 					Можно курить
 				</label>
+				
+					<>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="rules.party"
+								checked={formData.rules?.party ?? false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Разрешены вечеринки
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="rules.docs"
+								checked={formData.rules?.docs ?? false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Есть отчётные документы
+						</label>
+						<label className={styles.checkbox}>
+							<input
+								type="checkbox"
+								name="rules.month"
+								checked={formData.rules?.month ?? false}
+								onChange={handleChange}
+							/>
+							<span className={styles.checkmark}></span>
+							Возможна помесячная аренда
+						</label>
+					</>
+			
 			</div>
-
+			
 		</form>
 	);
 } 

@@ -108,26 +108,7 @@ export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initial
 						<span className={styles.checkmark}></span>
 						Ипотека
 					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="shareSale"
-							checked={formData.shareSale}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Продажа доли
-					</label>
-					<label className={styles.checkbox}>
-						<input
-							type="checkbox"
-							name="auction"
-							checked={formData.auction}
-							onChange={handleChange}
-						/>
-						<span className={styles.checkmark}></span>
-						Аукцион
-					</label>
+					
 				</div>
 				<label>Цена</label>
 				<div className={styles.priceInputGroup}>

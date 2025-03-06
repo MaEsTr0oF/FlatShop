@@ -11,13 +11,21 @@ type StepData = SecondStepData | ThirdStepData | FourthStepData | PriceData;
 
 export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 	const [currentStep, setCurrentStep] = useState(() => {
-		const savedStep = localStorage.getItem('currentStep');
-		return savedStep ? parseInt(savedStep) : 1;
+		const savedState = localStorage.getItem('addFormState');
+		if (savedState) {
+			const { currentStep } = JSON.parse(savedState);
+			return currentStep;
+		}
+		return 1;
 	});
 
 	const [formData, setFormData] = useState<FormData>(() => {
-		const savedData = localStorage.getItem('formData');
-		return savedData ? JSON.parse(savedData) : {
+		const savedState = localStorage.getItem('addFormState');
+		if (savedState) {
+			const { formData } = JSON.parse(savedState);
+			return formData;
+		}
+		return {
 			title: '',
 			propertyType: '',
 			listingType: '',
@@ -30,24 +38,37 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 	});
 
 	useEffect(() => {
-		localStorage.setItem('currentStep', currentStep.toString());
-		localStorage.setItem('formData', JSON.stringify(formData));
+		const dataToSave = {
+			currentStep,
+			formData
+		};
+		localStorage.setItem('addFormState', JSON.stringify(dataToSave));
 	}, [currentStep, formData]);
 
 	const handleNext = () => {
-		setCurrentStep(prev => Math.min(prev + 1, 5));
+		setCurrentStep((prev: number) => Math.min(prev + 1, 5));
 	};
 
 	const handleBack = () => {
-		setCurrentStep(prev => Math.max(prev - 1, 1));
+		setCurrentStep((prev: number) => Math.max(prev - 1, 1));
 	};
 
 	const handleSubmit = () => {
 		onSubmit(formData);
+		localStorage.removeItem('addFormState');
 	};
 
 	const handleSave = () => {
-		localStorage.setItem('formData', JSON.stringify(formData));
+		const dataToSave = {
+			currentStep,
+			formData
+		};
+		localStorage.setItem('addFormState', JSON.stringify(dataToSave));
+		onClose();
+	};
+
+	const handleClose = () => {
+		localStorage.removeItem('addFormState');
 		onClose();
 	};
 
@@ -78,7 +99,6 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 			return newData;
 		});
 	}, []);
-
 	return (
 		<div className={styles.container}>
 			{currentStep === 1 && (
@@ -96,6 +116,8 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 					onSave={handleSave}
 					propertyType={formData.propertyType}
 					listingType={formData.listingType}
+					onDataUpdate={(data) => updateStepData(2, data)}
+					initialData={formData.secondStepData}
 				/>
 			)}
 			{currentStep === 3 && (

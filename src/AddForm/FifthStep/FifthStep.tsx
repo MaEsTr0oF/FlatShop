@@ -66,7 +66,17 @@ export default function FifthStep({
   return (
     <div className={styles.stepContainer}>
       {renderComponent()}
-		
+		<div className={styles.buttons}>
+				<button type="button" onClick={onBack} className={styles.backButton}>
+					Назад
+				</button>
+				<button type="button" onClick={onNext} className={styles.nextButton}>
+				Выставить объявление
+				</button>
+				<button type="button" onClick={onSave} className={styles.saveButton}>
+					Сохранить и выйти
+				</button>
+			</div>
 		<div className={styles.progressBar}>
         <div className={styles.progressLine} style={{ '--progress-width': '100%' } as React.CSSProperties} />
         <div className={styles.progressStep}>

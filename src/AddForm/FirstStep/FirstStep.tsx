@@ -262,30 +262,20 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 		<div className={styles.stepContainer}>
 			<div className={styles.header}>
 				<h3 className={styles.step}>01/<span>05</span></h3>
-				<h2 className={styles.title}>НОВОЕ ОБЪЯВЛЕНИЕ</h2>
+				<h2 className={styles.title}>Новое объявление</h2>
 			</div>
 
 			<form className={styles.form}>
 				<div className={styles.formGroup}>
-					<label>Название объявления</label>
-					<input
-						type="text"
-						name="title"
-						value={formData.title}
-						onChange={handleChange}
-						placeholder="Введите название"
-						className={styles.input}
-					/>
-				</div>
-
-				<div className={styles.formGroup}>
-					<label>Тип объекта недвижимости</label>
+					<label>Тип недвижимости</label>
 					<select
 						name="propertyType"
 						value={formData.propertyType}
 						onChange={handleChange}
 						className={styles.select}
+						required
 					>
+						<option value="">Выберите тип недвижимости</option>
 						<option value="Квартира">Квартира</option>
 						<option value="Комната">Комната</option>
 						<option value="Дом">Дом</option>
@@ -300,29 +290,16 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 						value={formData.listingType}
 						onChange={handleChange}
 						className={styles.select}
+						required
 					>
+						<option value="">Выберите тип объявления</option>
 						<option value="Продажа">Продажа</option>
 						<option value="Аренда">Аренда</option>
 					</select>
 				</div>
 
-				{formData.listingType === 'Аренда' && formData.propertyType !== 'Коммерческая недвижимость' && (
-					<div className={styles.formGroup}>
-						<label>Тип аренды</label>
-						<select
-							name="rentType"
-							value={formData.rentType}
-							onChange={handleChange}
-							className={styles.select}
-						>
-							<option value="Долгосрочная аренда">Долгосрочная аренда</option>
-							<option value="Посуточная аренда">Посуточная аренда</option>
-						</select>
-					</div>
-				)}
-
 				<div className={styles.formGroup}>
-					<label>Расположение</label>
+					<label>Адрес</label>
 					<input
 						type="text"
 						name="address"
@@ -330,29 +307,30 @@ export default function FirstStep({ onNext, onSave, formData, updateFormData }: 
 						onChange={handleChange}
 						placeholder="Введите адрес"
 						className={styles.input}
+						required
 					/>
 				</div>
 
-				<div className={styles.mapContainer} style={{ width: '100%', height: '400px', position: 'relative' }}>
+				<div className={styles.mapContainer} ref={mapRef}>
 					{isMapLoading && <div className={styles.mapLoading}>Загрузка карты...</div>}
 					{mapError && <div className={styles.mapError}>{mapError}</div>}
-					<div ref={mapRef} className={styles.map} style={{ width: '100%', height: '100%' }}></div>
 				</div>
 
-				<div className={styles.buttons}>
-					<button
-						type="button"
-						onClick={onNext}
-						className={styles.nextButton}
-					>
-						Продолжить
-					</button>
-					<button
-						type="button"
-						onClick={onSave}
+				<div className={styles.buttonGroup}>
+					<button 
+						type="button" 
+						onClick={onSave} 
 						className={styles.saveButton}
 					>
-						Сохранить и выйти
+						Сохранить
+					</button>
+					<button 
+						type="button" 
+						onClick={onNext} 
+						className={styles.nextButton}
+						disabled={!formData.propertyType || !formData.listingType || !formData.address}
+					>
+						Далее
 					</button>
 				</div>
 			</form>

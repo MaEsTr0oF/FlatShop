@@ -21,8 +21,10 @@ export interface BedInfo {
 }
 
 export default function SecondStep({ onNext, onBack, onSave, propertyType, listingType, onDataUpdate, initialData }: SecondStepProps) {
+	
 	const [formData, setFormData] = useState<SecondStepData>(initialData || {
 		type: propertyType === 'Дом' ? 'дом' : propertyType === 'Офис' || propertyType === 'Коворкинг' ? propertyType : 'квартира',
+		buildingType: undefined,
 		roomCount: 1,
 		beds: [],
 		bedType: propertyType === 'Дом' && listingType === 'Аренда' ? 'Односпальная (70-110)' : undefined,
@@ -94,7 +96,6 @@ export default function SecondStep({ onNext, onBack, onSave, propertyType, listi
 			onDataUpdate(formData);
 		}
 	}, [formData, onDataUpdate]);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

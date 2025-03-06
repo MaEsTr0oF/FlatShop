@@ -30,9 +30,13 @@ export default function AddButton() {
 		setShowForm(false)
 	}
 
+	const handleClick = () => {
+		setShowForm(true)
+	}
+
 	return (
 		<>
-			<button className={styles.addButton} onClick={() => setShowForm(true)}>
+			<button className={styles.addButton} onClick={handleClick}>
 				<span>+</span>
 				Создать объявление
 			</button>
