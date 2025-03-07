@@ -67,18 +67,12 @@ export default function AddForm({ onClose, onSubmit }: AddFormProps) {
 		onClose();
 	};
 
-	const handleClose = () => {
-		localStorage.removeItem('addFormState');
-		onClose();
-	};
-
 	const updateFormData = (data: Partial<FormData>) => {
 		setFormData(prev => ({
 			...prev,
 			...data
 		}));
 	};
-
 	const updateStepData = useCallback((step: number, data: StepData) => {
 		setFormData(prev => {
 			const newData = { ...prev };

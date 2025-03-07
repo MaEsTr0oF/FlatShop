@@ -5,147 +5,168 @@
   align-items: center;
   min-height: 100vh;
   background-color: #f5f5f5;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .registerForm {
 	position: relative;
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 2rem;
+	background: white;
+	padding: 2rem;
+	border-radius: 20px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 800px;
+	margin-bottom: 2rem;
 }
+
 .logo {
 	position: absolute;
 	top: 30px;
 	left: 30px;
+	transition: all 0.3s ease;
 }
+
 .stepIndicator {
-  text-align: right;
-  color: #666;
-  margin-bottom: 1rem;
+	text-align: right;
+	color: #666;
+	margin-bottom: 1rem;
+	transition: all 0.2s ease;
 }
 
 .stepIndicator span {
-  color: #000;
-  font-weight: bold;
+	color: #000;
+	font-weight: bold;
 }
 
 .registerForm h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
-  font-size: 1.5rem;
-  font-weight: 600;
-  font-family: 'Druk Cyr', sans-serif;
+	text-align: center;
+	margin-bottom: 2rem;
+	color: #333;
+	font-size: 1.5rem;
+	font-weight: 600;
+	font-family: 'Druk Cyr', sans-serif;
 }
 
 .formGroup {
-  margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
 .formGroup label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #666;
+	display: block;
+	margin-bottom: 0.5rem;
+	color: #666;
+	transition: all 0.2s ease;
 }
 
 .formGroup input,
 .formGroup select {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-size: 1rem;
+	transition: all 0.2s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+	outline: none;
+	border-color: #E31235;
+	box-shadow: 0 0 0 2px rgba(227, 18, 53, 0.1);
 }
 
 .select {
-  appearance: none;
-  background-image: url('path-to-arrow-icon.svg');
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
+	appearance: none;
+	background-image: url('path-to-arrow-icon.svg');
+	background-repeat: no-repeat;
+	background-position: right 1rem center;
+	cursor: pointer;
 }
 
 .passwordGroup {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
 }
 
 .agreements {
-  margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
 .checkbox {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
 }
 
 .checkbox input {
-  margin-top: 0.25rem;
+	margin-top: 0.25rem;
 }
 
 .checkbox span {
-  font-size: 0.9rem;
-  color: #666;
+	font-size: 0.9rem;
+	color: #666;
 }
 
 .submitButton {
-  width: 100%;
-  padding: 1rem;
-  background-color: #e31235;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
+	width: 100%;
+	padding: 1rem;
+	background-color: #e31235;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
 }
 
 .submitButton:hover {
-  background-color: #c60f2e;
+	background-color: #c60f2e;
+	transform: translateY(-1px);
 }
 
 .loginLink {
-  text-align: center;
-  margin-top: 1rem;
-  color: #666;
+	text-align: center;
+	margin-top: 1rem;
+	color: #666;
 }
 
 .loginLink a {
-  color: #e31235;
-  text-decoration: none;
+	color: #e31235;
+	text-decoration: none;
+	transition: all 0.2s ease;
 }
 
 .loginLink a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .progressBar {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 2rem;
-  position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 800px;
+	margin-top: 2rem;
+	position: relative;
+	background: white;
+	border-radius: 20px;
+	padding: 1.5rem 1rem;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .step {
-  display: flex;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
 .line {
-  flex: 1;
-  height: 2px;
-  background-color: #E8E8E8;
+	flex: 1;
+	height: 2px;
+	background-color: #E8E8E8;
 }
 
 .line.complete {
@@ -153,32 +174,33 @@
 }
 
 .line.progress {
-  background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
+	background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
 }
 
 .line.grey {
-  background-color: #E8E8E8;
+	background-color: #E8E8E8;
 }
 
 .stepContent {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0 0.5rem;
-  position: relative;
-  z-index: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0 0.5rem;
+	position: relative;
+	z-index: 1;
 }
 
 .stepContent img {
-  width: 24px;
-  height: 24px;
+	width: 24px;
+	height: 24px;
 }
 
 .stepContent span {
-  font-size: 14px;
-  color: #333;
-  white-space: nowrap;
+	font-size: 14px;
+	color: #333;
+	white-space: nowrap;
 }
+
 .stepContent h3{
 	background-color: rgba(255, 255, 255, 0.1);
 	width: 24px;
@@ -235,15 +257,246 @@
 }
 
 .errors {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #fff2f2;
-  border-radius: 8px;
-  border: 1px solid #ffcdd2;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	background-color: #fff2f2;
+	border-radius: 8px;
+	border: 1px solid #ffcdd2;
 }
 
 .error {
-  color: #e31235;
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
+	color: #e31235;
+	margin: 0.25rem 0;
+	font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+	.registerContainer {
+		padding: 0.75rem;
+	}
+
+	.registerForm {
+		padding: 1.5rem;
+		margin: 0.75rem;
+		border-radius: 16px;
+	}
+
+	.logo {
+		width: 100px;
+		top: 24px;
+		left: 24px;
+	}
+
+	.stepIndicator {
+		font-size: 14px;
+		margin-bottom: 0.75rem;
+	}
+
+	.registerForm h2 {
+		font-size: 1.25rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.formGroup {
+		margin-bottom: 1.25rem;
+	}
+
+	.formGroup label {
+		font-size: 0.9rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.formGroup input,
+	.formGroup select {
+		padding: 0.7rem;
+		font-size: 0.9rem;
+		border-radius: 6px;
+	}
+
+	.passwordGroup {
+		gap: 0.75rem;
+	}
+
+	.checkbox {
+		gap: 0.4rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.checkbox span {
+		font-size: 0.8rem;
+	}
+
+	.submitButton {
+		padding: 0.9rem;
+		font-size: 0.9rem;
+		border-radius: 6px;
+	}
+
+	.loginLink {
+		margin-top: 0.75rem;
+		font-size: 0.9rem;
+	}
+
+	.errors {
+		padding: 0.75rem;
+		border-radius: 6px;
+	}
+
+	.error {
+		font-size: 0.8rem;
+		margin: 0.2rem 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.registerContainer {
+		padding: 0.5rem;
+	}
+
+	.registerForm {
+		padding: 1.25rem;
+		margin: 0.5rem;
+		border-radius: 12px;
+	}
+
+	.logo {
+		width: 80px;
+		top: 20px;
+		left: 20px;
+	}
+
+	.stepIndicator {
+		font-size: 12px;
+		margin-bottom: 0.5rem;
+	}
+
+	.registerForm h2 {
+		font-size: 1.1rem;
+		margin-bottom: 1.25rem;
+	}
+
+	.formGroup {
+		margin-bottom: 1rem;
+	}
+
+	.formGroup label {
+		font-size: 0.8rem;
+		margin-bottom: 0.3rem;
+	}
+
+	.formGroup input,
+	.formGroup select {
+		padding: 0.6rem;
+		font-size: 0.8rem;
+		border-radius: 5px;
+	}
+
+	.passwordGroup {
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+	}
+
+	.checkbox {
+		gap: 0.3rem;
+		margin-bottom: 0.3rem;
+	}
+
+	.checkbox span {
+		font-size: 0.75rem;
+	}
+
+	.submitButton {
+		padding: 0.8rem;
+		font-size: 0.8rem;
+		border-radius: 5px;
+	}
+
+	.loginLink {
+		margin-top: 0.5rem;
+		font-size: 0.8rem;
+	}
+
+	.errors {
+		padding: 0.5rem;
+		border-radius: 5px;
+	}
+
+	.error {
+		font-size: 0.75rem;
+		margin: 0.15rem 0;
+	}
+}
+
+@media (max-width: 360px) {
+	.registerContainer {
+		padding: 0.25rem;
+	}
+
+	.registerForm {
+		padding: 1rem;
+		margin: 0.25rem;
+		border-radius: 10px;
+	}
+
+	.logo {
+		width: 70px;
+		top: 16px;
+		left: 16px;
+	}
+
+	.stepIndicator {
+		font-size: 11px;
+		margin-bottom: 0.4rem;
+	}
+
+	.registerForm h2 {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.formGroup {
+		margin-bottom: 0.75rem;
+	}
+
+	.formGroup label {
+		font-size: 0.75rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.formGroup input,
+	.formGroup select {
+		padding: 0.5rem;
+		font-size: 0.75rem;
+		border-radius: 4px;
+	}
+
+	.checkbox {
+		gap: 0.25rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.checkbox span {
+		font-size: 0.7rem;
+	}
+
+	.submitButton {
+		padding: 0.7rem;
+		font-size: 0.75rem;
+		border-radius: 4px;
+	}
+
+	.loginLink {
+		margin-top: 0.4rem;
+		font-size: 0.75rem;
+	}
+
+	.errors {
+		padding: 0.4rem;
+		border-radius: 4px;
+	}
+
+	.error {
+		font-size: 0.7rem;
+		margin: 0.1rem 0;
+	}
 }

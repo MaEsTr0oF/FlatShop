@@ -3,14 +3,11 @@ import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
 
 interface RoomSaleProps {
-	onNext: () => void;
-	onBack: () => void;
-	onSave: () => void;
 	onDataUpdate: (data: PriceData) => void;
 	initialData: PriceData | null;
 }
 
-export default function RoomSale({ onNext, onBack, onSave, onDataUpdate, initialData }: RoomSaleProps) {
+export default function RoomSale({ onDataUpdate, initialData }: RoomSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(() => ({
 		price: initialData?.price || 0,
 		priceType: initialData?.priceType || 'fixed',

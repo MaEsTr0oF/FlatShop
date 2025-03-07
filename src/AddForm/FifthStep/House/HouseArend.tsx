@@ -3,14 +3,11 @@ import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
 
 interface HouseArendProps {
-	onNext: () => void;
-	onBack: () => void;
-	onSave: () => void;
 	onDataUpdate: (data: PriceData) => void;
 	initialData: PriceData | null;
 }
 
-export default function HouseArend({ onNext, onBack, onSave, onDataUpdate, initialData }: HouseArendProps) {
+export default function HouseArend({  onDataUpdate, initialData }: HouseArendProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
 		mortgage: false,

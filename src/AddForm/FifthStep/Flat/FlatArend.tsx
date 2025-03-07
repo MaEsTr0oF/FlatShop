@@ -3,15 +3,12 @@ import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
 
 interface FlatArendProps {
-	onNext: () => void;
-	onBack: () => void;
-	onSave: () => void;
 	onDataUpdate: (data: PriceData) => void;
 	initialData: PriceData | null;
 	rentType: string;
 }
 
-export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpdate, initialData }: FlatArendProps) {
+export default function FlatArend({ rentType, onDataUpdate, initialData }: FlatArendProps) {
 	const [formData, setFormData] = useState<PriceData>({
 		price: initialData?.price || 0,
 		mortgage: initialData?.mortgage || false,
@@ -159,17 +156,7 @@ export default function FlatArend({ onNext, onBack, onSave, rentType, onDataUpda
 					</>
 				)}
 			</div>
-			<div className={styles.buttons}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
-					Выставить объявление
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
+			
 		</form>
 	);
 } 

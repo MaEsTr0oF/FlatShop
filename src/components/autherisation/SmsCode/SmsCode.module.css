@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 100vh;
   background-color: #f5f5f5;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .smsForm {
@@ -18,11 +18,14 @@
   margin-bottom: 2rem;
   position: relative;
 }
+
 .logo {
-	position: absolute;
-	left:50%;
-	transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
 }
+
 .backButton {
   position: absolute;
   top: 2rem;
@@ -34,12 +37,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  color: #333;
 }
 
 .stepIndicator {
   text-align: right;
   color: #666;
   margin-bottom: 2rem;
+  transition: all 0.2s ease;
 }
 
 .stepIndicator span {
@@ -60,6 +69,7 @@
   text-align: center;
   color: #666;
   margin-bottom: 2rem;
+  transition: all 0.2s ease;
 }
 
 .phoneInfo span {
@@ -75,6 +85,7 @@
   display: block;
   margin-bottom: 0.5rem;
   color: #666;
+  transition: all 0.2s ease;
 }
 
 .formGroup input {
@@ -85,12 +96,20 @@
   font-size: 1rem;
   text-align: center;
   letter-spacing: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #E31235;
+  box-shadow: 0 0 0 2px rgba(227, 18, 53, 0.1);
 }
 
 .timer {
   text-align: center;
   color: #666;
   margin-bottom: 2rem;
+  transition: all 0.2s ease;
 }
 
 .submitButton {
@@ -102,11 +121,12 @@
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .submitButton:hover {
   background-color: #c60f2e;
+  transform: translateY(-1px);
 }
 
 .progressBar {
@@ -116,135 +136,443 @@
   max-width: 800px;
   margin-top: 2rem;
   position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.progressBar {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	max-width: 800px;
-	margin-top: 2rem;
-	position: relative;
- }
- 
- .step {
-	display: flex;
-	align-items: center;
-	width: 100%;
- }
- 
- .line {
-	flex: 1;
-	height: 2px;
-	background-color: #E8E8E8;
- }
- 
- .line.complete {
-	 background: linear-gradient(to right, #333 50%, #e31235 50%);
- }
- 
- .line.progress {
-	background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
- }
- 
- .line.grey {
-	background-color: #E8E8E8;
- }
- .line.finish {
-	background-color: #333;
- }
- .stepContent {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	padding: 0 0.5rem;
-	position: relative;
-	z-index: 1;
- }
- 
- .stepContent img {
-	width: 24px;
-	height: 24px;
- }
- 
- .stepContent span {
-	font-size: 14px;
-	color: #333;
-	white-space: nowrap;
- }
- .stepContent h3{
-	 background-color: rgba(255, 255, 255, 0.1);
-	 width: 24px;
-	 height:24px;
-	 border-radius: 4px;
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 opacity: 0.5;
- }
- .stepContent span.active {
-	color: #000;
-	font-weight: 500;
- }
- 
- .step:first-child .stepContent {
-	background-color: transparent;
-	color: black;
-	padding: 8px 16px;
-	border-radius: 4px;
- }
- .step:first-child .stepContent span{
-	 color: black;
-	 opacity: 0.5;
-  }
- .step .stepContent:nth-of-type(2) {
-	padding: 8px 16px;
-	border-radius: 4px;
-	opacity: 1;
-	background-color: #333;
- }
- 
- .step .stepContent:nth-of-type(2) span {
-	color: white;
-	opacity: 1;
- }
- 
- .step .stepContent:nth-of-type(3),
- .step .stepContent:nth-of-type(4) {
-	background-color: #333;
-	padding: 8px 16px;
-	border-radius: 4px;
-	opacity: 1;
-	color: white;
- }
- .step .stepContent:nth-of-type(4) h3{
-	 color: white;
-	 opacity: 1;
- }
- .step .stepContent:nth-of-type(4) span{
-	 color: white;
-	 opacity: 1;
- } 
- .step .stepContent:nth-of-type(6){
-	background-color: #e31235;
- }
- .step .stepContent:nth-of-type(6) h3{
-	color: white;
-	opacity: 1;
-	background-color: #e31235;
+.step {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
-.step .stepContent:nth-of-type(6) span{
-	color: white;
-	opacity: 1;
-	background-color: #e31235;
+
+.line {
+  flex: 1;
+  height: 2px;
+  background-color: #E8E8E8;
+}
+
+.line.complete {
+  background: linear-gradient(to right, #333 50%, #e31235 50%);
+}
+
+.line.progress {
+  background: linear-gradient(to right, #e31235 50%, #E8E8E8 50%);
+}
+
+.line.grey {
+  background-color: #E8E8E8;
+}
+
+.line.finish {
+  background-color: #333;
+}
+
+.stepContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.stepContent img {
+  width: 24px;
+  height: 24px;
+}
+
+.stepContent span {
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.stepContent h3{
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 24px;
+  height:24px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.stepContent span.active {
+  color: #000;
+  font-weight: 500;
+}
+
+.step:first-child .stepContent {
+  background-color: transparent;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.step:first-child .stepContent span{
+  color: black;
+  opacity: 0.5;
+}
+
+.step .stepContent:nth-of-type(2) {
+  padding: 8px 16px;
+  border-radius: 4px;
+  opacity: 1;
+  background-color: #333;
+}
+
+.step .stepContent:nth-of-type(2) span {
+  color: white;
+  opacity: 1;
+}
+
+.step .stepContent:nth-of-type(3),
+.step .stepContent:nth-of-type(4) {
+  background-color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  opacity: 1;
+  color: white;
+}
+
+.step .stepContent:nth-of-type(4) h3{
+  color: white;
+  opacity: 1;
+}
+
+.step .stepContent:nth-of-type(4) span{
+  color: white;
+  opacity: 1;
 } 
-.resendButton{
-	background-color: #333;
-	color: white;
-	border: none;
-	border-radius: 8px;
-	font-size: 1rem;
-	cursor: pointer;
-	padding: 0.5rem 1rem;
-	transition: background-color 0.2s;
+
+.step .stepContent:nth-of-type(6){
+  background-color: #e31235;
+}
+
+.step .stepContent:nth-of-type(6) h3{
+  color: white;
+  opacity: 1;
+  background-color: #e31235;
+}
+
+.step .stepContent:nth-of-type(6) span{
+  color: white;
+  opacity: 1;
+  background-color: #e31235;
+} 
+
+.resendButton {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.resendButton:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .smsContainer {
+    padding: 0.75rem;
+  }
+
+  .smsForm {
+    padding: 1.5rem;
+    margin: 0.75rem;
+    border-radius: 16px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .backButton {
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 14px;
+    gap: 0.4rem;
+  }
+
+  .stepIndicator {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .smsForm h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .phoneInfo {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1.25rem;
+  }
+
+  .formGroup label {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .formGroup input {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.4rem;
+    border-radius: 6px;
+  }
+
+  .timer {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .submitButton {
+    padding: 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .resendButton {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .progressBar {
+    padding: 1rem 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .stepContent {
+    gap: 0.3rem;
+    padding: 0 0.3rem;
+  }
+
+  .stepContent img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .stepContent span {
+    font-size: 12px;
+  }
+
+  .line {
+    height: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .smsContainer {
+    padding: 0.5rem;
+  }
+
+  .smsForm {
+    padding: 1.25rem;
+    margin: 0.5rem;
+    border-radius: 12px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .backButton {
+    top: 1.25rem;
+    left: 1.25rem;
+    font-size: 13px;
+    gap: 0.3rem;
+  }
+
+  .stepIndicator {
+    font-size: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .smsForm h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .phoneInfo {
+    font-size: 13px;
+    margin-bottom: 1.25rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+
+  .formGroup label {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .formGroup input {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.3rem;
+    border-radius: 5px;
+  }
+
+  .timer {
+    font-size: 13px;
+    margin-bottom: 1.25rem;
+  }
+
+  .submitButton {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
+
+  .resendButton {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
+
+  .progressBar {
+    padding: 0.75rem 0.5rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-radius: 12px;
+  }
+
+  .progressBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .step {
+    flex: 0 0 auto;
+    min-width: max-content;
+    padding: 0 0.25rem;
+  }
+
+  .stepContent {
+    gap: 0.2rem;
+    padding: 0 0.2rem;
+  }
+
+  .stepContent img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stepContent span {
+    font-size: 10px;
+    max-width: 60px;
+    text-align: center;
+  }
+
+  .line {
+    width: 20px;
+    flex: 0 0 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .smsContainer {
+    padding: 0.25rem;
+  }
+
+  .smsForm {
+    padding: 1rem;
+    margin: 0.25rem;
+    border-radius: 10px;
+  }
+
+  .logo {
+    width: 70px;
+  }
+
+  .backButton {
+    top: 1rem;
+    left: 1rem;
+    font-size: 12px;
+    gap: 0.25rem;
+  }
+
+  .stepIndicator {
+    font-size: 11px;
+    margin-bottom: 1rem;
+  }
+
+  .smsForm h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .phoneInfo {
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .formGroup {
+    margin-bottom: 0.75rem;
+  }
+
+  .formGroup label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .formGroup input {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.25rem;
+    border-radius: 4px;
+  }
+
+  .timer {
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .submitButton {
+    padding: 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+  }
+
+  .resendButton {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+  }
+
+  .progressBar {
+    padding: 0.5rem 0.25rem;
+  }
+
+  .stepContent img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .stepContent span {
+    font-size: 9px;
+    max-width: 50px;
+  }
+
+  .line {
+    width: 15px;
+    flex: 0 0 15px;
+  }
 }

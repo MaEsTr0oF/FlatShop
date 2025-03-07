@@ -3,14 +3,11 @@ import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
 
 interface FlatSaleProps {
-	onNext: () => void;
-	onBack: () => void;
-	onSave: () => void;
 	onDataUpdate?: (data: PriceData) => void;
 	initialData?: PriceData | null;
 }
 
-export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initialData }: FlatSaleProps) {
+export default function FlatSale({ onDataUpdate, initialData }: FlatSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(() => ({
 		price: initialData?.price || 0,
 		priceType: initialData?.priceType || 'fixed',
@@ -158,17 +155,7 @@ export default function FlatSale({ onNext, onBack, onSave, onDataUpdate, initial
 				</label>
 			</div>
 
-			<div className={styles.buttons}>
-				<button type="button" onClick={onBack} className={styles.backButton}>
-					Назад
-				</button>
-				<button type="button" onClick={onNext} className={styles.nextButton}>
-					Выставить объявление
-				</button>
-				<button type="button" onClick={onSave} className={styles.saveButton}>
-					Сохранить и выйти
-				</button>
-			</div>
+			
 		</form>
 	);
 } 

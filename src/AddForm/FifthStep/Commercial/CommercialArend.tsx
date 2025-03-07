@@ -3,14 +3,11 @@ import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
 
 interface CommercialArendProps {
-	onNext: () => void;
-	onBack: () => void;
-	onSave: () => void;
 	onDataUpdate: (data: PriceData) => void;
 	initialData: PriceData | null;
 }
 
-export default function CommercialArend({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialArendProps) {
+export default function CommercialArend({  onDataUpdate, initialData }: CommercialArendProps) {
 	const [formData, setFormData] = useState<PriceData>({
 		rules: {
 			children: false,

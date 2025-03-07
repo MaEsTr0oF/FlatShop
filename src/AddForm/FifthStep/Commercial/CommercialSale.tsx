@@ -3,14 +3,11 @@ import styles from '../../AddForm.module.css'
 import { PriceData } from '../../../types/form'
 
 interface CommercialSaleProps {
-	onNext: () => void;
-	onBack: () => void;
-	onSave: () => void;
 	onDataUpdate: (data: PriceData) => void;
 	initialData: PriceData | null;
 }
 
-export default function CommercialSale({ onNext, onBack, onSave, onDataUpdate, initialData }: CommercialSaleProps) {
+export default function CommercialSale({  onDataUpdate, initialData }: CommercialSaleProps) {
 	const [formData, setFormData] = useState<PriceData>(initialData || {
 		price: 0,
 		priceType: 'fixed',

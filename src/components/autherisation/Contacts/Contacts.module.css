@@ -620,4 +620,294 @@ input::placeholder {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+@media (max-width: 768px) {
+  .contactsContainer {
+    padding: 1rem;
+  }
+
+  .contactsForm {
+    padding: 1.5rem;
+    border-radius: 16px;
+    max-width: 500px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .backButton {
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 14px;
+  }
+
+  .stepIndicator {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .contactsForm h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+
+  .formGroup label {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .formGroup input,
+  .formGroup select {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .formRow {
+    gap: 0.75rem;
+  }
+
+  .radioGroup {
+    gap: 1.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .radio span::before {
+    width: 18px;
+    height: 18px;
+  }
+
+  .photoLabel {
+    padding: 1.5rem;
+  }
+
+  .photoHint {
+    font-size: 0.8rem;
+    max-width: 90%;
+  }
+
+  .submitButton {
+    padding: 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .progressBar {
+    padding: 1rem 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .stepContent {
+    gap: 0.3rem;
+    padding: 0 0.3rem;
+  }
+
+  .stepContent img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .stepContent span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactsContainer {
+    padding: 0.5rem;
+  }
+
+  .contactsForm {
+    padding: 1.25rem;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .backButton {
+    top: 1.25rem;
+    left: 1.25rem;
+    font-size: 13px;
+  }
+
+  .stepIndicator {
+    font-size: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .contactsForm h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .formGroup {
+    margin-bottom: 0.75rem;
+  }
+
+  .formGroup label {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .formGroup input,
+  .formGroup select {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 5px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .radioGroup {
+    gap: 1rem;
+    margin-top: 0.3rem;
+  }
+
+  .radio span::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .photoLabel {
+    padding: 1rem;
+  }
+
+  .photoHint {
+    font-size: 0.75rem;
+    max-width: 100%;
+  }
+
+  .submitButton {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 5px;
+  }
+
+  .progressBar {
+    padding: 0.75rem 0.5rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .progressBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .step {
+    flex: 0 0 auto;
+    min-width: max-content;
+    padding: 0 0.25rem;
+  }
+
+  .stepContent {
+    gap: 0.2rem;
+    padding: 0 0.2rem;
+  }
+
+  .stepContent img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stepContent span {
+    font-size: 11px;
+    max-width: 60px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .contactsContainer {
+    padding: 0.25rem;
+  }
+
+  .contactsForm {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .logo {
+    width: 70px;
+  }
+
+  .backButton {
+    top: 1rem;
+    left: 1rem;
+    font-size: 12px;
+  }
+
+  .stepIndicator {
+    font-size: 11px;
+    margin-bottom: 1rem;
+  }
+
+  .contactsForm h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .formGroup {
+    margin-bottom: 0.6rem;
+  }
+
+  .formGroup label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .formGroup input,
+  .formGroup select {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+
+  .radioGroup {
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .radio span::before {
+    width: 14px;
+    height: 14px;
+  }
+
+  .photoLabel {
+    padding: 0.75rem;
+  }
+
+  .photoHint {
+    font-size: 0.7rem;
+  }
+
+  .submitButton {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+
+  .stepContent img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .stepContent span {
+    font-size: 10px;
+    max-width: 50px;
+  }
 } 

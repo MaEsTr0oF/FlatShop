@@ -10,29 +10,26 @@ import CommercialSale from './Commercial/CommercialSale.tsx'
 import CommercialArend from './Commercial/CommercialArend.tsx'
 
 interface FifthStepProps {
-  onNext: () => void;
-  onBack: () => void;
-  onSave: () => void;
   onDataUpdate: (data: PriceData) => void;
   initialData: PriceData | null;
   propertyType: string;
   listingType: string;
+  onBack: () => void;
+  onNext: () => void;
+  onSave: () => void;
 }
 
 export default function FifthStep({ 
-  onNext, 
-  onBack, 
-  onSave, 
   onDataUpdate, 
   initialData,
   propertyType,
-  listingType 
+  listingType,
+  onBack,
+  onNext,
+  onSave
 }: FifthStepProps) {
   const renderComponent = () => {
     const commonProps = {
-      onNext,
-      onBack,
-      onSave,
       onDataUpdate,
       initialData
     };
