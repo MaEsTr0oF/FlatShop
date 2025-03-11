@@ -105,3 +105,93 @@
   white-space: nowrap;
   z-index: 10;
 }
+
+/* Адаптивные стили для планшетов */
+@media (max-width: 992px) {
+  .analytics h2 {
+    font-size: 26px;
+  }
+  
+  .content {
+    gap: 30px;
+  }
+  
+  .textSection {
+    gap: 30px;
+  }
+  
+  .chartSection {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Адаптивные стили для средних экранов */
+@media (max-width: 850px) {
+  .content {
+    flex-direction: column;
+  }
+  
+  .textSection {
+    width: 100%;
+  }
+  
+  .chartSection {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .analytics {
+    padding: 20px;
+  }
+  
+  .analytics h2 {
+    font-size: 22px;
+  }
+  
+  .textSection {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .chartSection {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .centerText {
+    font-size: 20px;
+  }
+}
+
+/* Специальный медиа-запрос для ширины экрана 750px */
+@media (max-width: 750px) {
+  .chartSection {
+    width: 230px;
+    height: 230px;
+  }
+}
+
+/* Адаптивные стили для маленьких мобильных устройств */
+@media (max-width: 480px) {
+  .analytics {
+    padding: 15px;
+  }
+  
+  .analytics h2 {
+    font-size: 18px;
+  }
+  
+  .chartSection {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .centerText {
+    font-size: 18px;
+  }
+}

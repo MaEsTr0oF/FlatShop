@@ -1,0 +1,125 @@
+.burgerMenu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.open .bar:nth-child(1) {
+  transform: translateY(10.5px) rotate(45deg);
+}
+
+.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.open .bar:nth-child(3) {
+  transform: translateY(-10.5px) rotate(-45deg);
+}
+
+.menuContent {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1050;
+  padding: 15px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.menuButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.2s;
+  background-color: #FFE7EB;
+  color: #E31235;
+  text-decoration: none;
+  width: 100%;
+}
+
+.menuButton h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: #E31235;
+  border-radius: 4px;
+  position: relative;
+}
+
+.buttonIcon::before,
+.buttonIcon::after {
+  content: '';
+  position: absolute;
+  background-color: white;
+}
+
+.buttonIcon::before {
+  width: 12px;
+  height: 1px;
+}
+
+.buttonIcon::after {
+  width: 1px;
+  height: 12px;
+}
+
+/* Показываем бургер-меню только на экранах меньше 1200px */
+@media (max-width: 1200px) {
+  .burgerMenu {
+    display: flex;
+  }
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+  .menuButton {
+    padding: 0.5rem 1rem;
+  }
+  
+  .menuButton h2 {
+    font-size: 1rem;
+  }
+  
+  .buttonIcon {
+    width: 24px;
+    height: 24px;
+  }
+} 

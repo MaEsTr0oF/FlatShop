@@ -52,92 +52,88 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 10px 16px;
   background-color: #E31235;
   color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .addButton:hover {
-  background-color: #c60f2e;
+  background-color: #c01030;
 }
 
 .filtersWrapper {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
   margin-bottom: 20px;
 }
 
 .filters {
   display: flex;
   gap: 16px;
-  flex: 1;
 }
 
 .resetButton {
   padding: 8px 16px;
-  border: 1px solid #E31235;
+  background: none;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background: white;
-  color: #E31235;
+  color: #666;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;
 }
 
 .resetButton:hover {
-  background: #FFF5F5;
+  background-color: #f5f5f5;
 }
 
 .resetButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  border-color: #ccc;
-  color: #666;
+  background: none;
 }
 
 .salesTable {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
+  background-color: white;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .salesTable th {
-  text-align: left;
   padding: 16px;
-  font-size: 14px;
+  text-align: left;
   font-weight: 500;
   color: #666;
-  background: white;
-  border-bottom: 1px solid #E0E0E0;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #eee;
 }
 
 .salesTable td {
   padding: 16px;
-  font-size: 14px;
+  border-bottom: 1px solid #eee;
   color: #333;
-  border-bottom: 1px solid #E0E0E0;
 }
 
 .propertyImage {
-  width: 60px;
-  height: 40px;
+  width: 80px;
+  height: 60px;
   object-fit: cover;
   border-radius: 4px;
 }
 
 .propertyInfo {
   display: flex;
+  gap: 16px;
   align-items: center;
-  gap: 12px;
 }
 
 .propertyDetails {
@@ -147,75 +143,80 @@
 }
 
 .propertyAddress {
-  font-size: 12px;
   color: #666;
+  font-size: 14px;
 }
 
 .status {
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
-  text-align: center;
+  font-weight: 500;
 }
 
 .status.active {
-  background-color: #E8F5E9;
-  color: #2E7D32;
+  background-color: #e6f7ed;
+  color: #00a650;
 }
 
 .status.pending {
-  background-color: #FFF3E0;
-  color: #EF6C00;
+  background-color: #fff8e6;
+  color: #f5a623;
 }
 
 .status.sold {
-  background-color: #FFEBEE;
-  color: #E31235;
+  background-color: #f5f5f5;
+  color: #666;
 }
 
 .pagination {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .paginationButton {
-  min-width: 32px;
-  height: 32px;
-  border: none;
-  background: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 14px;
-  color: #666;
+  background: white;
+  color: #333;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .paginationButton:hover {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .paginationButton.active {
   background-color: #E31235;
   color: white;
+  border-color: #E31235;
 }
 
 .paginationArrow {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 14px;
-  color: #666;
+  background: white;
+  color: #333;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .paginationArrow:hover:not(:disabled) {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .paginationArrow:disabled {
@@ -225,32 +226,151 @@
 
 .filter {
   padding: 8px 16px;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background: white;
+  background-color: white;
   color: #333;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s;
-  min-width: 180px;
   appearance: none;
-  background-image: url('/img/partners/arrow-down.svg');
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8.825L1.175 4 2.05 3.125 6 7.075 9.95 3.125 10.825 4z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
-  background-size: 12px;
+  padding-right: 32px;
 }
 
 .filter:hover {
-  border-color: #999;
+  border-color: #ccc;
 }
 
 .filter:focus {
   outline: none;
   border-color: #E31235;
-  box-shadow: 0 0 0 2px rgba(227, 18, 53, 0.1);
+  box-shadow: 0 0 0 2px rgba(227, 18, 53, 0.2);
 }
 
 .filter option {
   padding: 8px;
-  font-size: 14px;
+}
+
+/* Адаптивные стили для планшетов */
+@media (max-width: 992px) {
+  .salesContainer {
+    padding: 15px;
+  }
+  
+  .title {
+    font-size: 22px;
+  }
+  
+  .tabs {
+    gap: 15px;
+  }
+  
+  .tab {
+    padding: 6px 12px;
+    font-size: 15px;
+  }
+  
+  .salesTable th, 
+  .salesTable td {
+    padding: 12px;
+  }
+  
+  .propertyImage {
+    width: 70px;
+    height: 50px;
+  }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .salesContainer {
+    padding: 10px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+  .tabs {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .tab {
+    white-space: nowrap;
+  }
+  
+  .filtersWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .filters {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .filter {
+    min-width: 120px;
+  }
+  
+  .salesTable {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .propertyInfo {
+    gap: 10px;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+  }
+}
+
+/* Адаптивные стили для маленьких мобильных устройств */
+@media (max-width: 480px) {
+  .title {
+    font-size: 18px;
+  }
+  
+  .tab {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  .addButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .propertyImage {
+    width: 60px;
+    height: 45px;
+  }
+  
+  .propertyDetails {
+    font-size: 14px;
+  }
+  
+  .propertyAddress {
+    font-size: 12px;
+  }
+  
+  .paginationButton,
+  .paginationArrow {
+    width: 32px;
+    height: 32px;
+  }
 }

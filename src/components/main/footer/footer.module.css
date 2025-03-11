@@ -103,3 +103,51 @@
   color: #999;
   font-size: 12px;
 }
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .mainMenu li a {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+  
+  .icon img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .bottomMenu {
+    padding: 15px;
+  }
+  
+  .bottomMenu li a {
+    font-size: 13px;
+  }
+  
+  .copyright {
+    font-size: 11px;
+  }
+}
+
+/* Адаптивные стили для маленьких мобильных устройств */
+@media (max-width: 480px) {
+  .mainMenu li a {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .icon img {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+  
+  .bottomMenu {
+    padding: 12px;
+  }
+  
+  .social {
+    gap: 10px;
+  }
+}

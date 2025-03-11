@@ -17,6 +17,9 @@
 .headerArea {
   grid-area: header;
   background: white;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .contentArea {
@@ -25,20 +28,104 @@
 }
 
 .sidebarArea {
-  padding-top: 85px;
   grid-area: sidebar;
   background: white;
   border-right: 1px solid #eee;
   position: relative;
+  z-index: 1000;
 }
-.logo{
-	position: absolute;
-	top: 30px;
-	left: 30px;
+
+.sidebarContent {
+  padding-top: 85px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.burgerMenuContainer {
+  display: none;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1100;
+}
+
+.sidebarOverlay {
+  display: none;
+}
+
+/* Адаптивные стили для экранов меньше 1200px */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-areas: 
+      "header header"
+      "content content";
+    grid-template-columns: 1fr;
+  }
+
+  .burgerMenuContainer {
+    display: block;
+  }
+
+  .sidebarArea {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    transition: left 0.3s ease-in-out;
+    box-shadow: none;
+  }
+
+  .sidebarArea.open {
+    left: 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebarOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  .sidebarArea.open .sidebarOverlay {
+    display: block;
+  }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .contentArea {
+    padding: 15px;
+  }
+
+  .headerArea {
+    padding: 10px 0;
+  }
+}
+
+/* Адаптивные стили для маленьких мобильных устройств */
+@media (max-width: 480px) {
+  .contentArea {
+    padding: 10px;
+  }
+}
+
 .footer {
   margin-top: auto;
   padding: 2rem;
   background: white;
   border-top: 1px solid #eee;
-} 
+}
